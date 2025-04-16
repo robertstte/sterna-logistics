@@ -1,0 +1,112 @@
+@font-face {
+    font-family: "Onest";
+    src: url("/fonts/Onest.ttf") format("truetype");
+    display: swap;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+.bg-light {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.navbar-brand {
+    font-size: 64px;
+    margin-right: 0;
+    font-weight: 700;
+    margin-left: 25px;
+    font-family: "Onest";
+    color: rgb(0, 168, 255);
+}
+
+.navbar-brand:hover {
+    color: rgb(0, 168, 255);
+}
+
+.navbar-toggler {
+    margin-right: 25px;
+}
+
+.navbar-nav {
+    gap: 30px;
+    font-size: 24px;
+    font-weight: 500;
+    margin-right: 25px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+}
+
+.dropdown-center {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    transition: none;
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    left: 50%;
+    width: 100px;
+    min-width: auto;
+    text-align: center;
+}
+
+.dropdown-item {
+    width: 64px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-item:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+.access {
+    padding: 8px;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 8px;
+    font-family: "Onest";
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 31, 63);
+}
+
+.access:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 31, 63);
+}
+
+@media (min-width: 990px) {
+    .dropdown-menu {
+        left: 75%;
+        transform: translateX(-25%);
+    }
+}
+
+@media (max-width: 990px) {
+    .navbar-nav {
+        margin-right: 0;
+        text-align: center;
+    }
+
+    .nav-item img {
+        margin: auto;
+        display: block;
+    }
+
+    .nav-item button {
+        margin: auto;
+        display: block;
+    }
+
+    .dropdown-menu {
+        left: 75%;
+    }
+}
