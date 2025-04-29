@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
             Users::class,
             PasswordTokens::class,
             Customers::class,
-            PackageTypes::class
+            Orders::class,
+            PackageTypes::class,
+            Transports::class,
+            OrderDetails::class
         ]);
     }
 }
