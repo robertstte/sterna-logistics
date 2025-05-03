@@ -11,9 +11,9 @@
     <div class="col-12 col-xl-6">
         <p class="localization-title">@lang('translations.landing.localization.title')</p>
         <p class="localization-subtitle">@lang('translations.landing.localization.subtitle')</p>
-        <form>
-            <input type="text" placeholder="Nº 202503290000000001" maxlength="18" required>
-            <input type="submit" class="btn" value="@lang('translations.landing.localization.search')">
+        <form class="localization-form">
+            <input class="localization-form-text" type="text" placeholder="Nº 202503290000000001" maxlength="18" required>
+            <input class="localization-form-submit btn" type="submit" value="@lang('translations.landing.localization.search')">
             <hr>
             <p class="localization-help">@lang('translations.landing.localization.help')</p>
         </form>
@@ -24,6 +24,20 @@
 </div>
 <div class="row">
     <p class="features-title mx-auto">@lang('translations.landing.features.title')</p>
+    <div class="row features-circles-container mx-auto d-none d-lg-flex">
+        <div class="features-circle">
+            <img loading="lazy" src="{{ asset('icons/lock.svg') }}">
+            <span class="features-circle-text">@lang('translations.landing.features.security')</span>
+        </div>
+        <div class="features-circle">
+            <img loading="lazy" src="{{ asset('icons/anchor.svg') }}">
+            <span class="features-circle-text">@lang('translations.landing.features.robustness')</span>
+        </div>
+        <div class="features-circle">
+            <img loading="lazy" src="{{ asset('icons/clock.svg') }}">
+            <span class="features-circle-text">@lang('translations.landing.features.speed')</span>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 col-xl-6">
             <div class="features-card">

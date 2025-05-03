@@ -1,7 +1,7 @@
 @font-face {
+    display: swap;
     font-family: "Onest";
     src: url("/fonts/Onest.ttf") format("truetype");
-    display: swap;
 }
 
 html {
@@ -83,6 +83,11 @@ html {
     background-color: rgb(0, 31, 63);
 }
 
+.access:active {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(0, 31, 63) !important;
+}
+
 @media (min-width: 990px) {
     .dropdown-menu {
         left: 75%;
@@ -115,7 +120,7 @@ html {
     display: flex;
     margin-top: 50px;
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 200px;
     flex-direction: column;
     justify-content: center;
 }
@@ -126,10 +131,9 @@ html {
     max-width: 800px;
     font-weight: 800;
     margin-top: 60px;
-    font-display: swap;
     font-family: "Onest";
-    margin: 0 auto 30px auto;
     color: rgb(0, 31, 63);
+    margin: 0 auto 30px auto;
 }
 
 .hero-background {
@@ -153,7 +157,6 @@ html {
     font-size: 24px;
     font-weight: 500;
     border-radius: 8px;
-    font-display: swap;
     font-family: "Onest";
     color: rgb(0, 31, 63);
     border: 3px solid rgb(0, 31, 63);
@@ -169,6 +172,7 @@ html {
 @media (min-width: 1600px) {
     .hero-title {
         text-align: left;
+        margin-top: 80px;
         margin-left: 20px;
         margin-right: auto;
     }
@@ -182,6 +186,7 @@ html {
 @media (max-width: 1599px) {
     .hero {
         padding-top: 8px;
+        margin-bottom: 100px;
     }
 
     .hero-background {
@@ -202,7 +207,6 @@ html {
     font-size: 48px;
     padding: 0 20px;
     font-weight: 700;
-    font-display: swap;
     font-family: "Onest";
     margin: 20px auto 10px;
     color: rgb(255, 255, 255);
@@ -212,17 +216,16 @@ html {
     font-size: 24px;
     padding: 0 20px;
     font-weight: 700;
-    font-display: swap;
     font-family: "Onest";
     margin: 10px auto 20px;
     color: rgba(255, 255, 255, 0.5);
 }
 
-form {
+.localization-form {
     margin: 230px 20px 30px 20px;
 }
 
-input[type=text] {
+.localization-form-text {
     width: 80%;
     height: 40px;
     border: none;
@@ -233,30 +236,34 @@ input[type=text] {
     background-color: rgb(0, 31, 63);
 }
 
-input[type=text]:focus {
+.localization-form-text:focus {
     outline: none;
 }
 
-::placeholder {
+.localization-form-text::placeholder {
     font-size: 32px;
     font-weight: 700;
-    font-display: swap;
     font-family: "Onest";
 }
 
-input[type=submit] {
+.localization-form-submit {
     float: right;
     font-size: 24px;
     font-weight: 500;
-    font-display: swap;
     font-family: "Onest";
     color: rgb(255, 255, 255);
     background-color: rgb(255, 139, 35);
 }
 
-input[type=submit]:hover {
+.localization-form-submit:hover {
     color: rgb(255, 255, 255);
     background-color: rgb(255, 139, 35);
+}
+
+.localization-form-submit:active {
+    border: none;
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(255, 139, 35) !important;
 }
 
 hr {
@@ -267,7 +274,6 @@ hr {
 .localization-help {
     font-size: 24px;
     font-weight: 700;
-    font-display: swap;
     font-family: "Onest";
     color: rgba(255, 255, 255, 0.5);
 }
@@ -313,11 +319,73 @@ hr {
     font-weight: 700;
     margin-top: 60px;
     margin-left: 25px;
-    font-display: swap;
     margin-right: 25px;
     text-align: center;
     margin-bottom: 30px;
     font-family: "Onest";
+}
+
+.features-circles-container {
+    gap: 200px;
+    display: flex;
+    margin-top: 60px;
+    position: relative;
+    align-items: center;
+    margin-bottom: 120px;
+    justify-content: center;
+}
+
+.features-circle {
+    width: 125px;
+    display: flex;
+    height: 125px;
+    border-radius: 50%;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 139, 35);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.features-circle::after {
+    top: 50%;
+    left: 90%;
+    content: '';
+    height: 30px;
+    position: absolute;
+    width: calc(100% + 100px);
+    transform: translateY(-50%);
+    background-color: rgb(255, 139, 35);
+}
+
+.features-circle:nth-child(2)::after {
+    background: linear-gradient(to right, rgb(255, 139, 35), rgb(123, 95, 241));
+}
+
+.features-circle:last-child {
+    background-color: rgb(123, 95, 241);
+}
+
+.features-circle:last-child::after {
+    display: none;
+}
+
+.features-circle img {
+    width: 60px;
+    height: auto;
+}
+
+.features-circle-text {
+    top: 100%;
+    width: 100%;
+    font-size: 24px;
+    margin-top: 20px;
+    font-weight: 500;
+    position: absolute;
+    text-align: center;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
 }
 
 .features-card {
@@ -346,7 +414,6 @@ hr {
     font-weight: 700;
     padding-top: 25px;
     text-align: center;
-    font-display: swap;
     font-family: "Onest";
 }
 
@@ -355,7 +422,6 @@ hr {
     font-weight: 700;
     padding-top: 25px;
     text-align: center;
-    font-display: swap;
     font-family: "Onest";
     color: rgb(255, 255, 255);
 }
@@ -366,7 +432,6 @@ hr {
     margin-top: 75px;
     font-weight: 500;
     margin-left: 50px;
-    font-display: swap;
     font-family: "Onest";
 }
 

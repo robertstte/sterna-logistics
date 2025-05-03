@@ -34,7 +34,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link access btn">@lang('translations.header.access')</button>
+                        <a class="nav-link access btn" href="login">@lang('translations.header.access')</a>
                     </li>
                 </ul>
             </div>
