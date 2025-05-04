@@ -1,10 +1,10 @@
 @extends('layouts.access')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center mt-xl-4">
-    <div class="row w-100 d-flex justify-content-center align-items-center">
+<div class="row">
+    <div class="row p-5">
         <div class="col-12 col-xl-6 d-none d-xl-flex justify-content-center">
-            <img loading="lazy" class="img-fluid" src="{{ asset('images/access.svg') }}" alt="@lang('translations.access.login.illustration')">
+            <img loading="lazy" class="w-100 h-100" src="{{ asset('images/access.svg') }}" alt="@lang('translations.access.login.illustration')">
         </div>
         <div class="col-12 col-xl-6 d-flex flex-column justify-content-center align-itmes-center access-form">
             <div class="row">
