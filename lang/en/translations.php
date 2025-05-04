@@ -49,6 +49,20 @@ return [
             ]
         ]
     ],
+    "access" => [
+        "login" => [
+            "illustration" => "Ilustration",
+            "title" => "My Account",
+            "back" => "Back",
+            "email" => "Email",
+            "password" => "Password",
+            "remember" => "Remember me",
+            "recovery" => "Forgot password?",
+            "signin" => "Sign In",
+            "google" => "Sign in with google",
+            "signup" => "Don't have an account yet?"
+        ]
+    ],
     "footer" => [
         "copyright" => "© 2025 Sterna. All rights reserved.",
         "privacy" => "Privacy Policy and Terms of Use.",

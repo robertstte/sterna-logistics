@@ -48,7 +48,21 @@ return [
                 "icon" => "Factura"
             ]
         ]
-     ],
+    ],
+    "access" => [
+        "login" => [
+            "illustration" => "Ilustración",
+            "title" => "Mi cuenta",
+            "back" => "Volver",
+            "email" => "Correo electrónico",
+            "password" => "Contraseña",
+            "remember" => "Recuérdame",
+            "recovery" => "¿Has olvidado la contraseña?",
+            "signin" => "Iniciar Sesión",
+            "google" => "Iniciar sesion con google",
+            "signup" => "¿Aún no tienes una cuenta?"
+        ]
+    ],
     "footer" => [
         "copyright" => "© 2025 Sterna. Todos los derechos reservados.",
         "privacy" => "Política de privacidad y Términos de uso.",

@@ -26,15 +26,15 @@
     <p class="features-title mx-auto">@lang('translations.landing.features.title')</p>
     <div class="row features-circles-container mx-auto d-none d-lg-flex">
         <div class="features-circle">
-            <img loading="lazy" src="{{ asset('icons/lock.svg') }}">
+            <img loading="lazy" src="{{ asset('icons/lock.svg') }}" alt="@lang('translations.landing.features.security')">
             <span class="features-circle-text">@lang('translations.landing.features.security')</span>
         </div>
         <div class="features-circle">
-            <img loading="lazy" src="{{ asset('icons/anchor.svg') }}">
+            <img loading="lazy" src="{{ asset('icons/anchor.svg') }}" alt="@lang('translations.landing.features.robustness')">
             <span class="features-circle-text">@lang('translations.landing.features.robustness')</span>
         </div>
         <div class="features-circle">
-            <img loading="lazy" src="{{ asset('icons/clock.svg') }}">
+            <img loading="lazy" src="{{ asset('icons/clock.svg') }}" alt="@lang('translations.landing.features.speed')">
             <span class="features-circle-text">@lang('translations.landing.features.speed')</span>
         </div>
     </div>
