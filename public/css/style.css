@@ -546,6 +546,115 @@ hr {
     color: rgba(0, 31, 63, 0.5);
 }
 
+.access-form-register-email {
+    width: 100%;
+    height: 65px;
+    padding: 15px;
+    font-size: 20px;
+    margin-top: 25px;
+    font-weight: 600;
+    border-radius: 8px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+    border: 2px solid rgb(0, 31, 63);
+}
+
+.access-form-register-email::placeholder {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Onest";
+    color: rgba(0, 31, 63, 0.5);
+}
+
+.access-form-name {
+    width: 100%;
+    height: 65px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+    border: 2px solid rgb(0, 31, 63);
+}
+
+.access-form-name::placeholder {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Onest";
+    color: rgba(0, 31, 63, 0.5);
+}
+
+.access-form-address {
+    width: 100%;
+    height: 65px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+    border: 2px solid rgb(0, 31, 63);
+}
+
+.access-form-address::placeholder {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Onest";
+    color: rgba(0, 31, 63, 0.5);
+}
+
+.access-form-phone {
+    width: 100%;
+    height: 65px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 25px;
+    border-radius: 8px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+    border: 2px solid rgb(0, 31, 63);
+}
+
+.access-form-phone::placeholder {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Onest";
+    color: rgba(0, 31, 63, 0.5);
+}
+
+.access-form-username {
+    width: 100%;
+    height: 65px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+    border: 2px solid rgb(0, 31, 63);
+}
+
+.access-form-username::placeholder {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Onest";
+    color: rgba(0, 31, 63, 0.5);
+}
+
+.access-form-select {
+    width: 100%;
+    height: 65px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+    border: 2px solid rgb(0, 31, 63);
+}
+
 .access-form-password {
     width: 100%;
     height: 65px;
@@ -596,12 +705,40 @@ hr {
     margin-top: 25px;
     font-weight: 600;
     font-family: "Onest";
-    color: rgba(0, 31, 63);
+    color: rgb(0, 31, 63);
 }
 
 .access-form-remember span {
     margin-top: 5px;
     margin-left: 15px;
+}
+
+.access-form-customer-type-radio {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 600;
+    border-radius: 50%;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(0, 31, 63);
+}
+
+.access-form-customer-type {
+    font-size: 18px;
+    margin-top: 25px;
+    font-weight: 600;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+}
+
+.access-form-customer-type span {
+    margin-top: 5px;
+    margin-left: 15px;
+    color: rgba(0, 31, 63, 0.5);
 }
 
 .access-form-recovery {
@@ -636,6 +773,22 @@ hr {
     font-family: "Onest";
     text-decoration: none;
     color: rgba(0, 0, 0, 0.35);
+}
+
+.form-step-container {
+    padding-top: 25px;
+}
+
+.form-step-active {
+    border: 3px solid rgba(123, 95, 241, 1);
+}
+
+.form-step {
+    border: 3px solid rgba(0, 31, 63, 1);
+}
+
+.step-hidden {
+    display: none;
 }
 
 @media (max-width: 1400px) {

@@ -61,6 +61,20 @@ return [
             "signin" => "Iniciar Sesión",
             "google" => "Iniciar sesion con google",
             "signup" => "¿Aún no tienes una cuenta?"
+        ],
+        "register" => [
+            "illustration" => "Ilustración",
+            "title" => "Registrarme",
+            "back" => "Volver",
+            "name" => "Nombre completo",
+            "email" => "Correo electrónico",
+            "individual" => "Soy particular",
+            "company" => "Soy empresa",
+            "address" => "Dirección",
+            "phone" => "Telefono",
+            "username" => "Nombre de usuario",
+            "password" >= "Contraseña",
+            "next" => "Siguiente"
         ]
     ],
     "footer" => [

@@ -12,7 +12,7 @@ class CustomerTypes extends Seeder
     {
         DB::table('customer_types')->insert([
             ['type' => 'Company'],
-            ['type' => 'Particular']
+            ['type' => 'Individual']
         ]);
     }
 }

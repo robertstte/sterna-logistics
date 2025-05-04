@@ -11,3 +11,24 @@ function showFormPassword()
         loginTogglePassword.src = loginTogglePassword.getAttribute("data-eye");
     }
 }
+
+var currentStep = 1;
+
+function nextStep(step) 
+{
+    document.getElementById("step-content" + step).classList.add("step-hidden");
+    document.getElementById("step-content" + (step + 1)).classList.remove("step-hidden");
+
+    document.getElementById("step" + step).classList.add("form-step");
+    document.getElementById("step" + step).classList.remove("form-step-active");
+    
+    document.getElementById("step" + (step + 1)).classList.remove("form-step");
+    document.getElementById("step" + (step + 1)).classList.add("form-step-active");
+
+    currentStep++;
+}
+
+function previousStep(step) {
+    document.getElementById("step-content" + step).classList.add("step-hidden");
+    document.getElementById("step-content" + (step - 1)).classList.remove("step-hidden");
+}

@@ -61,6 +61,20 @@ return [
             "signin" => "Sign In",
             "google" => "Sign in with google",
             "signup" => "Don't have an account yet?"
+        ],
+        "register" => [
+            "illustration" => "Ilustración",
+            "title" => "Register",
+            "back" => "Back",
+            "name" => "Full name",
+            "email" => "Email",
+            "individual" => "I am a individual",
+            "company" => "Im am a company",
+            "address" => "Address",
+            "phone" => "Phone number",
+            "username" => "Username",
+            "password" => "Password",
+            "next" => "Next"
         ]
     ],
     "footer" => [
