@@ -1,7 +1,7 @@
 @extends('layouts.access')
 
 @section('content')
-<div class="row p-5">
+<div class="row p-5" >
     <div class="row">
         <div class="col-12 col-xl-6 d-none d-xl-flex justify-content-center">
             <img loading="lazy" class="w-100 h-100" src="{{ asset('images/access.svg') }}" alt="@lang('translations.access.register.illustration')">
@@ -10,9 +10,10 @@
             <div class="row">
                 <div class="col-6">
                     <p class="access-form-title">@lang('translations.access.register.title')</p>
+
                 </div>
                 <div class="col-6">
-                    <a href="login"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.register.back')"></a>
+                    <a onclick="prevStep()" style="cursor: pointer;"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.register.back')"></a>
                 </div>
             </div>
             <form>
@@ -29,6 +30,7 @@
                             <span>@lang('translations.access.register.company')</span>
                         </div>
                     </div>
+                    <p class="form-error">Faltan campos por completar</p>
                     <div class="row">
                         <div class="col-10">
                             <button onclick="nextStep(1)" class="access-form-submit">@lang('translations.access.register.next')</button>
@@ -49,7 +51,10 @@
                             <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
                         </div>
                     </div>
+                    <p class="form-error">Faltan campos por completar</p>
+
                 </div>
+
                 <div class="step step-hidden" id="step-content3">
                     <input class="access-form-username" type="text" placeholder="@lang('translations.access.register.username')" name="username" required>
                     <input class="access-form-password" type="password" placeholder="@lang('translations.access.register.password')" name="password" required>
@@ -61,6 +66,8 @@
                             <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
                         </div>
                     </div>
+                <p class="form-error">Faltan campos por completar</p>
+
                 </div>
                 <div class="step step-hidden" id="step-content4">
                     <select class="access-form-select">
@@ -75,15 +82,119 @@
                             <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
                         </div>
                     </div>
+                <p class="form-error">Faltan campos por completar</p>
+
                 </div>
                 <div class="row d-flex form-step-container">
-                    <div class="col-3"><hr class="form-step-active" id="step1"></div>
-                    <div class="col-3"><hr class="form-step" id="step2"></div>
-                    <div class="col-3"><hr class="form-step" id="step3"></div>
-                    <div class="col-3"><hr class="form-step" id="step4"></div>
+                    <div class="col-3"><hr class="form-step-active" id="step1" onclick="goToStep(1)"></div>
+                    <div class="col-3"><hr class="form-step" id="step2" onclick="goToStep(2)"></div>
+                    <div class="col-3"><hr class="form-step" id="step3" onclick="goToStep(3)"></div>
+                    <div class="col-3"><hr class="form-step" id="step4" onclick="goToStep(4)"></div>
                 </div>
+
             </form>
         </div>
     </div>
 </div>
 @endsection
+
+<script>
+    let currentStep = 1;
+
+    function showStep(step) {
+        const steps = document.querySelectorAll('.step');
+        steps.forEach(s => s.classList.add('step-hidden'));
+
+        const selectedStep = document.getElementById('step-content' + step);
+        if (selectedStep) {
+            selectedStep.classList.remove('step-hidden');
+        }
+
+        for (let i = 1; i <= 4; i++) {
+            const stepIndicator = document.getElementById('step' + i);
+            stepIndicator.classList.remove('form-step-active');
+            stepIndicator.classList.add('form-step');
+        }
+
+        const activeIndicator = document.getElementById('step' + step);
+        if (activeIndicator) {
+            activeIndicator.classList.remove('form-step');
+            activeIndicator.classList.add('form-step-active');
+        }
+
+        currentStep = step;
+    }
+
+    function goToStep(step) {
+    if (step <= currentStep) {
+        showStep(step);
+    }
+}
+
+
+function nextStep(step) {
+    event.preventDefault();
+
+    const stepContainer = document.getElementById(`step-content${step}`);
+    const errorMsg = stepContainer.querySelector('.form-error');
+    const currentFields = stepContainer.querySelectorAll('input, select');
+    let allValid = true;
+
+    currentFields.forEach(field => {
+        if (field.type === 'radio') {
+            const radios = stepContainer.querySelectorAll(`input[name="${field.name}"]`);
+            if (![...radios].some(r => r.checked)) {
+                allValid = false;
+            }
+        } else if (!field.value) {
+            allValid = false;
+        }
+    });
+
+    if (allValid) {
+        errorMsg.style.visibility = 'hidden';
+        const next = step + 1;
+        if (next <= 4) {
+            showStep(next);
+        }
+    } else {
+        errorMsg.style.visibility = 'visible';
+    }
+}
+
+
+    function prevStep() {
+    event.preventDefault();
+    if (currentStep > 1) {
+        showStep(currentStep - 1);
+    }
+}
+    document.addEventListener('DOMContentLoaded', () => {
+        showStep(currentStep);
+    });
+</script>
+
+<style>
+    .step-hidden {
+    display: none;
+}
+.form-step {
+    height: 4px;
+    background-color: #ccc;
+    cursor: pointer;
+}
+.form-step-active {
+    background-color: #007bff;
+}
+.step{
+    height: 320px;
+}
+.form-error {
+    color: red;
+    visibility: hidden;
+    margin-top: 4px;
+    margin-bottom: 0px;
+}
+
+
+</style>
