@@ -1,10 +1,10 @@
-@extends('layouts.access')
+@extends('layouts.app')
 
-<?php 
-    $orderDetail = $orderDetail[0]; // Acceso a la primera entrada si es un array
-?>
+
 
 @section('content')
+
+
     <div class="container mt-5">
         @if (isset($status) && $status == 'no')
             <div class="alert alert-danger text-center">
@@ -12,7 +12,7 @@
             </div>
 
         @elseif (isset($status) && $status == 'ok')
-        <h2 class="text-center mb-4">Detalles del Pedido</h2>
+        <h2 class="text-center mb-4">@lang('translations.access.order.info.title')</h2>
 
             <div class="card shadow-lg p-4 mb-5">
                 
@@ -21,31 +21,31 @@
                     <div class="col-md-6">
                         <!-- Sección: Pedido -->
                         <div class="mb-3 p-3" style="background-color: #f8f9fa; border-radius: 8px;">
-                            <h5 class="text-primary">Información del Pedido</h5>
+                            <h5 class="text-primary">@lang('translations.access.order.info.title')</h5>
                             <div class="mb-2">
-                                <strong>ID del Pedido:</strong>
+                                <strong>@lang('translations.access.order.info.id')</strong>
                                 <p class="text-muted">{{ $order->id }}</p>
                             </div>
                             <div class="mb-2">
-                                <strong>Estado:</strong>
-                                <p class="text-muted">{{ $order->status }}</p>
+                                <strong>@lang('translations.access.order.info.status')</strong>
+                                <p class="text-muted">{{ $order->status->status }}</p>
                             </div>
                             <div class="mb-2">
-                                <strong>Fecha de Creación:</strong>
+                                <strong>@lang('translations.access.order.info.created_at')</strong>
                                 <p class="text-muted">{{ $order->created_at->format('d/m/Y H:i') }}</p>
                             </div>
                         </div>
 
                         <!-- Sección: Detalles de Origen/Destino -->
                         <div class="mb-3 p-3 mt-4" style="background-color: #e9ecef; border-radius: 8px;">
-                            <h5 class="text-primary">Origen y Destino</h5>
+                            <h5 class="text-primary">@lang('translations.access.order.route.title')</h5>
                             <div class="mb-2">
-                                <strong>Origen:</strong>
-                                <p class="text-muted">{{ $orderDetail->origin }}</p>
+                                <strong>@lang('translations.access.order.route.origin')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->origin }}</p>
                             </div>
                             <div class="mb-2">
-                                <strong>Destino:</strong>
-                                <p class="text-muted">{{ $orderDetail->destination }}</p>
+                                <strong>@lang('translations.access.order.route.destination')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->destination }}</p>
                             </div>
                         </div>
                     </div>
@@ -54,30 +54,30 @@
                     <div class="col-md-6">
                         <!-- Sección: Fechas y Transporte -->
                         <div class="mb-3 p-3" style="background-color: #f8f9fa; border-radius: 8px;">
-                            <h5 class="text-primary">Fechas y Transporte</h5>
+                            <h5 class="text-primary">@lang('translations.access.order.dates_transport.title')</h5>
                             <div class="mb-2">
-                                <strong>Fecha de Salida:</strong>
-                                <p class="text-muted">{{ $orderDetail->departure_date }}</p>
+                                <strong>@lang('translations.access.order.dates_transport.departure')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->departure_date }}</p>
                             </div>
                             <div class="mb-2">
-                                <strong>Fecha de Llegada:</strong>
-                                <p class="text-muted">{{ $orderDetail->arrival_date }}</p>
+                                <strong>@lang('translations.access.order.dates_transport.arrival')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->arrival_date }}</p>
                             </div>
                             <div class="mb-2">
-                                <strong>ID de Transporte:</strong>
-                                <p class="text-muted">{{ $orderDetail->transport_id }}</p>
+                                <strong>@lang('translations.access.order.dates_transport.transport')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->transport_id }}</p>
                             </div>
                         </div>
 
                         <div class="mb-3 p-3 mt-4" style="background-color: #e9ecef; border-radius: 8px;">
-                            <h5 class="text-primary">Costos y Peso</h5>
+                            <h5 class="text-primary">@lang('translations.access.order.cost_weight.title')</h5>
                             <div class="mb-2">
-                                <strong>Costo Total:</strong>
-                                <p class="text-muted">${{ number_format($orderDetail->total_cost, 2) }}</p>
+                                <strong>@lang('translations.access.order.cost_weight.cost')</strong>
+                                <p class="text-muted">${{ number_format($orderDetail[0]->total_cost, 2) }}</p>
                             </div>
                             <div class="mb-2">
-                                <strong>Peso:</strong>
-                                <p class="text-muted">{{ $orderDetail->weight }} kg</p>
+                                <strong>@lang('translations.access.order.cost_weight.weight')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->weight }} kg</p>
                             </div>
                         </div>
                     </div>
@@ -86,28 +86,28 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3 p-3 mt-4" style="background-color: #f8f9fa; border-radius: 8px;">
-                            <h5 class="text-primary">Ubicación y Tipo de Paquete</h5>
+                            <h5 class="text-primary">@lang('translations.access.order.location_package.title')</h5>
                             <div class="mb-2">
-                                <strong>Ubicación:</strong>
-                                <p class="text-muted">{{ $orderDetail->location }}</p>
+                                <strong>@lang('translations.access.order.location_package.location')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->location }}</p>
                             </div>
                             <div class="mb-2">
-                                <strong>Tipo de Paquete:</strong>
-                                <p class="text-muted">{{ $orderDetail->package_type_id }}</p>
+                                <strong>@lang('translations.access.order.location_package.type')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->package_type_id }}</p>
                             </div>
                         </div>
                     </div>
-                
                     <div class="col-md-6">
+
                         <div class="mb-3 p-3 mt-4" style="background-color: #f8f9fa; border-radius: 8px;">
-                            <h5 class="text-primary">Descripción y Observaciones</h5>
+                            <h5 class="text-primary">@lang('translations.access.order.description_notes.title')</h5>
                             <div class="mb-2">
-                                <strong>Descripción:</strong>
-                                <p class="text-muted">{{ $orderDetail->description }}</p>
+                                <strong>@lang('translations.access.order.description_notes.description')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->description }}</p>
                             </div>
                             <div class="mb-2">
-                                <strong>Observaciones:</strong>
-                                <p class="text-muted">{{ $orderDetail->observations }}</p>
+                                <strong>@lang('translations.access.order.description_notes.observations')</strong>
+                                <p class="text-muted">{{ $orderDetail[0]->observations }}</p>
                             </div>
                         </div>
                     </div>
@@ -116,4 +116,5 @@
             </div>
         @endif
     </div>
+   
 @endsection

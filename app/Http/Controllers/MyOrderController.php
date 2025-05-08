@@ -13,12 +13,13 @@ class MyOrderController extends Controller
     {
         $orderId = $request->input('order_id');
         
-        $order = Order::find($orderId);
-        $orderDetail = OrderDetail::where('order_id',$orderId)->get();
+        $order = Order::with(['customer', 'status'])->find($orderId);
 
-        if (!$order || !$orderDetail) {
-            return view('myOrder', ['status' => 'no', 'message' => 'Pedido no encontrado.']);
+        $orderDetail = OrderDetail::where('order_id',$orderId)->get();
+        if (!isset($orderDetail) || $orderDetail->isEmpty()) {
+            return view('myOrder', ['status' => 'no', 'message' => 'Detalles del pedido no encontrados.']);
         }
+        
         return view('myOrder', ['status' => 'ok', 'order' => $order , 'orderDetail' => $orderDetail]);
     }
 }

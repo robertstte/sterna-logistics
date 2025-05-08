@@ -20,7 +20,8 @@ Route::get('register', function () {
 Route::get('OrderDetails', function () {
     return view('myOrder');
 });
-Route::post('/my-order', [MyOrderController::class, 'index'])->name('myOrder.index');
+Route::get('/my-order', [MyOrderController::class, 'index'])->name('my-order');
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
