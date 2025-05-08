@@ -97,7 +97,10 @@ return [
                 "title" => "Fechas y Transporte",
                 "departure" => "Fecha de Salida",
                 "arrival" => "Fecha de Llegada",
-                "transport" => "Transporte"
+                "transport" => "Transporte",
+                "air"=> "Avión",
+                "maritime" => "Barco",
+                "land" => "Camion"
             ],
             
             "cost_weight" => [

@@ -5,7 +5,9 @@
 @section('content')
 
 
-    <div class="container mt-5">
+    <div class="container mt-5 ">
+        
+        <div class="col-10 mx-auto">
         @if (isset($status) && $status == 'no')
             <div class="alert alert-danger text-center">
                 <h5>{{ $message }}</h5>
@@ -41,11 +43,12 @@
                             <h5 class="text-primary">@lang('translations.access.order.route.title')</h5>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.route.origin')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->origin }}</p>
+                                <p class="text-muted">{{ $orderDetail[0]->country->name }}</p>
                             </div>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.route.destination')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->destination }}</p>
+                                
+                                <p class="text-muted">{{ $orderDetail[0]->country->name }}</p>
                             </div>
                         </div>
                     </div>
@@ -63,10 +66,34 @@
                                 <strong>@lang('translations.access.order.dates_transport.arrival')</strong>
                                 <p class="text-muted">{{ $orderDetail[0]->arrival_date }}</p>
                             </div>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.dates_transport.transport')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->transport_id }}</p>
-                            </div>
+                            @switch($orderDetail[0]->transport->type)
+                                @case ('Air') 
+                                    <div class="mb-2">
+                                        <strong>@lang('translations.access.order.dates_transport.transport')</strong>
+                                        <p class="text-muted">
+                                            @php echo __('translations.access.order.dates_transport.air') . ' - ' . $orderDetail[0]->transport->license_plate; @endphp
+                                        </p>
+                                    </div>
+                                @break
+
+
+                                @case ('Maritime') 
+                                    <div class="mb-2">
+                                        <strong>@lang('translations.access.order.dates_transport.transport')</strong>
+                                        <p class="text-muted">
+                                            @php echo __('translations.access.order.dates_transport.maritime') . ' - ' . $orderDetail[0]->transport->license_plate; @endphp
+                                        </p>
+                                    </div>
+                                @break
+                                @case ('Land') 
+                                    <div class="mb-2">
+                                        <strong>@lang('translations.access.order.dates_transport.transport')</strong>
+                                        <p class="text-muted">
+                                            @php echo __('translations.access.order.dates_transport.land') . ' - ' . $orderDetail[0]->transport->license_plate; @endphp
+                                        </p>
+                                    </div>
+                                @break
+                            @endswitch
                         </div>
 
                         <div class="mb-3 p-3 mt-4" style="background-color: #e9ecef; border-radius: 8px;">
@@ -93,7 +120,7 @@
                             </div>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.location_package.type')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->package_type_id }}</p>
+                                <p class="text-muted">{{ $orderDetail[0]->packageType->type }}</p>
                             </div>
                         </div>
                     </div>
@@ -115,6 +142,7 @@
 
             </div>
         @endif
+        </div>
     </div>
    
 @endsection

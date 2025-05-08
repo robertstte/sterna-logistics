@@ -24,4 +24,9 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Transport::class);
     }
+    
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'origin');
+    }
 }

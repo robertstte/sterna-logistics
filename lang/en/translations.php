@@ -97,7 +97,10 @@ return [
                     "title" => "Dates and Transport",
                     "departure" => "Departure Date",
                     "arrival" => "Arrival Date",
-                    "transport" => "Transport "
+                    "transport" => "Transport ",
+                    "air"=> "Plane",
+                    "maritime" => "Ship",
+                    "land" => "Truck"
                 ],
                 
                 "cost_weight" => [

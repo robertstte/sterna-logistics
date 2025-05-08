@@ -15,7 +15,10 @@ class MyOrderController extends Controller
         
         $order = Order::with(['customer', 'status'])->find($orderId);
 
-        $orderDetail = OrderDetail::where('order_id',$orderId)->get();
+        $orderDetail = OrderDetail::with(['packageType', 'transport', 'country'])
+        ->where('order_id', $orderId)
+        ->get();
+    
         if (!isset($orderDetail) || $orderDetail->isEmpty()) {
             return view('myOrder', ['status' => 'no', 'message' => 'Detalles del pedido no encontrados.']);
         }
