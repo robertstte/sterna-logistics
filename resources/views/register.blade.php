@@ -1,12 +1,12 @@
 @extends('layouts.access')
 
 @section('content')
-<div class="row p-5" >
+<div class="row p-5">
     <div class="row">
-        <div class="col-12 col-xl-6  d-none d-xl-flex justify-content-center" style="margin-right: 100px;">
+        <div class="col-12 col-xl-6  d-none d-xl-flex justify-content-center" style="margin-right: 100px;"  >
             <img loading="lazy" class="w-100 h-100" src="{{ asset('images/access.svg') }}" alt="@lang('translations.access.register.illustration')">
         </div>
-        <div class="col-12 col-xl-4  d-flex flex-column justify-content-center align-itmes-center access-form">
+        <div class="col-12 col-xl-4  slide-in d-flex flex-column justify-content-center align-itmes-center access-form" id="page">
             <div class="row">
                 <div class="col-6">
                     <p class="access-form-title">@lang('translations.access.register.title')</p>
@@ -130,10 +130,30 @@
     }
 
     function goToStep(step) {
-    if (step <= currentStep) {
-        showStep(step);
+    for (let i = 1; i < step; i++) {
+        const stepContainer = document.getElementById(`step-content${i}`);
+        const fields = stepContainer.querySelectorAll('input, select');
+        let allValid = true;
+
+        fields.forEach(field => {
+            if (field.type === 'radio') {
+                const radios = stepContainer.querySelectorAll(`input[name="${field.name}"]`);
+                if (![...radios].some(r => r.checked)) {
+                    allValid = false;
+                }
+            } else if (!field.value) {
+                allValid = false;
+            }
+        });
+
+        if (!allValid) {
+            return; 
+        }
     }
+
+    showStep(step);
 }
+
 
 
 function nextStep(step) {
@@ -176,6 +196,26 @@ function nextStep(step) {
     document.addEventListener('DOMContentLoaded', () => {
         showStep(currentStep);
     });
+    document.addEventListener('DOMContentLoaded', () => {
+    const loginLink = document.querySelector('a[href="login"]');
+
+    if (loginLink) {
+        loginLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            const page = document.getElementById('page');
+            page.classList.remove('slide-in');
+            page.classList.add('slide-out-right');
+
+            setTimeout(() => {
+                window.location.href = this.getAttribute('href');
+            }, 400); 
+        });
+    }
+
+    showStep(currentStep);
+});
+
+
 </script>
 
 <style>
@@ -198,6 +238,36 @@ function nextStep(step) {
     visibility: hidden;
     margin-top: 4px;
     margin-bottom: 0px;
+}
+
+.slide-in {
+    animation: slideIn 0.4s ease-in;
+}
+
+.slide-out-right {
+    animation: slideOutRight 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
 }
 
 

@@ -6,7 +6,7 @@
         <div class="col-12 col-xl-6 d-none d-xl-flex justify-content-center" style="margin-right: 100px;">
             <img loading="lazy" class="w-100 h-100" src="{{ asset('images/access.svg') }}" alt="@lang('translations.access.login.illustration')">
         </div>
-        <div class="col-12 col-xl-4 d-flex flex-column justify-content-center align-itmes-center access-form" style="height: 555px; ">
+        <div class="col-12 col-xl-4  slide-in d-flex flex-column justify-content-center align-itmes-center access-form" style="height: 555px;" id="page">
             <div class="row">
                 <div class="col-9 ">
                     <p class="access-form-title">@lang('translations.access.login.title')</p>
@@ -59,6 +59,27 @@
             document.querySelector('.form-error').style.visibility = 'visible';
         }
     });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const loginLink = document.querySelector('a[href="login"]');
+
+    if (loginLink) {
+        loginLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            const page = document.getElementById('page');
+            page.classList.remove('slide-in');
+            page.classList.add('slide-out-right');
+
+            setTimeout(() => {
+                window.location.href = this.getAttribute('href');
+            }, 400); 
+        });
+    }
+
+    showStep(currentStep);
+});
+
 </script>
 <style>
 .form-error {
@@ -67,6 +88,34 @@
     margin-top: 4px;
     margin-bottom: 0px;
 }
+.slide-in {
+    animation: slideIn 0.4s ease-in;
+}
 
+.slide-out-right {
+    animation: slideOutLeft 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+}
 
 </style>
