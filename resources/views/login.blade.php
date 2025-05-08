@@ -15,7 +15,8 @@
                     <a href="/"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.login.back')"></a>
                 </div>
             </div>
-            <form>
+            <form method="POST" action="{{ route('login') }}" id="loginForm">
+                @csrf
                 <input class="access-form-email" type="email" placeholder="@lang('translations.access.login.email')" name="email" required>
                 <div class="position-relative">
                     <input id="login-password" class="access-form-password" type="password" placeholder="@lang('translations.access.login.password')" name="password" required>
@@ -40,9 +41,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <a href="register" class="access-form-signup">@lang('translations.access.login.signup')</a>
+                    <a href="{{ route('register') }}" class="access-form-signup">@lang('translations.access.login.signup')</a>
                 </div>
             </form>
+            
         </div>
     </div>
 </div>

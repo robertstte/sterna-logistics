@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Model
+class User extends Model implements Authenticatable
 {
+    use \Illuminate\Auth\Authenticatable; // Esto permite que el modelo implemente la funcionalidad de autenticación
+
     public $timestamps = false;
 
     protected $fillable = ['username', 'email', 'password', 'role_id'];
