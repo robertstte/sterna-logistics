@@ -3,10 +3,10 @@
 @section('content')
 <div class="row p-5" >
     <div class="row">
-        <div class="col-12 col-xl-6 d-none d-xl-flex justify-content-center">
+        <div class="col-12 col-xl-6  d-none d-xl-flex justify-content-center" style="margin-right: 100px;">
             <img loading="lazy" class="w-100 h-100" src="{{ asset('images/access.svg') }}" alt="@lang('translations.access.register.illustration')">
         </div>
-        <div class="col-12 col-xl-6 d-flex flex-column justify-content-center align-itmes-center access-form">
+        <div class="col-12 col-xl-4  d-flex flex-column justify-content-center align-itmes-center access-form">
             <div class="row">
                 <div class="col-6">
                     <p class="access-form-title">@lang('translations.access.register.title')</p>
@@ -16,7 +16,7 @@
                     <a onclick="prevStep()" style="cursor: pointer;"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.register.back')"></a>
                 </div>
             </div>
-            <form>
+            <form style="margin-bottom: 0;">
                 <div class="step" id="step-content1">
                     <input class="access-form-name" type="text" placeholder="@lang('translations.access.register.name')" name="name" required>
                     <input class="access-form-register-email" type="email" placeholder="@lang('translations.access.register.email')" name="email" required>
@@ -91,8 +91,12 @@
                     <div class="col-3"><hr class="form-step" id="step3" onclick="goToStep(3)"></div>
                     <div class="col-3"><hr class="form-step" id="step4" onclick="goToStep(4)"></div>
                 </div>
-
+           
+                <div class="row">
+                    <a style="margin-top: 0;" href="login" class="access-form-signup">@lang('translations.access.login.signin')</a>
+                </div>
             </form>
+
         </div>
     </div>
 </div>
@@ -187,7 +191,7 @@ function nextStep(step) {
     background-color: #007bff;
 }
 .step{
-    height: 320px;
+    height: 322px;
 }
 .form-error {
     color: red;
