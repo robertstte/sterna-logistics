@@ -49,6 +49,16 @@ return [
             ]
         ]
     ],
+    "errors" => [
+        "404" => [
+            "title" => "Oops! Page not found",
+            "subtitle" => "The page you are looking for does not exist, has been moved, or was deleted."
+        ],
+        "503" => [
+            "title" => "Oops! The site is under maintenance",
+            "subtitle" => "We are making some improvements. We will be back shortly."
+        ]
+    ],
     "access" => [
         "login" => [
             "illustration" => "Ilustration",

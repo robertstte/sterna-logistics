@@ -849,6 +849,48 @@ hr {
     }
 }
 
+.errors-404-image {
+    max-width: 90%;
+    max-height: 300px;
+}
+
+.errors-404-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 50px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+}
+
+.errors-404-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+}
+
+.errors-503-image {
+    max-width: 90%;
+    max-height: 300px;
+    margin-top: 100px;
+}
+
+.errors-503-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 50px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+}
+
+.errors-503-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+}
 
 footer {
     bottom: 0;
