@@ -11,12 +11,14 @@ class MyOrderController extends Controller
 {
     public function index(Request $request)
     {
-        $orderId = $request->input('order_id');
+        $request->validate([
+            'order_id' => 'required|min:18|max:18',
+        ]);
         
-        $order = Order::with(['customer', 'status'])->find($orderId);
+        $order = Order::with(['customer', 'status'])->find($request->order_id);
 
         $orderDetail = OrderDetail::with(['packageType', 'transport', 'country'])
-        ->where('order_id', $orderId)
+        ->where('order_id', $request->order_id)
         ->get();
     
         if (!isset($orderDetail) || $orderDetail->isEmpty()) {
@@ -25,4 +27,6 @@ class MyOrderController extends Controller
         
         return view('myOrder', ['status' => 'ok', 'order' => $order , 'orderDetail' => $orderDetail]);
     }
+
+
 }
