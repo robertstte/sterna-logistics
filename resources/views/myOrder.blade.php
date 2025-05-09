@@ -144,5 +144,70 @@
         @endif
         </div>
     </div>
-   
+    
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Seguimiento de Pedido</h2>
+        
+        <div id="map" style="height: 500px; width: 100%;"></div>
+    </div>
 @endsection
+    
+    <script>
+        const origen = { lat: 40.416775, lng: -3.703790 };   // Madrid
+    const destino = { lat: 41.387019, lng: 2.167858 };   // Barcelona
+
+    let marker;
+let step = 0;
+let routeCoords = [];
+
+function moveMarker() {
+    if (step >= routeCoords.length) return;
+
+    marker.setPosition(routeCoords[step]);
+    step++;
+    setTimeout(moveMarker, 1000); // Cambia la velocidad aquí
+}
+
+function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 6,
+        center: origen,
+    });
+
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
+
+    directionsService.route(
+        {
+            origin: origen,
+            destination: destino,
+            travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (response, status) => {
+            if (status === "OK") {
+                directionsRenderer.setDirections(response);
+
+                const path = response.routes[0].overview_path;
+                routeCoords = path;
+                marker = new google.maps.Marker({
+                    position: path[0],
+                    map: map,
+                    icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                });
+
+                moveMarker();
+            }
+        }
+    );
+}
+
+
+
+
+    </script>
+    
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQIySQKY_ZSIuFEzOqfr-o-tpIK7qTtXg&callback=initMap">
+    </script>
+    
