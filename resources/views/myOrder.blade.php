@@ -203,7 +203,6 @@ function initMap() {
 }
 
 {{$apiKey = env('APP_GOOGLE_KEY');}}
-@dd($apiKey)
 
 
     </script>
