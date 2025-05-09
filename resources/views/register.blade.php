@@ -16,7 +16,8 @@
                     <a onclick="prevStep()" style="cursor: pointer;"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.register.back')"></a>
                 </div>
             </div>
-            <form style="margin-bottom: 0;">
+           <form method="POST" action="{{ route('register') }}" style="margin-bottom: 0;">
+             @csrf
                 <div class="step" id="step-content1">
                     <input class="access-form-name" type="text" placeholder="@lang('translations.access.register.name')" name="name" required>
                     <input class="access-form-register-email" type="email" placeholder="@lang('translations.access.register.email')" name="email" required>
