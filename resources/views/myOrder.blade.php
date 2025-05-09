@@ -202,12 +202,12 @@ function initMap() {
     );
 }
 
-
+{{$apiKey = env('APP_GOOGLE_KEY');}}
+@dd($apiKey)
 
 
     </script>
-    
     <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQIySQKY_ZSIuFEzOqfr-o-tpIK7qTtXg&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key={{ $apiKey }}&callback=initMap">
     </script>
     
