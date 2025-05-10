@@ -1,21 +1,22 @@
 @extends('layouts.access')
 
 @section('content')
-<div class="row">
-    <div class="row p-5">
-        <div class="col-12 col-xl-6 d-none d-xl-flex justify-content-center">
+<div class="row p-5">
+    <div class="row ">
+        <div class="col-12 col-xl-6 d-none d-xl-flex justify-content-center" style="margin-right: 100px;">
             <img loading="lazy" class="w-100 h-100" src="{{ asset('images/access.svg') }}" alt="@lang('translations.access.login.illustration')">
         </div>
-        <div class="col-12 col-xl-6 d-flex flex-column justify-content-center align-itmes-center access-form">
+        <div class="col-12 col-xl-4  slide-in d-flex flex-column justify-content-center align-itmes-center access-form" style="height: 555px;" id="page">
             <div class="row">
-                <div class="col-6">
+                <div class="col-9 ">
                     <p class="access-form-title">@lang('translations.access.login.title')</p>
                 </div>
-                <div class="col-6">
+                <div class="col-3">
                     <a href="/"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.login.back')"></a>
                 </div>
             </div>
-            <form>
+            <form method="POST" action="{{ route('login') }}" id="loginForm">
+                @csrf
                 <input class="access-form-email" type="email" placeholder="@lang('translations.access.login.email')" name="email" required>
                 <div class="position-relative">
                     <input id="login-password" class="access-form-password" type="password" placeholder="@lang('translations.access.login.password')" name="password" required>
@@ -30,7 +31,8 @@
                         <span class="access-form-recovery">@lang('translations.access.login.recovery')</span>
                     </div>
                 </div>
-                <div class="row">
+                <p class="form-error">Faltan campos por completar</p>
+                <div class="row mb-3">
                     <div class="col-10">
                         <input class="access-form-submit" type="submit" value="@lang('translations.access.login.signin')">
                     </div>
@@ -39,10 +41,83 @@
                     </div>
                 </div>
                 <div class="row">
-                    <a href="register" class="access-form-signup">@lang('translations.access.login.signup')</a>
+                    <a href="{{ route('register') }}" class="access-form-signup">@lang('translations.access.login.signup')</a>
                 </div>
             </form>
+            
         </div>
     </div>
 </div>
 @endsection
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        document.querySelector('.form-error').style.visibility = 'hidden';
+
+        var email = document.querySelector('input[name="email"]').value;
+        var password = document.querySelector('input[name="password"]').value;
+
+        if (!email || !password) {
+            event.preventDefault();
+            document.querySelector('.form-error').style.visibility = 'visible';
+        }
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const loginLink = document.querySelector('a[href="login"]');
+
+    if (loginLink) {
+        loginLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            const page = document.getElementById('page');
+            page.classList.remove('slide-in');
+            page.classList.add('slide-out-right');
+
+            setTimeout(() => {
+                window.location.href = this.getAttribute('href');
+            }, 400); 
+        });
+    }
+
+    showStep(currentStep);
+});
+
+</script>
+<style>
+.form-error {
+    color: red;
+    visibility: hidden;
+    margin-top: 4px;
+    margin-bottom: 0px;
+}
+.slide-in {
+    animation: slideIn 0.4s ease-in;
+}
+
+.slide-out-right {
+    animation: slideOutLeft 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+}
+
+</style>

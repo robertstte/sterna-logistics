@@ -11,12 +11,14 @@
     <div class="col-12 col-xl-6">
         <p class="localization-title">@lang('translations.landing.localization.title')</p>
         <p class="localization-subtitle">@lang('translations.landing.localization.subtitle')</p>
-        <form class="localization-form">
-            <input class="localization-form-text" type="text" placeholder="Nº 202503290000000001" maxlength="18" required>
+        <form action="{{ route('my-order') }}" method="GET" class="localization-form">
+            @csrf  
+            <input class="localization-form-text" type="text" name="order_id" placeholder="Nº 202503290000000001" maxlength="18" required>
             <input class="localization-form-submit btn" type="submit" value="@lang('translations.landing.localization.search')">
             <hr>
             <p class="localization-help">@lang('translations.landing.localization.help')</p>
         </form>
+
     </div>
     <div class="col-xl-6 d-none d-xl-block">
         <img loading="lazy" src="{{ asset('images/localization.svg') }}" alt="@lang('translations.landing.localization.illustration')">

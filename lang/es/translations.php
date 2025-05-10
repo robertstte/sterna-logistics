@@ -134,7 +134,53 @@ return [
             "username" => "Nombre de usuario",
             "password" >= "Contraseña",
             "next" => "Siguiente"
+        ],
+        "order" => [
+            "title" => "Detalles del Pedido",
+            "error" => "Hubo un error al encontrar el pedido.",
+            
+            "info" => [
+                "title" => "Información del Pedido",
+                "id" => "ID del Pedido",
+                "status" => "Estado",
+                "created_at" => "Fecha de Creación"
+            ],
+            
+            "route" => [
+                "title" => "Origen y Destino",
+                "origin" => "Origen",
+                "destination" => "Destino"
+            ],
+            
+            "dates_transport" => [
+                "title" => "Fechas y Transporte",
+                "departure" => "Fecha de Salida",
+                "arrival" => "Fecha de Llegada",
+                "transport" => "Transporte",
+                "air"=> "Avión",
+                "maritime" => "Barco",
+                "land" => "Camion"
+            ],
+            
+            "cost_weight" => [
+                "title" => "Costos y Peso",
+                "cost" => "Costo Total",
+                "weight" => "Peso"
+            ],
+            
+            "location_package" => [
+                "title" => "Ubicación y Tipo de Paquete",
+                "location" => "Ubicación",
+                "type" => "Tipo de Paquete"
+            ],
+            
+            "description_notes" => [
+                "title" => "Descripción y Observaciones",
+                "description" => "Descripción",
+                "observations" => "Observaciones"
+            ]
         ]
+
     ],
     "footer" => [
         "copyright" => "© 2025 Sterna. Todos los derechos reservados.",
