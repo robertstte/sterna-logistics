@@ -43,12 +43,12 @@
                             <h5 class="text-primary">@lang('translations.access.order.route.title')</h5>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.route.origin')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->country->name }}</p>
+                                <p class="text-muted">{{ $orderDetail[0]->departure_location }}</p>
                             </div>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.route.destination')</strong>
                                 
-                                <p class="text-muted">{{ $orderDetail[0]->country->name }}</p>
+                                <p class="text-muted">{{ $orderDetail[0]->arrival_location  }}</p>
                             </div>
                         </div>
                     </div>
@@ -66,8 +66,9 @@
                                 <strong>@lang('translations.access.order.dates_transport.arrival')</strong>
                                 <p class="text-muted">{{ $orderDetail[0]->arrival_date }}</p>
                             </div>
-                            @switch($orderDetail[0]->transport->type)
-                                @case ('Air') 
+                            
+                            @switch($orderDetail[0]->transport->type_id)
+                                @case ('1') 
                                     <div class="mb-2">
                                         <strong>@lang('translations.access.order.dates_transport.transport')</strong>
                                         <p class="text-muted">
@@ -77,7 +78,7 @@
                                 @break
 
 
-                                @case ('Maritime') 
+                                @case ('2') 
                                     <div class="mb-2">
                                         <strong>@lang('translations.access.order.dates_transport.transport')</strong>
                                         <p class="text-muted">
@@ -85,7 +86,7 @@
                                         </p>
                                     </div>
                                 @break
-                                @case ('Land') 
+                                @case ('3') 
                                     <div class="mb-2">
                                         <strong>@lang('translations.access.order.dates_transport.transport')</strong>
                                         <p class="text-muted">
@@ -116,7 +117,7 @@
                             <h5 class="text-primary">@lang('translations.access.order.location_package.title')</h5>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.location_package.location')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->location }}</p>
+                                <p class="text-muted">{{ $orderDetail[0]->destinationCountry->name }}</p>
                             </div>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.location_package.type')</strong>

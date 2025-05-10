@@ -17,7 +17,7 @@ class MyOrderController extends Controller
         
         $order = Order::with(['customer', 'status'])->find($request->order_id);
 
-        $orderDetail = OrderDetail::with(['packageType', 'transport', 'country'])
+        $orderDetail = OrderDetail::with(['packageType', 'transport', 'destinationCountry'])
         ->where('order_id', $request->order_id)
         ->get();
     

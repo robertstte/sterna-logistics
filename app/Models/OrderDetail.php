@@ -24,22 +24,21 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Transport::class);
     }
-<<<<<<< HEAD
-    
+
     public function country()
     {
         return $this->belongsTo(Country::class, 'origin');
     }
-=======
+
 
     public function originCountry()
     {
         return $this->belongsTo(Country::class, 'origin');
     }
 
+
     public function destinationCountry()
     {
         return $this->belongsTo(Country::class, 'destination');
     }
->>>>>>> 70acb5b36c1d5ea31be1793c8bfb8c53db102522
 }
