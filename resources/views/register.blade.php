@@ -23,11 +23,11 @@
                     <input class="access-form-register-email" type="email" placeholder="@lang('translations.access.register.email')" name="email" required>
                     <div class="row w-100">
                         <div class="col-6 d-flex justify-content-start access-form-customer-type">
-                            <input class="access-form-customer-type-radio" type="radio" name="customerType">
+                            <input class="access-form-customer-type-radio" value="2" type="radio" name="customerType">
                             <span>@lang('translations.access.register.individual')</span>
                         </div>
                         <div class="col-6 d-flex justify-content-end access-form-customer-type">
-                            <input class="access-form-customer-type-radio" type="radio" name="customerType">
+                            <input class="access-form-customer-type-radio" value="1" type="radio" name="customerType">
                             <span>@lang('translations.access.register.company')</span>
                         </div>
                     </div>
@@ -71,8 +71,8 @@
 
                 </div>
                 <div class="step step-hidden" id="step-content4">
-                    <select class="access-form-select">
-                        <option>España</option>
+                    <select class="access-form-select"  name="country_id">
+                        <option value="204">España</option>
                         <option>Portugal</option>
                     </select>
                     <div class="row">
