@@ -23,7 +23,7 @@ class OrderDetails extends Seeder
                 'transport_id' => 15,
                 'total_cost' => 1200.00,
                 'weight' => 28000.00,
-                'package_type_id' => 7,
+                'package_type_id' => 8,
                 'description' => 'Textile products such as fabrics, garments or accessories related to the textile industry.'
             ],
             [
@@ -32,7 +32,7 @@ class OrderDetails extends Seeder
                 'destination' => 31,
                 'departure_date' => '2025-02-11',
                 'arrival_date' => '2025-02-12',
-                'departure_location' => 18,
+                'departure_location' => 19,
                 'arrival_location' => 13,
                 'distance_km' => 7640.00,
                 'transport_id' => 4,
