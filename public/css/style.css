@@ -892,6 +892,89 @@ hr {
     color: rgb(0, 31, 63);
 }
 
+.dheader {
+    background-color: rgb(0, 31, 63);
+}
+
+.navbar-brand-dheader {
+    font-size: 64px;
+    margin-right: 0;
+    font-weight: 700;
+    margin-left: 25px;
+    font-family: "Onest";
+    color: rgb(255, 255, 255);
+}
+
+.navbar-brand-dheader:hover {
+    color: rgb(255, 255, 255);
+}
+
+.nav-link-dheader {
+    color: rgb(255, 255, 255);
+}
+
+.nav-link-dheader:hover {
+    color: rgb(255, 255, 255);
+}
+
+.account {
+    padding: 8px;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 8px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+    background-color: rgb(255, 255, 255);
+}
+
+.account:hover {
+    color: rgb(0, 31, 63);
+    background-color: rgb(255, 255, 255);
+}
+
+.table {
+    margin-top: 50px;
+    border: 1px solid rgb(0, 31, 63);
+}
+
+.table th.header {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Onest";
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 31, 63);
+}
+
+.table td.body {
+    font-size: 16px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+}
+
+.orderDetail-title {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+}
+
+.orderDetail-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    font-family: "Onest";
+    color: rgb(0, 31, 63);
+    border: 2px solid rgb(0, 31, 63);
+}
+
+.orderDetail-btn {
+    font-size: 18px;
+    font-family: "Onest";
+    color: rgb(255, 255, 255);
+}
+
 footer {
     bottom: 0;
     width: 100%;

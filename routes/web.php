@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\LanguageController;
 
 Route::get('/', function () {
@@ -14,5 +15,8 @@ Route::get('login', function () {
 Route::get('register', function () {
     return view('register');
 });
+
+Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
+Route::post('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
 
 Route::get('language/{lang}', [LanguageController::class, 'setLanguage']);
