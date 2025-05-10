@@ -8,7 +8,7 @@ class Transport extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['type', 'cost_per_km', 'capacity', 'license_plate', 'country_id'];
+    protected $fillable = ['type_id', 'cost_per_km', 'capacity', 'license_plate', 'country_id'];
 
     public function orderDetail()
     {
@@ -18,5 +18,10 @@ class Transport extends Model
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function transportType()
+    {
+        return $this->belongsTo(TransportType::class);
     }
 }

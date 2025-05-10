@@ -8,18 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('transports', function (Blueprint $table) {
+        Schema::create('country_locations', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->foreignId('type_id')->constrained('transport_types')->onDelete('cascade');
-            $table->decimal('cost_per_km', 8, 2);
-            $table->decimal('capacity', 8, 2);
-            $table->string('license_plate')->unique();
             $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('transports');
+        Schema::dropIfExists('country_locations');
     }
 };
