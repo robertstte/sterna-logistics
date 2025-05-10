@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\Auth\LoginController;
@@ -27,5 +28,8 @@ Route::get('/my-order', [MyOrderController::class, 'index'])->name('my-order');
 
 
 //////////////////////////////////////////////////////////////////////////////////
+
+Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
+Route::post('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
 
 Route::get('language/{lang}', [LanguageController::class, 'setLanguage']);

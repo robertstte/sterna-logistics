@@ -11,11 +11,26 @@ class Statuses extends Seeder
     public function run(): void
     {
         DB::table('statuses')->insert([
-            ['status' => 'Cancelled'],
-            ['status' => 'Delayed'],
-            ['status' => 'Delivered'],
-            ['status' => 'Ongoing'],
-            ['status' => 'Pending']
+            [
+                'status' => 'Cancelled',
+                'color' => '#FF3737'
+            ],
+            [
+                'status' => 'Delayed',
+                'color' => '#7B5FF1'
+            ],
+            [
+                'status' => 'Delivered',
+                'color' => '#118433'
+            ],
+            [
+                'status' => 'Ongoing',
+                'color' => '#FF8B37'
+            ],
+            [
+                'status' => 'Pending',
+                'color' => '#A3A2A6'
+            ]
         ]);
     }
 }

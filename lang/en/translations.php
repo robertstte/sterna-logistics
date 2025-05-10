@@ -49,6 +49,65 @@ return [
             ]
         ]
     ],
+    "errors" => [
+        "404" => [
+            "title" => "Oops! Page not found",
+            "subtitle" => "The page you are looking for does not exist, has been moved, or was deleted."
+        ],
+        "503" => [
+            "title" => "Oops! The site is under maintenance",
+            "subtitle" => "We are making some improvements. We will be back shortly."
+        ]
+    ],
+    "dashboard" => [
+        "dheader" => [
+            "orders" => "Orders",
+            "clients" => "Clients",
+            "invoicing" => "Invoicing",
+            "account" => "Account",
+            "logout" => "Logout"
+        ],
+        "table" => [
+            "id" => "ID",
+            "order" => "Order",
+            "client" => "Client",
+            "status" => "Status",
+            "origin" => "Origin",
+            "destination" => "Destination",
+            "date" => "Date",
+            "details" => [
+                "description" => "Description",
+                "ubication" => "Ubication",
+                "package_type" => "Package Type",
+                "arrival_date" => "Arrival Date",
+                "departure_location" => "Departure Location",
+                "arrival_location" => "Arrival Location",
+                "transport_type" => "Transport Type",
+                "license_plate" => "License Plate",
+                "weight" => "Weight",
+                "total_cost" => "Total Cost",
+                "status" => "Status",
+                "observations" => "Observations"
+            ]
+        ],
+    ],
+    "package_type" => [
+        "chemical" => "Chemical",
+        "electronic" => "Electronic",
+        "explosive" => "Explosive",
+        "heavy" => "Heavy",
+        "organic" => "Organic",
+        "perishables" => "Perishables",
+        "sensible" => "Sensible",
+        "textile" => "Textile"
+    ],
+    "status" => [
+        "cancelled" => "Cancelled",
+        "delayed" => "Delayed",
+        "delivered" => "Delivered",
+        "ongoing" => "Ongoing",
+        "pending" => "Pending"
+    ],
     "access" => [
         "login" => [
             "illustration" => "Ilustration",

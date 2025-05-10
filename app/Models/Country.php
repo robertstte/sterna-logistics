@@ -19,4 +19,19 @@ class Country extends Model
     {
         return $this->hasMany(Transport::class);
     }
+
+    public function originOrderDetails()
+    {
+        return $this->hasMany(OrderDetails::class, 'origin');
+    }
+
+    public function destinationOrderDetails()
+    {
+        return $this->hasMany(OrderDetails::class, 'destination');
+    }
+
+    public function locations()
+    {
+        return $this->hasMany(CountryLocation::class);
+    }
 }

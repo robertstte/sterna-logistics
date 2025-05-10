@@ -15,11 +15,12 @@ return new class extends Migration
             $table->string('destination');
             $table->date('departure_date');
             $table->date('arrival_date');
+            $table->integer('departure_location')->nullable();
+            $table->integer('arrival_location')->nullable();
             $table->decimal('distance_km', 8, 2);
             $table->foreignId('transport_id')->constrained('transports')->onDelete('cascade');
             $table->decimal('total_cost', 8, 2);
             $table->decimal('weight', 8, 2);
-            $table->string('location');
             $table->foreignId('package_type_id')->constrained('package_types')->onDelete('cascade');
             $table->string('description');
             $table->string('observations')->nullable();

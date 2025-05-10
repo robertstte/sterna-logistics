@@ -8,7 +8,7 @@ class Status extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['status'];
+    protected $fillable = ['status', 'color'];
 
     public function order()
     {
