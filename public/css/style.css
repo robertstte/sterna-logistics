@@ -510,6 +510,7 @@ hr {
 
 .access-form {
     padding: 25px;
+    margin-left: 15px;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -791,9 +792,13 @@ hr {
     display: none;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1587px) {
     .access-form-title {
         font-size: 38px;
+    }
+
+    .form-step-container {
+        padding-top: 45px;
     }
 
     .access-form-back {
@@ -813,8 +818,12 @@ hr {
         margin-top: 0;
     }
 
+    .form-step-container {
+        padding-top: 45px;
+    }
+
     .access-form {
-        padding: 15px;
+        margin-left: 15px;
     }
 
     .access-form-email {
@@ -933,7 +942,7 @@ hr {
 }
 
 .table {
-    margin-top: 50px;
+    margin-top: 25px;
     border: 1px solid rgb(0, 31, 63);
 }
 
@@ -967,6 +976,16 @@ hr {
     font-family: "Onest";
     color: rgb(0, 31, 63);
     border: 2px solid rgb(0, 31, 63);
+}
+
+.input-group-text {
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    font-family: "Onest";
+    border-top: 2px solid rgb(0, 31, 63);
+    border-right: 2px solid rgb(0, 31, 63);
+    border-bottom: 2px solid rgb(0, 31, 63);
 }
 
 .orderDetail-btn {
