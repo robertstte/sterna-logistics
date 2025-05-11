@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sterna</title>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script async defer src="{{ config('app.google_url') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="icon" href="favicon.ico" type="image/x-icon">

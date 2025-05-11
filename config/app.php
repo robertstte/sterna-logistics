@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'google_url' => 'https://maps.googleapis.com/maps/api/js?key=' . env('APP_GOOGLE_KEY') . '&callback=onMapsReady&loading=async',
 
     /*
     |--------------------------------------------------------------------------

@@ -85,8 +85,11 @@
                                 <div class="row p-2">
                                     <p class="orderDetail-title">@lang('translations.dashboard.table.details.ubication')</p>
                                     <div class="form-group">
-                                        <div style="height: 320px; border: 2px solid black; border-radius: 8px;">
-                                            <!-- Agregar mapa -->
+                                        <div style="height: 320px; border: 2px solid black; border-radius: 8px;" class="map-ubication" id="ubication{{ $order->orderDetail->id }}"
+                                        data-departure-lat="{{ optional($order->orderDetail->departureLocation)->latitude }}"
+                                        data-departure-lng="{{ optional($order->orderDetail->departureLocation)->longitude }}"
+                                        data-arrival-lat="{{ optional($order->orderDetail->arrivalLocation)->latitude }}"
+                                        data-arrival-lng="{{ optional($order->orderDetail->arrivalLocation)->longitude }}">
                                         </div>
                                     </div>
                                 </div>
