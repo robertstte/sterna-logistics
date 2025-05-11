@@ -19,9 +19,9 @@ class OrdersController extends Controller
         ->with('orderDetail.packageType')
         ->with('orderDetail.originCountry')
         ->with('orderDetail.destinationCountry')
-        ->with('orderDetail.originCountry.locations')
-        ->with('orderDetail.destinationCountry.locations')
-        ->get();
+        ->with('orderDetail.departureLocation')
+        ->with('orderDetail.arrivalLocation')
+        ->paginate(15);
 
         $statuses = Status::all();
 
@@ -49,6 +49,6 @@ class OrdersController extends Controller
             'observations' => $request->observations
         ]);
 
-        return redirect()->route('orders.index');
+        return redirect()->route('orders');
     }
 }

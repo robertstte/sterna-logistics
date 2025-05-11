@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="container">
+<div class="ps-5 pe-5">
     <table class="table table-bordered">
         <tr class="text-center">
             <th class="header">@lang('translations.dashboard.table.id')</th>
@@ -24,8 +24,9 @@
             </tr>
             <tr class="collapse" id="orderDetail{{ $order->id }}">
                 <td colspan="7">
-                    <form action="{{ route('orders.update', $order->id) }}" method="POST">
+                    <form action="{{ route('orders.update', $order->id) }}">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="row p-2">
@@ -37,7 +38,7 @@
                                 <div class="row p-2">
                                     <p class="orderDetail-title">@lang('translations.dashboard.table.details.package_type')</p>
                                     <div class="form-group">
-                                        <input class="orderDetail-input" type="text" value="{{ __('translations.package_type')[strtolower($order->orderDetail->packageType->type)] }}" disabled>
+                                        <input class="orderDetail-input form-control" type="text" value="{{ __('translations.package_type')[strtolower($order->orderDetail->packageType->type)] }}" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -49,19 +50,20 @@
                                 <div class="row p-2">
                                     <p class="orderDetail-title">@lang('translations.dashboard.table.details.departure_location')</p>
                                     <div class="form-group">
-                                        <input class="orderDetail-input" type="text" disabled>
+                                        <input class="orderDetail-input form-control" value="{{ $order->orderDetail->departureLocation->name ?? 'N/A'}}" type="text" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <p class="orderDetail-title">@lang('translations.dashboard.table.details.transport_type')</p>
                                     <div class="form-group">
-                                        <input class="orderDetail-input" type="text" value="{{ $order->orderDetail->transport->type_id }}" disabled>
+                                        <input class="orderDetail-input form-control" type="text" value="{{ $order->orderDetail->transport->transportType->type }}" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <p class="orderDetail-title">@lang('translations.dashboard.table.details.weight')</p>
-                                    <div class="form-group">
-                                        <input class="orderDetail-input" type="text" value="{{ $order->orderDetail->weight }}" disabled>
+                                    <div class="input-group">
+                                        <input class="orderDetail-input form-control" type="text" value="{{ $order->orderDetail->weight }}" disabled>
+                                        <span class="input-group-text">KG</span>
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -89,21 +91,22 @@
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.license_plate')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.arrival_location')</p>
                                     <div class="form-group">
-                                        <input class="orderDetail-input" type="text" value="{{ $order->orderDetail->transport->license_plate }}" disabled>
+                                        <input class="orderDetail-input form-control" value="{{ $order->orderDetail->arrivalLocation->name ?? 'N/A' }}" type="text" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.arrival_location')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.license_plate')</p>
                                     <div class="form-group">
-                                        <input class="orderDetail-input" type="text" disabled>
+                                        <input class="orderDetail-input form-control" type="text" value="{{ $order->orderDetail->transport->license_plate }}" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <p class="orderDetail-title">@lang('translations.dashboard.table.details.total_cost')</p>
-                                    <div class="form-group">
-                                        <input class="orderDetail-input" type="text" value="{{ $order->orderDetail->total_cost }}" disabled>
+                                    <div class="input-group">
+                                        <input class="orderDetail-input form-control" type="text" value="{{ $order->orderDetail->total_cost }}" disabled>
+                                        <span class="input-group-text">Euro</span>
                                     </div>
                                 </div>
                                 <div class="row p-2">

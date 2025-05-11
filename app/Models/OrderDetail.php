@@ -34,4 +34,14 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Country::class, 'destination');
     }
+
+    public function departureLocation()
+    {
+        return $this->belongsTo(CountryLocation::class, 'departure_location');
+    }
+
+    public function arrivalLocation()
+    {
+        return $this->belongsTo(CountryLocation::class, 'arrival_location');
+    }
 }

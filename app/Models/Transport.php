@@ -22,6 +22,6 @@ class Transport extends Model
 
     public function transportType()
     {
-        return $this->belongsTo(TransportType::class);
+        return $this->belongsTo(TransportType::class, 'type_id');
     }
 }

@@ -19,4 +19,9 @@ class CountryLocation extends Model
 	{
 		return $this->belongsTo(TransportType::class);
 	}
+
+	public function orderDetail()
+	{
+		return $this->hasMany(OrderDetail::class);
+	}
 }
