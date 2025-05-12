@@ -6,7 +6,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
+use App\Http\Controllers\UserOrdersController;
 Route::get('/', function () {
     return view('landing');
 });
@@ -31,6 +31,7 @@ Route::get('OrderDetails', function () {
 });
 
 Route::get('/my-order', [MyOrderController::class, 'index'])->name('my-order');
+Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');
 
 Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
 Route::post('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
