@@ -4,7 +4,7 @@
 
 @section('content')
 
-
+    
     <div class="container mt-5 ">
         
         <div class="col-10 mx-auto">
@@ -43,12 +43,12 @@
                             <h5 class="text-primary">@lang('translations.access.order.route.title')</h5>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.route.origin')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->departure_location }}</p>
+                                <p class="text-muted">{{ $orderDetail[0]->originCountry->name }}</p>
                             </div>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.route.destination')</strong>
                                 
-                                <p class="text-muted">{{ $orderDetail[0]->arrival_location  }}</p>
+                                <p class="text-muted">{{ $orderDetail[0]->destinationCountry->name }}</p>
                             </div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                             <h5 class="text-primary">@lang('translations.access.order.location_package.title')</h5>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.location_package.location')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->destinationCountry->name }}</p>
+                                <p class="text-muted">{{ $orderDetail[0]->originCountry->name }}</p>
                             </div>
                             <div class="mb-2">
                                 <strong>@lang('translations.access.order.location_package.type')</strong>
@@ -146,67 +146,84 @@
         </div>
     </div>
     
-    <div class="container mt-4">
+    <div class="container mt-4 mb-4">
+        <div class="col-10 mx-auto">
         <h2 class="text-center mb-4">Seguimiento de Pedido</h2>
         
         <div id="map" style="height: 500px; width: 100%;"></div>
+        </div>
     </div>
 @endsection
     
     <script>
-        const origen = { lat: 40.416775, lng: -3.703790 };   // Madrid
-    const destino = { lat: 41.387019, lng: 2.167858 };   // Barcelona
+    const origen = {
+        lat: parseFloat("{{ $orderDetail[0]->departureLocation->latitude }}"),
+        lng: parseFloat("{{ $orderDetail[0]->departureLocation->longitude }}")
+    };
+
+    const destino = {
+        lat: parseFloat("{{ $orderDetail[0]->arrivalLocation->latitude }}"),
+        lng: parseFloat("{{ $orderDetail[0]->arrivalLocation->longitude }}")
+    };
+
+    console.log(destino, origen);
 
     let marker;
-let step = 0;
-let routeCoords = [];
+    let step = 0;
+    let routeCoords = [];
 
-function moveMarker() {
-    if (step >= routeCoords.length) return;
-
-    marker.setPosition(routeCoords[step]);
-    step++;
-    setTimeout(moveMarker, 1000); // Cambia la velocidad aquí
-}
-
-function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 6,
-        center: origen,
-    });
-
-    const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer();
-    directionsRenderer.setMap(map);
-
-    directionsService.route(
-        {
-            origin: origen,
-            destination: destino,
-            travelMode: google.maps.TravelMode.DRIVING,
-        },
-        (response, status) => {
-            if (status === "OK") {
-                directionsRenderer.setDirections(response);
-
-                const path = response.routes[0].overview_path;
-                routeCoords = path;
-                marker = new google.maps.Marker({
-                    position: path[0],
-                    map: map,
-                    icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
-                });
-
-                moveMarker();
-            }
+    function interpolateCoords(start, end, numSteps) {
+        const coords = [];
+        for (let i = 0; i <= numSteps; i++) {
+            const lat = start.lat + (end.lat - start.lat) * (i / numSteps);
+            const lng = start.lng + (end.lng - start.lng) * (i / numSteps);
+            coords.push({ lat, lng });
         }
-    );
-}
+        return coords;
+    }
 
-{{$apiKey = env('APP_GOOGLE_KEY');}}
+    function moveMarker() {
+        if (step >= routeCoords.length) return;
 
+        marker.setPosition(routeCoords[step]);
+        step++;
+        setTimeout(moveMarker, 100); // más rápido y suave
+    }
 
-    </script>
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            center: origen,
+        });
+
+        // Línea de vuelo
+        const flightPath = new google.maps.Polyline({
+            path: [origen, destino],
+            geodesic: true,
+            strokeColor: "#FF0000",
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+        });
+
+        flightPath.setMap(map);
+
+        // Crear pasos para animar el marcador
+        routeCoords = interpolateCoords(origen, destino, 100); // 100 pasos
+
+        marker = new google.maps.Marker({
+            position: origen,
+            map: map,
+            icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+        });
+
+        moveMarker();
+    }
+</script>
+
+<?php
+$apiKey = env('APP_GOOGLE_KEY');
+?>
+
     <script async
         src="https://maps.googleapis.com/maps/api/js?key={{ $apiKey }}&callback=initMap">
     </script>
