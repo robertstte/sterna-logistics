@@ -11,10 +11,10 @@
                         <a class="nav-link" href="/">@lang('translations.header.home')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">@lang('translations.header.about')</a>
+                        <a class="nav-link"  href="{{ route ('about') }}">@lang('translations.header.about')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">@lang('translations.header.contact')</a>
+                        <a class="nav-link" href="{{ route ('contact') }}" >@lang('translations.header.contact')</a>
                     </li>
                     <li class="nav-item">
                         <div class="dropdown-center mx-auto">

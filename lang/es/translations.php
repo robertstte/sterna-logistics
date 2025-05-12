@@ -49,6 +49,12 @@ return [
             ]
         ]
     ],
+     "contact"=>[
+        "title" => "Contactános",
+        "name" => "Nombre",
+        "email" => "Email",
+        "message" => "Mensaje",
+    ],
     "errors" => [
         "404" => [
             "title" => "¡Oops! Página no encontrada",
