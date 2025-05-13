@@ -131,5 +131,8 @@
             </tr>
         @endforeach
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $orders->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 @endsection

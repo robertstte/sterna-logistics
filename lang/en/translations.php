@@ -94,7 +94,12 @@ return [
                 ]
             ],
             "customers" => [
-
+                "name" => "Name",
+                "email" => "Email",
+                "address" => "Address",
+                "phone" => "Phone",
+                "country" => "Country",
+                "customer_type" => "Customer Type"
             ]
         ],
     ],

@@ -6,6 +6,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CustomersController;
 
 Route::get('/', function () {
     return view('landing');
@@ -14,6 +15,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrdersController::class, 'index'])->name('orders');
     Route::get('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
+    Route::get('/customers', [CustomersController::class, 'index'])->name('customers');
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

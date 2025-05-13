@@ -94,7 +94,12 @@ return [
                 ]
             ],
             "customers" => [
-
+                "name" => "Nombre",
+                "email" => "Correo Electrónico",
+                "address" => "Dirección",
+                "phone" => "Teléfono",
+                "country" => "País",
+                "customer_type" => "Tipo de Cliente"
             ]
         ]
     ],

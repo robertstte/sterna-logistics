@@ -8,10 +8,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item mt-2">
-                        <a class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.orders')</a>
+                        <a href="orders" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.orders')</a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.clients')</a>
+                        <a href="customers" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.clients')</a>
                     </li>
                     <li class="nav-item mt-2">
                         <a class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.invoicing')</a>
