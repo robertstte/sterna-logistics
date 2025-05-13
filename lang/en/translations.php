@@ -68,26 +68,33 @@ return [
             "logout" => "Logout"
         ],
         "table" => [
-            "id" => "ID",
-            "order" => "Order",
-            "client" => "Client",
-            "status" => "Status",
-            "origin" => "Origin",
-            "destination" => "Destination",
-            "date" => "Date",
-            "details" => [
-                "description" => "Description",
-                "ubication" => "Ubication",
-                "package_type" => "Package Type",
-                "arrival_date" => "Arrival Date",
-                "departure_location" => "Departure Location",
-                "arrival_location" => "Arrival Location",
-                "transport_type" => "Transport Type",
-                "license_plate" => "License Plate",
-                "weight" => "Weight",
-                "total_cost" => "Total Cost",
+            "orders" => [
+                "id" => "ID",
+                "order" => "Order",
+                "client" => "Client",
                 "status" => "Status",
-                "observations" => "Observations"
+                "origin" => "Origin",
+                "destination" => "Destination",
+                "date" => "Date",
+                "details" => [
+                    "description" => "Description",
+                    "ubication" => "Ubication",
+                    "package_type" => "Package Type",
+                    "arrival_date" => "Arrival Date",
+                    "departure_location" => "Departure Location",
+                    "arrival_location" => "Arrival Location",
+                    "transport_type" => "Transport Type",
+                    "license_plate" => "License Plate",
+                    "weight" => "Weight",
+                    "total_cost" => "Total Cost",
+                    "status" => "Status",
+                    "observations" => "Observations",
+                    "save" => "Save",
+                    "cancel" => "Cancel"
+                ]
+            ],
+            "customers" => [
+
             ]
         ],
     ],

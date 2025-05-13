@@ -68,26 +68,33 @@ return [
             "logout" => "Cerrar sesión"
         ],
         "table" => [
-            "id" => "ID",
-            "order" => "Orden",
-            "client" => "Cliente",
-            "status" => "Estado",
-            "origin" => "Origen",
-            "destination" => "Destino",
-            "date" => "Fecha",
-            "details" => [
-                "description" => "Descripción",
-                "ubication" => "Ubicación",
-                "package_type" => "Tipo de carga",
-                "arrival_date" => "Fecha de llegada",
-                "departure_location" => "Lugar de salida",
-                "arrival_location" => "Lugar de llegada",
-                "transport_type" => "Medio de transporte",
-                "license_plate" => "Matricula",
-                "weight" => "Peso",
-                "total_cost" => "Coste total",
+            "orders" => [
+                "id" => "ID",
+                "order" => "Orden",
+                "client" => "Cliente",
                 "status" => "Estado",
-                "observations" => "Observaciones"
+                "origin" => "Origen",
+                "destination" => "Destino",
+                "date" => "Fecha",
+                "details" => [
+                    "description" => "Descripción",
+                    "ubication" => "Ubicación",
+                    "package_type" => "Tipo de carga",
+                    "arrival_date" => "Fecha de llegada",
+                    "departure_location" => "Lugar de salida",
+                    "arrival_location" => "Lugar de llegada",
+                    "transport_type" => "Medio de transporte",
+                    "license_plate" => "Matricula",
+                    "weight" => "Peso",
+                    "total_cost" => "Coste total",
+                    "status" => "Estado",
+                    "observations" => "Observaciones",
+                    "save" => "Guardar",
+                    "cancel" => "Cancelar"
+                ]
+            ],
+            "customers" => [
+
             ]
         ]
     ],

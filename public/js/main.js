@@ -78,6 +78,16 @@ function showOrderUbication(departureLat, departureLng, arrivalLat, arrivalLng, 
             if (status === "OK") {
                 directionsRenderer.setDirections(response);
                 const path = response.routes[0].overview_path;
+
+                const polyline = new google.maps.Polyline({
+                    path: path,
+                    geodesic: true,
+                    strokeColor: "#0000FF",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+                polyline.setMap(map);
+
                 routeCoords = path;
                 marker = new google.maps.Marker({
                     position: path[0],
