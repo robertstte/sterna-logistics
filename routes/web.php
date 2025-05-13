@@ -6,6 +6,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UserOrdersController;
 use App\Http\Controllers\CustomersController;
 
 Route::get('/', function () {
@@ -25,11 +26,14 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-// ////////////////////busqueda de pedidos en la landing///////////////////////////
 Route::get('OrderDetails', function () {
     return view('myOrder');
 });
-Route::get('/my-order', [MyOrderController::class, 'index'])->name('my-order');
 
-//////////////////////////////////////////////////////////////////////////////////
+Route::get('/my-order', [MyOrderController::class, 'index'])->name('my-order');
+Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');
+
+Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
+Route::post('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
+
 Route::get('language/{lang}', [LanguageController::class, 'setLanguage']);
