@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
     public function showLoginForm()
     {
         return view('login'); 
@@ -21,16 +26,28 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-     
+
         $user = User::where('email', $request->email)->first();
-    
-        if ($user && Hash::check($request->password, $user->password)) {
-            if ($user->role_id == 1) {
-                Auth::login($user);
-                return redirect()->intended('orders');
-            }
+
+        if (!$user) {
+            return back()
+                ->withInput($request->only('email'))
+                ->withErrors(['email' => 'No existe una cuenta con este correo electrónico.']);
         }
-        return back()->withErrors(['email' => 'Credenciales incorrectas']);
+
+        if (!Hash::check($request->password, $user->password)) {
+            return back()
+                ->withInput($request->only('email'))
+                ->withErrors(['email' => 'La contraseña es incorrecta.']);
+        }
+
+        Auth::login($user, $request->has('remember'));
+
+        if ($user->role_id == 1) {
+            return redirect()->route('orders.index');
+        } else {
+            return redirect()->route('ordersUser.index');
+        }
     }
     
     public function logout()
