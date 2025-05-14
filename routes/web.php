@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrdersController::class, 'show'])->name('orders.show');
     Route::post('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
+    Route::get('/customers', [CustomersController::class, 'index'])->name('customers.index');
 
     // Rutas de usuario normal
     Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');
