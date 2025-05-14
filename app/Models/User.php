@@ -2,21 +2,34 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
-class User extends Model implements Authenticatable
+class User extends Authenticatable
 {
-    use \Illuminate\Auth\Authenticatable; // Esto permite que el modelo implemente la funcionalidad de autenticación
+    use Notifiable;
 
     public $timestamps = false;
 
-    protected $fillable = ['username', 'email', 'password', 'role_id'];
+    protected $fillable = [
+        'username',
+        'email',
+        'password',
+        'role_id'
+    ];
     
-    protected $hidden = ['password'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    public function setPassword($value)
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'preferences' => 'array',
+    ];
+
+    public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
     }

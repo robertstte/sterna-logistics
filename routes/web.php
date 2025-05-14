@@ -8,15 +8,25 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserOrdersController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\MyAccountController;
 
 Route::get('/', function () {
     return view('landing');
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/orders', [OrdersController::class, 'index'])->name('orders');
-    Route::get('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
-    Route::get('/customers', [CustomersController::class, 'index'])->name('customers');
+    // Rutas de administrador
+    Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [OrdersController::class, 'show'])->name('orders.show');
+    Route::post('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
+
+    // Rutas de usuario normal
+    Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');
+
+    Route::get('/my-account', [MyAccountController::class, 'index'])->name('my-account');
+    Route::put('/my-account/profile', [MyAccountController::class, 'updateProfile'])->name('my-account.profile');
+    Route::put('/my-account/password', [MyAccountController::class, 'updatePassword'])->name('my-account.password');
+    Route::put('/my-account/preferences', [MyAccountController::class, 'updatePreferences'])->name('my-account.preferences');
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -31,9 +41,13 @@ Route::get('OrderDetails', function () {
 });
 
 Route::get('/my-order', [MyOrderController::class, 'index'])->name('my-order');
-Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');
 
-Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
-Route::post('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
+Route::get('/about-us', function () {
+    return view('aboutUs');
+})->name('about');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 Route::get('language/{lang}', [LanguageController::class, 'setLanguage']);

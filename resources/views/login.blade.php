@@ -17,10 +17,32 @@
             </div>
             <form method="POST" action="{{ route('login') }}" id="loginForm">
                 @csrf
-                <input class="access-form-email" type="email" placeholder="@lang('translations.access.login.email')" name="email" required>
+
+                <input class="access-form-email @error('email') is-invalid @enderror" 
+                       type="email" 
+                       placeholder="@lang('translations.access.login.email')" 
+                       name="email" 
+                       value="{{ old('email') }}"
+                       required>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+
                 <div class="position-relative">
-                    <input id="login-password" class="access-form-password" type="password" placeholder="@lang('translations.access.login.password')" name="password" required>
+                    <input id="login-password" 
+                           class="access-form-password @error('password') is-invalid @enderror" 
+                           type="password" 
+                           placeholder="@lang('translations.access.login.password')" 
+                           name="password" 
+                           required>
                     <img id="login-toggle-password" onclick="showFormPassword()" class="position-absolute access-form-eye" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="row">
                     <div class="col-6 access-form-remember d-flex">
@@ -44,7 +66,6 @@
                     <a href="{{ route('register') }}" class="access-form-signup">@lang('translations.access.login.signup')</a>
                 </div>
             </form>
-            
         </div>
     </div>
 </div>
@@ -90,6 +111,37 @@
     margin-top: 4px;
     margin-bottom: 0px;
 }
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: #dc3545;
+    font-weight: 400;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+    background-image: none !important;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
 .slide-in {
     animation: slideIn 0.4s ease-in;
 }
