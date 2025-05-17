@@ -71,9 +71,8 @@
 
                 </div>
                 <div class="step step-hidden" id="step-content4">
-                    <select class="access-form-select"  name="country_id">
-                        <option value="204">España</option>
-                        <option>Portugal</option>
+                    <select class="access-form-select" name="country_id" id="country-select">
+                        <option value="">@lang('translations.access.register.select_country')</option>
                     </select>
                     <div class="row">
                         <div class="col-10">
@@ -195,6 +194,20 @@ function nextStep(step) {
     }
 }
     document.addEventListener('DOMContentLoaded', () => {
+        // Cargar países
+        fetch('/countries')
+            .then(response => response.json())
+            .then(countries => {
+                const select = document.getElementById('country-select');
+                countries.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.id;
+                    option.textContent = country.name;
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+
         showStep(currentStep);
     });
     document.addEventListener('DOMContentLoaded', () => {

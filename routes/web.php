@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserOrdersController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\MyAccountController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\CountryLocationController;
 
 Route::get('/', function () {
     return view('landing');
@@ -19,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrdersController::class, 'show'])->name('orders.show');
     Route::post('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
+    Route::post('/orders', [OrdersController::class, 'store'])->name('orders.store');
+    Route::get('/api/countries/{country}/locations', [CountryLocationController::class, 'getLocations']);
 
     // Rutas de usuario normal
     Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');
@@ -35,6 +39,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
+
+Route::get('/countries', [CountryController::class, 'getCountries'])->name('countries.get');
 
 Route::get('OrderDetails', function () {
     return view('myOrder');

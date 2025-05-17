@@ -4,13 +4,13 @@
 <div class="container">
     <table class="table table-bordered">
         <tr class="text-center">
-            <th class="header">@lang('translations.dashboard.table.id')</th>
-            <th class="header">@lang('translations.dashboard.table.order')</th>
-            <th class="header">@lang('translations.dashboard.table.client')</th>
-            <th class="header">@lang('translations.dashboard.table.status')</th>
-            <th class="header">@lang('translations.dashboard.table.origin')</th>
-            <th class="header">@lang('translations.dashboard.table.destination')</th>
-            <th class="header">@lang('translations.dashboard.table.date')</th>
+            <th class="header">@lang('translations.dashboard.table.orders.id')</th>
+            <th class="header">@lang('translations.dashboard.table.orders.order')</th>
+            <th class="header">@lang('translations.dashboard.table.orders.client')</th>
+            <th class="header">@lang('translations.dashboard.table.orders.status')</th>
+            <th class="header">@lang('translations.dashboard.table.orders.origin')</th>
+            <th class="header">@lang('translations.dashboard.table.orders.destination')</th>
+            <th class="header">@lang('translations.dashboard.table.orders.date')</th>
         </tr>
         @foreach ($orders as $order)
             <tr class="text-center" data-bs-toggle="collapse" data-bs-target="#orderDetail{{ $order->id }}">

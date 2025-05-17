@@ -151,7 +151,8 @@ return [
             "phone" => "Phone number",
             "username" => "Username",
             "password" => "Password",
-            "next" => "Next"
+            "next" => "Next",
+            "select_country" => "Select a country"
         ],
         "order" => [
                 "title" => "Order Details",
