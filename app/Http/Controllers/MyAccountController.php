@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\PasswordChange;
 use Illuminate\Support\Facades\DB;
 
 class MyAccountController extends Controller
