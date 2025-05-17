@@ -150,8 +150,9 @@ return [
             "address" => "Dirección",
             "phone" => "Telefono",
             "username" => "Nombre de usuario",
-            "password" >= "Contraseña",
-            "next" => "Siguiente"
+            "password" => "Contraseña",
+            "next" => "Siguiente",
+            "select_country" => "Selecciona un país"
         ],
         "order" => [
             "title" => "Detalles del Pedido",
