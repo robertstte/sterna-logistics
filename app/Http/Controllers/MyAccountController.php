@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 
 class MyAccountController extends Controller
@@ -66,6 +67,10 @@ class MyAccountController extends Controller
         $user->update([
             'password' => Hash::make($request->password)
         ]);
+
+        $name = $user->customer->name;
+
+        Mail::to($user->email)->send(new PasswordChange(now(), $name));
 
         return redirect()->back()->with('success', 'Contraseña actualizada correctamente');
     }
