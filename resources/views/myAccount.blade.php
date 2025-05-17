@@ -71,35 +71,48 @@
                 </div>
 
                 <!-- Sección Seguridad -->
-                <div class="tab-pane fade" id="v-pills-security" role="tabpanel">
-                    <h2 class="mb-4">Seguridad</h2>
+                <div class="tab-pane fade" id="v-pills-preferences" role="tabpanel">
+                    <h2 class="mb-4">Preferencias</h2>
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('my-account.password') }}" method="POST">
+                            <form action="{{ route('my-account.preferences') }}" method="POST">
                                 @csrf
                                 @method('PUT')
-                                <div class="mb-3">
-                                    <label for="current_password" class="form-label">Contraseña actual</label>
-                                    <input type="password" class="form-control @error('current_password') is-invalid @enderror" 
-                                           id="current_password" name="current_password">
-                                    @error('current_password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                <div class="mb-4">
+                                    <h5>Notificaciones</h5>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="email_notifications" 
+                                               name="email_notifications" value="1" 
+                                               {{ old('email_notifications', Auth::user()->preferences['email_notifications'] ?? '') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="email_notifications">
+                                            Recibir notificaciones por correo electrónico
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="order_updates" 
+                                               name="order_updates" value="1"
+                                               {{ old('order_updates', Auth::user()->preferences['order_updates'] ?? '') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="order_updates">
+                                            Actualizaciones de pedidos
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Nueva contraseña</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                           id="password" name="password">
-                                    @error('password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+
+                                <div class="mb-4">
+                                    <h5>Idioma</h5>
+                                    <div class="mb-3">
+                                        <select class="form-select @error('language') is-invalid @enderror" 
+                                                id="language" name="language">
+                                            <option value="es" {{ (old('language', Auth::user()->preferences['language'] ?? '') == 'es') ? 'selected' : '' }}>Español</option>
+                                            <option value="en" {{ (old('language', Auth::user()->preferences['language'] ?? '') == 'en') ? 'selected' : '' }}>English</option>
+                                        </select>
+                                        @error('language')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="password_confirmation" class="form-label">Confirmar nueva contraseña</label>
-                                    <input type="password" class="form-control" 
-                                           id="password_confirmation" name="password_confirmation">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Actualizar contraseña</button>
+
+                                <button type="submit" class="btn btn-primary">Guardar preferencias</button>
                             </form>
                         </div>
                     </div>

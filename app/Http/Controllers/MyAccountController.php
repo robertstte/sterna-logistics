@@ -55,23 +55,27 @@ class MyAccountController extends Controller
     public function updatePassword(Request $request)
     {
         $request->validate([
-            'current_password' => 'required',
-            'password' => 'required|string|min:8|confirmed',
+            'current_password' => 'required|string',
+            'password' => 'required|string|min:8|confirmed', 
         ]);
-
+    
         $user = Auth::user();
-
+    
         if (!Hash::check($request->current_password, $user->password)) {
             return back()->withErrors(['current_password' => 'La contraseña actual no es correcta']);
         }
-
+    
+        if (Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['password' => 'La nueva contraseña no puede ser igual a la actual.']);
+        }
+    
         $user->update([
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ]);
 
-        $name = $user->customer->name;
+        $user->save();
 
-        Mail::to($user->email)->send(new PasswordChange(now(), $name));
+        Mail::to($user->email)->send(new PasswordChange(now()->format('d/m/Y H:i'), $name));
 
         return redirect()->back()->with('success', 'Contraseña actualizada correctamente');
     }
