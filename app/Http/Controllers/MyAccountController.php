@@ -69,11 +69,11 @@ class MyAccountController extends Controller
             return back()->withErrors(['password' => 'La nueva contraseña no puede ser igual a la actual.']);
         }
     
-        $user->update([
-            'password' => Hash::make($request->password),
-        ]);
+        $user->password = $request->password;
 
         $user->save();
+
+        $name = $user->customer->name;
 
         Mail::to($user->email)->send(new PasswordChange(now()->format('d/m/Y H:i'), $name));
 

@@ -22,32 +22,28 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $remember = $request->has('remember');
 
-        if (!$user) {
-            return back()
-                ->withInput($request->only('email'))
-                ->withErrors(['email' => 'No existe una cuenta con este correo electrónico.']);
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            if ($user->role_id == 1) {
+                return redirect()->route('orders.index');
+            } else {
+                return redirect()->route('ordersUser.index');
+            }
         }
 
-        if (!Hash::check($request->password, $user->password)) {
-            return back()
-                ->withInput($request->only('email'))
-                ->withErrors(['email' => 'La contraseña es incorrecta.']);
-        }
-
-        Auth::login($user, $request->has('remember'));
-
-        if ($user->role_id == 1) {
-            return redirect()->route('orders.index');
-        } else {
-            return redirect()->route('ordersUser.index');
-        }
+        return back()
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => 'Las credenciales no son válidas.']);
     }
     
     public function logout()
