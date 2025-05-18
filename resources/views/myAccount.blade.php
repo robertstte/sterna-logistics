@@ -64,7 +64,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                <button type="submit" class="btn btn-account-settings">Guardar cambios</button>
                             </form>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                                     <input type="password" class="form-control" 
                                            id="password_confirmation" name="password_confirmation" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Actualizar contraseña</button>
+                                <button type="submit" class="btn btn-account-settings">Actualizar contraseña</button>
                             </form>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Guardar preferencias</button>
+                                <button type="submit" class="btn btn-account-settings">Guardar preferencias</button>
                             </form>
                         </div>
                     </div>
@@ -156,42 +156,6 @@
         </div>
     </div>
 </div>
-
-@push('styles')
-<style>
-    .sidebar {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .nav-pills .nav-link {
-        color: #495057;
-        border-radius: 0;
-        transition: all 0.2s ease;
-        text-align: left;
-        width: 100%;
-        padding: 12px 15px;
-        margin-bottom: 5px;
-        border-left: 3px solid transparent;
-    }
-    .nav-pills .nav-link:hover {
-        background-color: #f8f9fa;
-        border-left: 3px solid #0d6efd;
-    }
-    .nav-pills .nav-link.active {
-        background-color: #f8f9fa;
-        color: #0d6efd;
-        font-weight: 600;
-        border-left: 3px solid #0d6efd;
-    }
-    .card {
-        border: none;
-        box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        border-radius: 1rem;
-    }
-    .tab-content {
-        padding: 1rem;
-    }
-</style>
-@endpush
 
 @push('scripts')
 <script>
