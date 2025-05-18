@@ -1,6 +1,16 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: '{{ session('success') }}',
+            timer: 3000
+        });
+    </script>
+@endif
 <div class="container-fluid">
     <div class="row">
         <!-- Barra lateral -->
@@ -165,16 +175,6 @@ document.addEventListener('DOMContentLoaded', function() {
     triggerTabList.forEach(function(triggerEl) {
         new bootstrap.Tab(triggerEl);
     });
-
-    // Mostrar mensajes de éxito
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: '¡Éxito!',
-            text: '{{ session('success') }}',
-            timer: 3000
-        });
-    @endif
 });
 </script>
 @endpush
