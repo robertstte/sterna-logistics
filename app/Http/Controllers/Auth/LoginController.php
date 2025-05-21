@@ -27,27 +27,20 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $credentials = $request->only('email', 'password');
 
-        if (!$user) {
-            return back()
-                ->withInput($request->only('email'))
-                ->withErrors(['email' => 'No existe una cuenta con este correo electrónico.']);
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            $user = Auth::user();
+            if ($user->role_id == 1) {
+                return redirect()->route('orders.index');
+            } else {
+                return redirect()->route('ordersUser.index');
+            }
         }
 
-        if (!Hash::check($request->password, $user->password)) {
-            return back()
-                ->withInput($request->only('email'))
-                ->withErrors(['email' => 'La contraseña es incorrecta.']);
-        }
-
-        Auth::login($user, $request->has('remember'));
-
-        if ($user->role_id == 1) {
-            return redirect()->route('orders.index');
-        } else {
-            return redirect()->route('ordersUser.index');
-        }
+        return back()
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => 'Las credenciales proporcionadas no son correctas.']);
     }
     
     public function logout()

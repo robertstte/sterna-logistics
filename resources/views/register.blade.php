@@ -67,7 +67,12 @@
                                placeholder="@lang('translations.access.register.password')" 
                                name="password" 
                                required>
-                        <img id="register-toggle-password" onclick="showFormPassword()" class="position-absolute access-form-eye" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                        <img id="register-toggle-password" 
+                             onclick="showFormPassword()" 
+                             class="position-absolute access-form-eye" 
+                             data-eye="{{ asset('icons/eye.svg') }}" 
+                             data-eye-off="{{ asset('icons/eye-off.svg') }}" 
+                             src="{{ asset('icons/eye.svg') }}">
                     </div>
                     <div class="position-relative">
                         <input id="register-password-confirm" 
@@ -76,7 +81,12 @@
                                placeholder="@lang('translations.access.register.confirm_password')" 
                                name="password_confirmation" 
                                required>
-                        <img id="register-toggle-password-confirm" onclick="showFormPassword()" class="position-absolute access-form-eye" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                        <img id="register-toggle-password-confirm" 
+                             onclick="showFormPasswordConfirm()" 
+                             class="position-absolute access-form-eye" 
+                             data-eye="{{ asset('icons/eye.svg') }}" 
+                             data-eye-off="{{ asset('icons/eye-off.svg') }}" 
+                             src="{{ asset('icons/eye.svg') }}">
                     </div>
                     <div class="row">
                         <div class="col-10">
@@ -222,11 +232,37 @@ function nextStep(step) {
             })
             .catch(error => console.error('Error:', error));
 
+        // Funciones para mostrar/ocultar contraseñas
+        window.showFormPassword = function() {
+            const passwordField = event.target.previousElementSibling;
+            const eyeIcon = event.target;
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.src = eyeIcon.dataset.eyeOff;
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.src = eyeIcon.dataset.eye;
+            }
+        }
+
+        window.showFormPasswordConfirm = function() {
+            const passwordField = event.target.previousElementSibling;
+            const eyeIcon = event.target;
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.src = eyeIcon.dataset.eyeOff;
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.src = eyeIcon.dataset.eye;
+            }
+        }
+
         showStep(currentStep);
     });
     document.addEventListener('DOMContentLoaded', () => {
     const loginLink = document.querySelector('a[href="login"]');
-
     if (loginLink) {
         loginLink.addEventListener('click', function (e) {
             e.preventDefault();
@@ -243,18 +279,6 @@ function nextStep(step) {
     showStep(currentStep);
 });
 
-function showFormPassword() {
-    const passwordField = event.target.previousElementSibling;
-    const eyeIcon = event.target;
-    
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        eyeIcon.src = eyeIcon.dataset.eyeOff;
-    } else {
-        passwordField.type = 'password';
-        eyeIcon.src = eyeIcon.dataset.eye;
-    }
-}
 
 </script>
 

@@ -24,7 +24,6 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
         ]);
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -36,7 +35,6 @@ class RegisterController extends Controller
                 'password' => Hash::make($request->password),
                 'role_id' => 2, 
             ]);
-
             Customer::create([
                 'user_id' => $user->id,
                 'name' => $request->name,
