@@ -8,7 +8,8 @@ return [
         "spanish" => "Español",
         "english" => "Inglés",
         "language" => "Idioma",
-        "access" => "Acceso"
+        "access" => "Acceso",
+        "panel" => "Panel de control"
     ],
     "landing" => [
         "hero" => [
@@ -152,7 +153,8 @@ return [
             "username" => "Nombre de usuario",
             "password" => "Contraseña",
             "next" => "Siguiente",
-            "select_country" => "Selecciona un país"
+            "select_country" => "Selecciona un país",
+            "confirm_password" => "Confirmar contraseña"
         ],
         "order" => [
             "title" => "Detalles del Pedido",

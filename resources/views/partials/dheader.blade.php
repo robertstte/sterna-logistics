@@ -14,7 +14,7 @@
                         <a href="customers" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.clients')</a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.invoicing')</a>
+                        <a href="{{ route('invoices.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.invoicing')</a>
                     </li>
                     <li class="nav-item mt-2">
                         <a href="{{ route('my-account') }}" class="nav-link account btn">@lang('translations.dashboard.dheader.account')</a>

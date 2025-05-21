@@ -43,7 +43,10 @@
                 </div>
                 <div class="step step-hidden" id="step-content2">
                     <input class="access-form-address" type="text" placeholder="@lang('translations.access.register.address')" name="address" required>
-                    <input class="access-form-phone" type="tel" placeholder="@lang('translations.access.register.phone')" name="phone" required>
+                    <input class="access-form-phone mb-4" type="tel" placeholder="@lang('translations.access.register.phone')" name="phone" required>
+                    <select class="access-form-select" name="country_id" id="country-select">
+                        <option value="">@lang('translations.access.register.select_country')</option>
+                    </select>
                     <div class="row">
                         <div class="col-10">
                             <button onclick="nextStep(2)" class="access-form-submit">@lang('translations.access.register.next')</button>
@@ -53,12 +56,28 @@
                         </div>
                     </div>
                     <p class="form-error">Faltan campos por completar</p>
-
                 </div>
 
                 <div class="step step-hidden" id="step-content3">
                     <input class="access-form-username" type="text" placeholder="@lang('translations.access.register.username')" name="username" required>
-                    <input class="access-form-password" type="password" placeholder="@lang('translations.access.register.password')" name="password" required>
+                    <div class="position-relative">
+                        <input id="register-password" 
+                               class="access-form-password" 
+                               type="password" 
+                               placeholder="@lang('translations.access.register.password')" 
+                               name="password" 
+                               required>
+                        <img id="register-toggle-password" onclick="showFormPassword()" class="position-absolute access-form-eye" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                    </div>
+                    <div class="position-relative">
+                        <input id="register-password-confirm" 
+                               class="access-form-password" 
+                               type="password" 
+                               placeholder="@lang('translations.access.register.confirm_password')" 
+                               name="password_confirmation" 
+                               required>
+                        <img id="register-toggle-password-confirm" onclick="showFormPassword()" class="position-absolute access-form-eye" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                    </div>
                     <div class="row">
                         <div class="col-10">
                             <button onclick="nextStep(3)" class="access-form-submit">@lang('translations.access.register.next')</button>                        
@@ -67,13 +86,9 @@
                             <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
                         </div>
                     </div>
-                <p class="form-error">Faltan campos por completar</p>
-
+                    <p class="form-error">Faltan campos por completar</p>
                 </div>
                 <div class="step step-hidden" id="step-content4">
-                    <select class="access-form-select" name="country_id" id="country-select">
-                        <option value="">@lang('translations.access.register.select_country')</option>
-                    </select>
                     <div class="row">
                         <div class="col-10">
                             <input class="access-form-submit" type="submit" value="@lang('translations.access.register.title')">
@@ -82,8 +97,7 @@
                             <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
                         </div>
                     </div>
-                <p class="form-error">Faltan campos por completar</p>
-
+                    <p class="form-error">Faltan campos por completar</p>
                 </div>
                 <div class="row d-flex form-step-container">
                     <div class="col-3"><hr class="form-step-active" id="step1" onclick="goToStep(1)"></div>
@@ -229,6 +243,18 @@ function nextStep(step) {
     showStep(currentStep);
 });
 
+function showFormPassword() {
+    const passwordField = event.target.previousElementSibling;
+    const eyeIcon = event.target;
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.src = eyeIcon.dataset.eyeOff;
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.src = eyeIcon.dataset.eye;
+    }
+}
 
 </script>
 
@@ -284,5 +310,29 @@ function nextStep(step) {
     }
 }
 
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+.password-toggle:hover {
+    color: #333;
+}
+
+.access-form-eye {
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
 
 </style>

@@ -11,6 +11,7 @@ use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CountryLocationController;
+use App\Http\Controllers\InvoiceController;
 
 Route::get('/', function () {
     return view('landing');
@@ -31,6 +32,11 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/my-account/profile', [MyAccountController::class, 'updateProfile'])->name('my-account.profile');
     Route::put('/my-account/password', [MyAccountController::class, 'updatePassword'])->name('my-account.password');
     Route::put('/my-account/preferences', [MyAccountController::class, 'updatePreferences'])->name('my-account.preferences');
+
+    // Rutas de facturación
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    Route::post('/invoices/generate', [InvoiceController::class, 'generateInvoice'])->name('invoices.generate');
+    Route::post('/invoices/generate-bulk', [InvoiceController::class, 'generateBulkInvoices'])->name('invoices.generate-bulk');
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

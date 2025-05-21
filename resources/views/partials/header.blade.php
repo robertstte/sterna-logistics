@@ -34,8 +34,11 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        @auth
+                        <a class="nav-link access btn" href="{{ route('orders.index') }}">@lang('translations.header.panel')</a>
+                    @else
                         <a class="nav-link access btn" href="login">@lang('translations.header.access')</a>
-                    </li>
+                    @endauth                    </li>
                 </ul>
             </div>
         </div>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="ps-5 pe-5">
-    <table class="table table-bordered">
+    <table class="table table-bordered orders-table">
         <tr class="text-center">
             <th class="header">@lang('translations.dashboard.table.orders.id')</th>
             <th class="header">@lang('translations.dashboard.table.orders.order')</th>
@@ -13,16 +13,16 @@
             <th class="header">@lang('translations.dashboard.table.orders.date')</th>
         </tr>
         @foreach ($orders as $order)
-            <tr class="text-center" data-bs-toggle="collapse" data-bs-target="#orderDetail{{ $order->id }}">
-                <td class="body">{{ $loop->iteration }}</td>
-                <td class="body">{{ $order->id }}</td>
-                <td class="body">{{ $order->customer->name }}</td>
-                <td class="body" style="color: {{ $order->status->color }}">{{ __('translations.status')[strtolower($order->status->status)] }}</td>
-                <td class="body">{{ $order->orderDetail->originCountry->name }}</td>
-                <td class="body">{{ $order->orderDetail->destinationCountry->name }}</td>
-                <td class="body">{{ $order->orderDetail->departure_date }}</td>
+            <tr class="text-center orders-tr" data-bs-toggle="collapse" data-bs-target="#orderDetail{{ $order->id }}">
+                <td class="orders-td">{{ $loop->iteration }}</td>
+                <td class="orders-td">{{ $order->id }}</td>
+                <td class="orders-td">{{ $order->customer->name }}</td>
+                <td class="orders-td" style="color: {{ $order->status->color }}">{{ __('translations.status')[strtolower($order->status->status)] }}</td>
+                <td class="orders-td">{{ $order->orderDetail->originCountry->name }}</td>
+                <td class="orders-td">{{ $order->orderDetail->destinationCountry->name }}</td>
+                <td class="orders-td">{{ $order->orderDetail->departure_date }}</td>
             </tr>
-            <tr class="collapse" id="orderDetail{{ $order->id }}">
+            <tr class="collapse orders-detail" id="orderDetail{{ $order->id }}">
                 <td colspan="7">
                     <form action="{{ route('orders.update', $order->id) }}">
                         @csrf
@@ -271,6 +271,86 @@
 
 .btn-floating img {
     filter: brightness(0) invert(1);
+}
+
+.orders-table {
+    margin-bottom: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.orders-th {
+    background-color: #0d6efd;
+    color: white;
+    border-bottom: 2px solid #dee2e6;
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.orders-tr {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.orders-tr:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.orders-td {
+    padding: 15px;
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
+
+.orders-detail {
+    background-color: #fff;
+    border-top: 1px solid #dee2e6;
+}
+
+.orders-detail td {
+    padding: 25px;
+    background-color: #f8f9fa;
+}
+
+/* Estilo para la fila seleccionada */
+.orders-tr.active {
+    background-color: #e9ecef;
+    border-left: 4px solid #ff6b00;
+}
+
+/* Estilo para el estado */
+.orders-td[style*="color"] {
+    font-weight: 500;
+}
+
+/* Estilo para la paginación */
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination .page-link {
+    color: #ff6b00;
+    border: 1px solid #dee2e6;
+    padding: 8px 16px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ff6b00;
+    border-color: #ff6b00;
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: #f8f9fa;
+    color: #ff6b00;
 }
 </style>
 
