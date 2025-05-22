@@ -1,6 +1,16 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: '{{ session('success') }}',
+            timer: 3000
+        });
+    </script>
+@endif
 <div class="container-fluid">
     <div class="row">
         <!-- Barra lateral -->
@@ -64,7 +74,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                <button type="submit" class="btn btn-account-settings">Guardar cambios</button>
                             </form>
                         </div>
                     </div>
@@ -81,7 +91,7 @@
                                 <div class="mb-3">
                                     <label for="current_password" class="form-label">Contraseña actual</label>
                                     <input type="password" class="form-control @error('current_password') is-invalid @enderror" 
-                                           id="current_password" name="current_password">
+                                           id="current_password" name="current_password" required>
                                     @error('current_password')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -89,7 +99,7 @@
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Nueva contraseña</label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                           id="password" name="password">
+                                           id="password" name="password" required>
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -97,9 +107,9 @@
                                 <div class="mb-3">
                                     <label for="password_confirmation" class="form-label">Confirmar nueva contraseña</label>
                                     <input type="password" class="form-control" 
-                                           id="password_confirmation" name="password_confirmation">
+                                           id="password_confirmation" name="password_confirmation" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Actualizar contraseña</button>
+                                <button type="submit" class="btn btn-account-settings">Actualizar contraseña</button>
                             </form>
                         </div>
                     </div>
@@ -147,7 +157,7 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Guardar preferencias</button>
+                                <button type="submit" class="btn btn-account-settings">Guardar preferencias</button>
                             </form>
                         </div>
                     </div>
@@ -157,42 +167,6 @@
     </div>
 </div>
 
-@push('styles')
-<style>
-    .sidebar {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .nav-pills .nav-link {
-        color: #495057;
-        border-radius: 0;
-        transition: all 0.2s ease;
-        text-align: left;
-        width: 100%;
-        padding: 12px 15px;
-        margin-bottom: 5px;
-        border-left: 3px solid transparent;
-    }
-    .nav-pills .nav-link:hover {
-        background-color: #f8f9fa;
-        border-left: 3px solid #0d6efd;
-    }
-    .nav-pills .nav-link.active {
-        background-color: #f8f9fa;
-        color: #0d6efd;
-        font-weight: 600;
-        border-left: 3px solid #0d6efd;
-    }
-    .card {
-        border: none;
-        box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        border-radius: 1rem;
-    }
-    .tab-content {
-        padding: 1rem;
-    }
-</style>
-@endpush
-
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -201,16 +175,6 @@ document.addEventListener('DOMContentLoaded', function() {
     triggerTabList.forEach(function(triggerEl) {
         new bootstrap.Tab(triggerEl);
     });
-
-    // Mostrar mensajes de éxito
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: '¡Éxito!',
-            text: '{{ session('success') }}',
-            timer: 3000
-        });
-    @endif
 });
 </script>
 @endpush

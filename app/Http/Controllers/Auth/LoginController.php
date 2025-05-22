@@ -22,15 +22,18 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember');
 
-        if (Auth::attempt($credentials, $request->has('remember'))) {
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate();
+
             $user = Auth::user();
+
             if ($user->role_id == 1) {
                 return redirect()->route('orders.index');
             } else {
@@ -40,7 +43,7 @@ class LoginController extends Controller
 
         return back()
             ->withInput($request->only('email'))
-            ->withErrors(['email' => 'Las credenciales proporcionadas no son correctas.']);
+            ->withErrors(['email' => 'Las credenciales no son válidas.']);
     }
     
     public function logout()

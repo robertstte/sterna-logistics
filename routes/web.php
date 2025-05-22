@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
     Route::post('/orders', [OrdersController::class, 'store'])->name('orders.store');
     Route::get('/api/countries/{country}/locations', [CountryLocationController::class, 'getLocations']);
+    Route::get('/customers', [CustomersController::class, 'index'])->name('customers.index');
 
     // Rutas de usuario normal
     Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');

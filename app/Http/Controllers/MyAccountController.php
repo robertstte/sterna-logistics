@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PasswordChange;
 use Illuminate\Support\Facades\DB;
 
 class MyAccountController extends Controller
@@ -53,19 +55,27 @@ class MyAccountController extends Controller
     public function updatePassword(Request $request)
     {
         $request->validate([
-            'current_password' => 'required',
-            'password' => 'required|string|min:8|confirmed',
+            'current_password' => 'required|string',
+            'password' => 'required|string|min:8|confirmed', 
         ]);
-
+    
         $user = Auth::user();
-
+    
         if (!Hash::check($request->current_password, $user->password)) {
             return back()->withErrors(['current_password' => 'La contraseña actual no es correcta']);
         }
+    
+        if (Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['password' => 'La nueva contraseña no puede ser igual a la actual.']);
+        }
+    
+        $user->password = $request->password;
 
-        $user->update([
-            'password' => Hash::make($request->password)
-        ]);
+        $user->save();
+
+        $name = $user->customer->name;
+
+        Mail::to($user->email)->send(new PasswordChange(now()->format('d/m/Y H:i'), $name));
 
         return redirect()->back()->with('success', 'Contraseña actualizada correctamente');
     }
