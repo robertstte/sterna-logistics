@@ -10,12 +10,16 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="hero-background">
-        <div class="d-flex flex-column min-vh-100">
-            @include('partials.header')
-            <main class="flex-grow-1">@yield('content')</main>
-            @include('partials.footer')
+    @if(request()->is('/'))
+        <div class="hero-background">
+    @endif
+            <div class="d-flex flex-column min-vh-100">
+                @include('partials.header')
+                <main class="flex-grow-1">@yield('content')</main>
+                @include('partials.footer')
+            </div>
+    @if(request()->is('/'))
         </div>
-    </div>
+    @endif
 </body>
 </html>
