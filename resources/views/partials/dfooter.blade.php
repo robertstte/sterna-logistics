@@ -17,7 +17,7 @@
                     <br>  
                     <li class="ms-3">
                         <a href="{{ route('contact') }}" class="text-decoration-none">
-                            <span>@lang('translations.contact.title')</span>
+                            <span style="color: white;">@lang('translations.contact.title')</span>
                         </a>
                     </li>
                     <li class="ms-3">

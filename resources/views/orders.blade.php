@@ -138,7 +138,7 @@
 
 <!-- Botón flotante para añadir pedido -->
 <button class="btn-floating" data-bs-toggle="modal" data-bs-target="#newOrderModal">
-    <img src="{{ asset('icons/plus.svg') }}" alt="Añadir pedido" width="24" height="24">
+    <img src="{{ asset('icons/add.svg') }}" alt="Añadir pedido" width="36" height="36">
 </button>
 
 <!-- Modal para nuevo pedido -->
