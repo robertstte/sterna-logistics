@@ -156,6 +156,10 @@ return [
             "select_country" => "Selecciona un país",
             "confirm_password" => "Confirmar contraseña"
         ],
+        "recovery" => [
+            "title" => "Recuperación",
+            "submit" => "Recuperar"
+        ],
         "order" => [
             "title" => "Detalles del Pedido",
             "error" => "Hubo un error al encontrar el pedido.",

@@ -50,7 +50,9 @@
                         <span>@lang('translations.access.login.remember')</span>
                     </div>
                     <div class="col-6">
-                        <span class="access-form-recovery">@lang('translations.access.login.recovery')</span>
+                        <a href="recovery">
+                            <span class="access-form-recovery">@lang('translations.access.login.recovery')</span>
+                        </a>
                     </div>
                 </div>
                 <p class="form-error">Faltan campos por completar</p>

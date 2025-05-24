@@ -59,6 +59,10 @@ Route::get('/about-us', function () {
     return view('aboutUs');
 })->name('about');
 
+Route::get('/recovery', function () {
+    return view('passwordRecovery');
+})->name('recovery');
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');

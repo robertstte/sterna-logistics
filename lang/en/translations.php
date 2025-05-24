@@ -156,6 +156,10 @@ return [
             "select_country" => "Select a country",
             "confirm_password" => "Confirm Password"
         ],
+        "recovery" => [
+            "title" => "Recovery",
+            "submit" => "Send email"
+        ],
         "order" => [
                 "title" => "Order Details",
                 "error" => "There was an error finding the order.",
