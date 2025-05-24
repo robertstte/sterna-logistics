@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row p-5">
-    <div class="row ">
+    <div class="row">
         <div class="col-12 col-xl-6 d-none d-xl-flex justify-content-center" style="margin-right: 100px; margin-left: 80px;">
             <img loading="lazy" class="w-90 h-90" src="{{ asset('images/recovery.svg') }}" alt="@lang('translations.access.login.illustration')">
         </div>
@@ -12,15 +12,15 @@
                     <p class="access-form-title">@lang('translations.access.recovery.title')</p>
                 </div>
                 <div class="col-3">
-                    <a href="login"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.login.back')"></a>
+                    <a href="{{ route('login') }}"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.login.back')"></a>
                 </div>
             </div>
-            <form method="POST" action="{{ route('login') }}" id="loginForm">
+            <form method="POST" action="{{ route('password.recovery') }}" id="recoveryForm">
                 @csrf
-                <input class="access-form-email mb-5 @error('email') is-invalid @enderror" 
-                       type="email" 
-                       placeholder="@lang('translations.access.login.email')" 
-                       name="email" 
+                <input class="access-form-email mb-5 @error('email') is-invalid @enderror"
+                       type="email"
+                       placeholder="@lang('translations.access.login.email')"
+                       name="email"
                        value="{{ old('email') }}"
                        required>
                 @error('email')

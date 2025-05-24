@@ -63,6 +63,8 @@ Route::get('/recovery', function () {
     return view('passwordRecovery');
 })->name('recovery');
 
+Route::post('/password-recovery', [MyAccountController::class, 'passwordRecovery'])->name('password.recovery');
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');

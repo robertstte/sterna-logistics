@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PasswordChange;
+use App\Mail\PasswordRecovery;
 use Illuminate\Support\Facades\DB;
 
 class MyAccountController extends Controller
@@ -78,6 +79,30 @@ class MyAccountController extends Controller
         Mail::to($user->email)->send(new PasswordChange(now()->format('d/m/Y H:i'), $name));
 
         return redirect()->back()->with('success', 'Contraseña actualizada correctamente');
+    }
+
+    public function passwordRecovery(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        $token = Str::random(60);
+
+        $name = $user->customer->name;
+
+        PasswordToken::create([
+            'user_id' => $user->id,
+            'token' => $token,
+            'expires_at' => Carbon::now()->addHours(1),
+            'used' => false,
+        ]);
+
+        Mail::to($user->email)->send(new PasswordRecovery(now()->format('d/m/Y H:i'), $name, $token));
+
+        return redirect()->route('login')->with('success', 'Te hemos enviado un enlace para recuperar tu contraseña.');
     }
 
     public function updatePreferences(Request $request)
