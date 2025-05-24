@@ -29,43 +29,43 @@
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.description')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.description')</p>
                                     <div class="form-group">
                                         <textarea class="orderDetail-input" name="description" required>{{ $order->orderDetail->description }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.package_type')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.package_type')</p>
                                     <div class="form-group">
                                         <input class="orderDetail-input" type="text" value="{{ __('translations.package_type')[strtolower($order->orderDetail->packageType->type)] }}" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.arrival_date')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.arrival_date')</p>
                                     <div class="form-group">
-                                        <input class="orderDetail-input" type="date" name="arrival_date" min={{ date('Y-m-d') }} value="{{ $order->orderDetail->arrival_date }}" required>
+                                        <input class="orderDetail-input" type="date" name="arrival_date" min="{{ date('Y-m-d') }}" value="{{ $order->orderDetail->arrival_date }}" required>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.departure_location')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.departure_location')</p>
                                     <div class="form-group">
                                         <input class="orderDetail-input" type="text" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.transport_type')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.transport_type')</p>
                                     <div class="form-group">
                                         <input class="orderDetail-input" type="text" value="{{ $order->orderDetail->transport->type_id }}" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.weight')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.weight')</p>
                                     <div class="form-group">
                                         <input class="orderDetail-input" type="text" value="{{ $order->orderDetail->weight }}" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.status')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.status')</p>
                                     <div class="form-group">
                                         <select class="orderDetail-input" name="status" required>
                                             @foreach($statuses as $status)
@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.ubication')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.ubication')</p>
                                     <div class="form-group">
                                         <div style="height: 320px; border: 2px solid black; border-radius: 8px;">
                                             <!-- Agregar mapa -->
@@ -89,25 +89,25 @@
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.license_plate')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.arrival_location')</p>
                                     <div class="form-group">
                                         <input class="orderDetail-input" type="text" value="{{ $order->orderDetail->transport->license_plate }}" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.arrival_location')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.license_plate')</p>
                                     <div class="form-group">
                                         <input class="orderDetail-input" type="text" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.total_cost')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.total_cost')</p>
                                     <div class="form-group">
                                         <input class="orderDetail-input" type="text" value="{{ $order->orderDetail->total_cost }}" disabled>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <p class="orderDetail-title">@lang('translations.dashboard.table.details.observations')</p>
+                                    <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.observations')</p>
                                     <div class="form-group">
                                         <textarea class="orderDetail-input" rows="1" name="observations">{{ $order->orderDetail->observations }}</textarea>
                                     </div>
