@@ -3,7 +3,7 @@
 @section('content')
 <div class="row p-5">
     <div class="row ">
-        <div class="col-12 col-xl-6 d-none d-xl-flex justify-content-center" style="margin-right: 100px;">
+        <div class="col-12 col-xl-6 d-none d-xl-flex justify-content-center" style="margin-right: 100px; margin-left: 80px;">
             <img loading="lazy" class="w-100 h-100" src="{{ asset('images/access.svg') }}" alt="@lang('translations.access.login.illustration')">
         </div>
         <div class="col-12 col-xl-4  slide-in d-flex flex-column justify-content-center align-itmes-center access-form" style="height: 555px;" id="page">
