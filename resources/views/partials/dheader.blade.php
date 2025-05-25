@@ -7,12 +7,30 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    @if(Auth::user()->role_id === 1)
                     <li class="nav-item mt-2">
                         <a href="{{ route('orders.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.orders')</a>
                     </li>
+                    @else
                     <li class="nav-item mt-2">
-                        <a href="customers" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.clients')</a>
+                        <a href="{{ route('ordersUser.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.orders')</a>
                     </li>
+                    @if(Auth::user()->role_id === 2)
+                    <li class="nav-item mt-2">
+                        <a href="{{ route('user.orders') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.table.orders.my_requests')</a>
+                    </li>
+                    @endif
+                    @endif
+                    @if(Auth::user()->role_id === 1)
+                    <li class="nav-item mt-2">
+                        <a href="{{ route('admin.orderRequests') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.table.orders.requests')</a>
+                    </li>
+                    @endif
+                    @if(Auth::user()->role_id === 1)
+                    <li class="nav-item mt-2">
+                        <a href="{{ route('customers.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.clients')</a>
+                    </li>
+                    @endif
                     <li class="nav-item mt-2">
                         <a href="{{ route('invoices.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.invoicing')</a>
                     </li>

@@ -15,10 +15,11 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\OrderRequestController;
+use App\Http\Controllers\AdminOrderRequestController;
 
 Route::get('/', function () {
     return view('landing');
-});
+})->name('landing');
 
 Route::middleware(['auth'])->group(function () {
     // Rutas de administrador
@@ -28,6 +29,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/orders', [OrdersController::class, 'store'])->name('orders.store');
     Route::get('/api/countries/{country}/locations', [CountryLocationController::class, 'getLocations']);
     Route::get('/customers', [CustomersController::class, 'index'])->name('customers.index');
+    
+    // Rutas para solicitudes de pedidos (admin)
+    Route::get('/admin/orderRequests', [AdminOrderRequestController::class, 'index'])->name('admin.orderRequests');
+    Route::post('/admin/orderRequests/{id}/approve', [AdminOrderRequestController::class, 'approve'])->name('admin.orderRequests.approve');
+    Route::post('/admin/orderRequests/{id}/reject', [AdminOrderRequestController::class, 'reject'])->name('admin.orderRequests.reject');
 
     // Rutas de usuario normal
     Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');
@@ -68,6 +74,7 @@ Route::get('OrderDetails', function () {
 });
 
 Route::get('/my-order', [MyOrderController::class, 'index'])->name('my-order');
+Route::get('/my-order-view', [MyOrderController::class, 'view'])->name('my-order-view');
 
 Route::get('/about-us', function () {
     return view('aboutUs');
@@ -77,4 +84,4 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('language/{lang}', [LanguageController::class, 'setLanguage']);
+Route::get('language/{lang}', [LanguageController::class, 'setLanguage'])->name('language.change');

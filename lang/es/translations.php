@@ -50,11 +50,79 @@ return [
             ]
         ]
     ],
-     "contact"=>[
-        "title" => "Contactános",
+     "contact" => [
+        "title" => "Contacto",
+        "subtitle" => "Estamos aquí para ayudarte. ¿Tienes alguna pregunta o comentario? ¡Contáctanos!",
         "name" => "Nombre",
-        "email" => "Email",
+        "email" => "Correo electrónico",
         "message" => "Mensaje",
+        "send" => "Enviar",
+        "form" => [
+            "title" => "Envíanos un mensaje",
+            "subject" => "Asunto"
+        ],
+        "info" => [
+            "title" => "Información de contacto",
+            "address" => [
+                "title" => "Dirección",
+                "content" => "Calle Principal 123, Madrid, España"
+            ],
+            "phone" => [
+                "title" => "Teléfono",
+                "content" => "+34 91 123 45 67"
+            ],
+            "email" => [
+                "title" => "Correo electrónico",
+                "content" => "info@sterna.com"
+            ],
+            "hours" => [
+                "title" => "Horario de atención",
+                "content" => "Lunes a Viernes: 9:00 - 18:00"
+            ]
+        ]
+    ],
+    "about" => [
+        "title" => "Nosotros",
+        "subtitle" => "Conectando el mundo a través de soluciones logísticas eficientes y confiables",
+        "who_we_are" => [
+            "title" => "Quiénes Somos",
+            "content_1" => "En Sterna, somos una empresa líder en logística y transporte internacional con más de 10 años de experiencia en el sector. Ofrecemos soluciones integrales para el transporte de mercancías a nivel global.",
+            "content_2" => "Nuestra red global de socios estratégicos nos permite ofrecer servicios de alta calidad adaptados a las necesidades específicas de cada cliente, garantizando siempre la máxima eficiencia y seguridad."
+        ],
+        "values" => [
+            "title" => "Nuestros Valores",
+            "reliability" => [
+                "title" => "Confiabilidad",
+                "content" => "Cumplimos nuestras promesas. Cada envío es tratado con la máxima atención para garantizar entregas puntuales y seguras."
+            ],
+            "efficiency" => [
+                "title" => "Eficiencia",
+                "content" => "Optimizamos constantemente nuestros procesos para ofrecer soluciones rápidas y rentables que maximicen el valor para nuestros clientes."
+            ],
+            "customer_focus" => [
+                "title" => "Enfoque al Cliente",
+                "content" => "Escuchamos activamente las necesidades de nuestros clientes y trabajamos en estrecha colaboración para superar sus expectativas."
+            ]
+        ],
+        "services" => [
+            "title" => "Nuestros Servicios",
+            "air" => [
+                "title" => "Transporte Aéreo",
+                "content" => "Soluciones rápidas para envíos urgentes o de alto valor, con cobertura global y tiempos de tránsito optimizados."
+            ],
+            "sea" => [
+                "title" => "Transporte Marítimo",
+                "content" => "Opciones rentables para grandes volúmenes de carga, con servicios de contenedor completo (FCL) o compartido (LCL)."
+            ],
+            "land" => [
+                "title" => "Transporte Terrestre",
+                "content" => "Servicios flexibles de transporte por carretera para entregas nacionales e internacionales con seguimiento en tiempo real."
+            ],
+            "warehousing" => [
+                "title" => "Almacenaje y Distribución",
+                "content" => "Instalaciones seguras para el almacenamiento temporal de mercancías y servicios de distribución eficientes."
+            ]
+        ]
     ],
     "errors" => [
         "404" => [
@@ -122,6 +190,29 @@ return [
                 "no_orders" => "No tienes pedidos",
                 "no_orders_message" => "Aún no has realizado ningún pedido. ¿Quieres solicitar uno nuevo?",
                 "request_order" => "Solicitar Pedido",
+                "my_requests" => "Mis Solicitudes",
+                "pending" => "Pendientes",
+                "approved" => "Aprobadas",
+                "rejected" => "Rechazadas",
+                "request_summary" => "Resumen de Solicitudes",
+                "view_details" => "Ver Detalles",
+                "no_requests" => "No hay solicitudes de pedidos pendientes",
+                "general_info" => "Información General",
+                "locations" => "Ubicaciones",
+                "dates" => "Fechas",
+                "request_date" => "Fecha de Solicitud",
+                "observations_optional" => "Observaciones (opcional)",
+                "send_request" => "Enviar Solicitud",
+                "approve_request" => "Aprobar Solicitud",
+                "reject_request" => "Rechazar Solicitud",
+                "approve_confirmation" => "¿Estás seguro de que deseas aprobar esta solicitud de pedido?",
+                "approve_message" => "Al aprobar esta solicitud, se creará un nuevo pedido en el sistema.",
+                "initial_status" => "Estado Inicial del Pedido",
+                "reject_confirmation" => "¿Estás seguro de que deseas rechazar esta solicitud de pedido?",
+                "reject_message" => "Esta acción no se puede deshacer.",
+                "pending_status" => "Pendiente de aprobación",
+                "approved_status" => "Aprobada - Se ha creado un pedido con esta solicitud",
+                "rejected_status" => "Rechazada",
               
             ],
             "customers" => [
@@ -220,10 +311,11 @@ return [
             ],
             
             "description_notes" => [
-                "title" => "Descripción y Observaciones",
+                "title" => "Descripción y Notas",
                 "description" => "Descripción",
                 "observations" => "Observaciones"
-            ]
+            ],
+            "tracking" => "Seguimiento de Pedido"
         ]
 
     ],

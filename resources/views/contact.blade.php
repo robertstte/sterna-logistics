@@ -1,99 +1,160 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    body {
-        background-color: white;
-    }
+<div class="container-fluid py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <!-- Encabezado de la página -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-3">@lang('translations.contact.title')</h1>
+                <div class="d-flex justify-content-center">
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                </div>
+                <p class="lead text-muted">@lang('translations.contact.subtitle')</p>
+            </div>
+        </div>
 
-    .contact-container {
-        min-height: 100vh;
-        padding: 40px 20px;
+        <div class="row justify-content-center">
+            <!-- Información de contacto -->
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <div class="card border-0 shadow-lg h-100">
+                    <div class="card-body p-4">
+                        <h2 class="h4 fw-bold mb-4 text-primary"><i class="fas fa-info-circle me-2"></i> @lang('translations.contact.info.title')</h2>
+                        
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                            </div>
+                            <div class="ms-3">
+                                <h3 class="h6 fw-bold">@lang('translations.contact.info.address.title')</h3>
+                                <p class="text-muted mb-0">@lang('translations.contact.info.address.content')</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                            </div>
+                            <div class="ms-3">
+                                <h3 class="h6 fw-bold">@lang('translations.contact.info.phone.title')</h3>
+                                <p class="text-muted mb-0">@lang('translations.contact.info.phone.content')</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                            </div>
+                            <div class="ms-3">
+                                <h3 class="h6 fw-bold">@lang('translations.contact.info.email.title')</h3>
+                                <p class="text-muted mb-0">@lang('translations.contact.info.email.content')</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-clock text-white"></i>
+                                </div>
+                            </div>
+                            <div class="ms-3">
+                                <h3 class="h6 fw-bold">@lang('translations.contact.info.hours.title')</h3>
+                                <p class="text-muted mb-0">@lang('translations.contact.info.hours.content')</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Formulario de contacto -->
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary rounded-circle p-3 me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fas fa-paper-plane text-white"></i>
+                            </div>
+                            <h2 class="h4 fw-bold text-primary mb-0">@lang('translations.contact.form.title')</h2>
+                        </div>
+                        
+                        <form action="{{ route('contact') }}" method="POST">
+                            @csrf
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="@lang('translations.contact.name')" required>
+                                        <label for="name">@lang('translations.contact.name')</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="@lang('translations.contact.email')" required>
+                                        <label for="email">@lang('translations.contact.email')</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="subject" name="subject" placeholder="@lang('translations.contact.form.subject')">
+                                        <label for="subject">@lang('translations.contact.form.subject')</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="message" name="message" placeholder="@lang('translations.contact.message')" style="height: 150px" required></textarea>
+                                        <label for="message">@lang('translations.contact.message')</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">
+                                        <i class="fas fa-paper-plane me-2"></i> @lang('translations.contact.send')
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .divider-custom {
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-bottom: 1.5rem;
     }
-
-    .contact-card {
+    
+    .divider-custom-line {
         width: 100%;
-        max-width: 700px;
-        background-color: white;
-        padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 31, 63, 0.3);
-        color: rgb(0, 31, 63);
+        max-width: 7rem;
+        height: 0.25rem;
+        background-color: #0d6efd;
+        border-radius: 1rem;
+        border-color: #0d6efd;
     }
-
-    .contact-card h2 {
-        text-align: center;
-        margin-bottom: 25px;
-        color: rgb(0, 31, 63);
-        font-size: 28px;
+    
+    .divider-custom-icon {
+        color: #0d6efd;
+        font-size: 1.5rem;
+        margin: 0 1rem;
     }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 6px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 15px;
-    }
-
-    .form-group textarea {
-        height: 120px;
-        resize: vertical;
-    }
-
-    .contact-card button {
-        background-color: rgb(0, 168, 255);
-        color: white;
-        padding: 12px;
-        border: none;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 16px;
-        width: 100%;
-        transition: background-color 0.2s;
-    }
-
-    .contact-card button:hover {
-        background-color: rgb(0, 140, 210);
+    
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     }
 </style>
-
-<div class="contact-container">
-    <div class="contact-card">
-        <h2>@lang('translations.contact.title')</h2>
-        <form action="{{ route('contact') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="name">@lang('translations.contact.name')</label>
-                <input type="text" name="name" id="name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">@lang('translations.contact.email')</label>
-                <input type="email" name="email" id="email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="message">@lang('translations.contact.message')</label>
-                <textarea name="message" id="message" required></textarea>
-            </div>
-
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
-</div>
 @endsection
