@@ -21,12 +21,12 @@
                             <img src="{{ asset('icons/language.svg') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" alt="@lang('translations.header.language')">
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item mx-auto" href="language/es">
+                                    <a class="dropdown-item mx-auto" href="{{ route('language.change', 'es') }}">
                                         <img src="{{ asset('icons/es.svg') }}" alt="@lang('translations.header.spanish')">
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item mx-auto" href="language/en">
+                                    <a class="dropdown-item mx-auto" href="{{ route('language.change', 'en') }}">
                                         <img src="{{ asset('icons/en.svg') }}" alt="@lang('translations.header.english')">
                                     </a>
                                 </li>

@@ -51,10 +51,79 @@ return [
         ]
     ],
     "contact"=>[
-        "title" => "Contact with us",
+        "title" => "Contact Us",
+        "subtitle" => "We're here to help. Have a question or comment? Get in touch with us!",
         "name" => "Name",
         "email" => "Email",
         "message" => "Message",
+        "send" => "Send",
+        "form" => [
+            "title" => "Send us a message",
+            "subject" => "Subject"
+        ],
+        "info" => [
+            "title" => "Contact Information",
+            "address" => [
+                "title" => "Address",
+                "content" => "123 Main Street, Madrid, Spain"
+            ],
+            "phone" => [
+                "title" => "Phone",
+                "content" => "+34 91 123 45 67"
+            ],
+            "email" => [
+                "title" => "Email",
+                "content" => "info@sterna.com"
+            ],
+            "hours" => [
+                "title" => "Business Hours",
+                "content" => "Monday to Friday: 9:00 AM - 6:00 PM"
+            ]
+        ]
+    ],
+    
+    "about" => [
+        "title" => "About Us",
+        "subtitle" => "Connecting the world through efficient and reliable logistics solutions",
+        "who_we_are" => [
+            "title" => "Who We Are",
+            "content_1" => "At Sterna, we are a leading logistics and international transport company with over 10 years of experience in the industry. We offer comprehensive solutions for global freight transportation.",
+            "content_2" => "Our global network of strategic partners allows us to offer high-quality services tailored to the specific needs of each client, always guaranteeing maximum efficiency and security."
+        ],
+        "values" => [
+            "title" => "Our Values",
+            "reliability" => [
+                "title" => "Reliability",
+                "content" => "We keep our promises. Every shipment is handled with the utmost care to ensure timely and secure deliveries."
+            ],
+            "efficiency" => [
+                "title" => "Efficiency",
+                "content" => "We constantly optimize our processes to offer fast and cost-effective solutions that maximize value for our clients."
+            ],
+            "customer_focus" => [
+                "title" => "Customer Focus",
+                "content" => "We actively listen to our clients' needs and work closely with them to exceed their expectations."
+            ]
+        ],
+        "services" => [
+            "title" => "Our Services",
+            "air" => [
+                "title" => "Air Freight",
+                "content" => "Fast solutions for urgent or high-value shipments, with global coverage and optimized transit times."
+            ],
+            "sea" => [
+                "title" => "Sea Freight",
+                "content" => "Cost-effective options for large cargo volumes, with full container load (FCL) or less than container load (LCL) services."
+            ],
+            "land" => [
+                "title" => "Land Transport",
+                "content" => "Flexible road transport services for domestic and international deliveries with real-time tracking."
+            ],
+            "warehousing" => [
+                "title" => "Warehousing & Distribution",
+                "content" => "Secure facilities for temporary storage of goods and efficient distribution services."
+            ]
+        ]
     ],
     "errors" => [
         "404" => [
@@ -121,7 +190,30 @@ return [
                 "reject" => "Reject",
                 "no_orders" => "You have no orders",
                 "no_orders_message" => "You haven't made any orders yet. Would you like to request a new one?",
-                "request_order" => "Request Order"
+                "request_order" => "Request Order",
+                "my_requests" => "My Requests",
+                "pending" => "Pending",
+                "approved" => "Approved",
+                "rejected" => "Rejected",
+                "request_summary" => "Requests Summary",
+                "view_details" => "View Details",
+                "no_requests" => "There are no pending order requests",
+                "general_info" => "General Information",
+                "locations" => "Locations",
+                "dates" => "Dates",
+                "request_date" => "Request Date",
+                "observations_optional" => "Observations (optional)",
+                "send_request" => "Send Request",
+                "approve_request" => "Approve Request",
+                "reject_request" => "Reject Request",
+                "approve_confirmation" => "Are you sure you want to approve this order request?",
+                "approve_message" => "By approving this request, a new order will be created in the system.",
+                "initial_status" => "Initial Order Status",
+                "reject_confirmation" => "Are you sure you want to reject this order request?",
+                "reject_message" => "This action cannot be undone.",
+                "pending_status" => "Pending approval",
+                "approved_status" => "Approved - An order has been created with this request",
+                "rejected_status" => "Rejected"
             ],
             "customers" => [
                 "name" => "Name",
@@ -226,7 +318,8 @@ return [
                     "title" => "Description and Observations",
                     "description" => "Description",
                     "observations" => "Observations"
-                ]
+                ],
+                "tracking" => "Order Tracking"
             ]
 
     ],

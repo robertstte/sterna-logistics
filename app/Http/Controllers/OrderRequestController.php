@@ -92,7 +92,7 @@ class OrderRequestController extends Controller
     public function index()
     {
         $orders = OrderRequest::where('customer_id', Auth::user()->customer->id)
-            ->with(['packageType', 'transport', 'originCountry', 'destinationCountry'])
+            ->with(['packageType', 'transport', 'originCountry', 'destinationCountry', 'departureLocation', 'arrivalLocation'])
             ->latest()
             ->get();
         
@@ -100,6 +100,6 @@ class OrderRequestController extends Controller
         $transports = Transport::with('transportType')->get();
         $countries = Country::all();
             
-        return view('userOrders', compact('orders', 'packageTypes', 'transports', 'countries'));
+        return view('userOrderRequests', compact('orders', 'packageTypes', 'transports', 'countries'));
     }
 }

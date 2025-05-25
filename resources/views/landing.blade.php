@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+@if(session('error'))
+<script>
+    // Ejecutar inmediatamente para asegurar que se muestre
+    window.onload = function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Pedido no encontrado',
+            text: "{{ session('error') }}",
+            confirmButtonColor: '#0d6efd',
+            confirmButtonText: 'Entendido'
+        });
+    };
+</script>
+@endif
 <div class="row hero">
     <p class="hero-title">@lang('translations.landing.hero.title')</p>
     <div class="hero-cta-container">
@@ -11,13 +25,94 @@
     <div class="col-12 col-xl-6">
         <p class="localization-title">@lang('translations.landing.localization.title')</p>
         <p class="localization-subtitle">@lang('translations.landing.localization.subtitle')</p>
-        <form action="{{ route('my-order') }}" method="GET" class="localization-form">
+        <form id="search-order-form" class="localization-form" autocomplete="off">
             @csrf  
-            <input class="localization-form-text" type="text" name="order_id" placeholder="Nº 202503290000000001" maxlength="18" required>
-            <input class="localization-form-submit btn" type="submit" value="@lang('translations.landing.localization.search')">
+            <input class="localization-form-text" type="text" name="order_id" id="order_id" placeholder="Nº 202503290000000001" maxlength="18" required autocomplete="off">
+            <button type="submit" class="localization-form-submit btn">@lang('translations.landing.localization.search')</button>
             <hr>
             <p class="localization-help">@lang('translations.landing.localization.help')</p>
         </form>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Evitar el autofill del navegador
+                const input = document.getElementById('order_id');
+                
+                // Guardar el valor actual
+                const currentValue = input.value;
+                
+                // Cambiar a password y luego de vuelta a texto
+                input.setAttribute('type', 'password');
+                setTimeout(function() {
+                    input.setAttribute('type', 'text');
+                    input.value = currentValue;
+                }, 1);
+                
+                // Limpiar el fondo del input cuando recibe el foco
+                input.addEventListener('focus', function() {
+                    this.style.backgroundColor = 'rgb(0, 31, 63)';
+                    this.style.color = 'rgb(255, 255, 255)';
+                });
+                
+                // También limpiar el fondo cuando se escribe
+                input.addEventListener('input', function() {
+                    this.style.backgroundColor = 'rgb(0, 31, 63)';
+                    this.style.color = 'rgb(255, 255, 255)';
+                });
+                
+                // Manejar el envío del formulario
+                const form = document.getElementById('search-order-form');
+                
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const orderId = document.getElementById('order_id').value;
+                    
+                    // Validar que el ID del pedido tenga 18 caracteres
+                    if (orderId.length !== 18) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'El número de pedido debe tener 18 caracteres.',
+                            confirmButtonColor: '#0d6efd'
+                        });
+                        return;
+                    }
+                    
+                    // Realizar la petición AJAX
+                    fetch(`{{ route('my-order') }}?order_id=${orderId}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Redirigir a la página de detalles del pedido
+                            window.location.href = data.redirect;
+                        } else {
+                            // Mostrar mensaje de error con SweetAlert2
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Pedido no encontrado',
+                                text: data.message,
+                                confirmButtonColor: '#0d6efd',
+                                confirmButtonText: 'Entendido'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ha ocurrido un error al buscar el pedido. Por favor, inténtelo de nuevo más tarde.',
+                            confirmButtonColor: '#0d6efd'
+                        });
+                    });
+                });
+            });
+        </script>
 
     </div>
     <div class="col-xl-6 d-none d-xl-block">

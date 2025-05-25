@@ -1,156 +1,206 @@
 @extends('layouts.app')
 
-
-
 @section('content')
-
-    
-    <div class="container mt-5 ">
-        
-        <div class="col-10 mx-auto">
-        @if (isset($status) && $status == 'no')
-            <div class="alert alert-danger text-center">
-                <h5>{{ $message }}</h5>
-            </div>
-
-        @elseif (isset($status) && $status == 'ok')
-        <h2 class="text-center mb-4">@lang('translations.access.order.info.title')</h2>
-
-            <div class="card shadow-lg p-4 mb-5">
-                
-                <div class="row">
-                    <!-- Columna izquierda -->
-                    <div class="col-md-6">
-                        <!-- Sección: Pedido -->
-                        <div class="mb-3 p-3" style="background-color: #f8f9fa; border-radius: 8px;">
-                            <h5 class="text-primary">@lang('translations.access.order.info.title')</h5>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.info.id')</strong>
-                                <p class="text-muted">{{ $order->id }}</p>
-                            </div>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.info.status')</strong>
-                                <p class="text-muted">{{ $order->status->status }}</p>
-                            </div>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.info.created_at')</strong>
-                                <p class="text-muted">{{ $order->created_at->format('d/m/Y H:i') }}</p>
-                            </div>
-                        </div>
-
-                        <!-- Sección: Detalles de Origen/Destino -->
-                        <div class="mb-3 p-3 mt-4" style="background-color: #e9ecef; border-radius: 8px;">
-                            <h5 class="text-primary">@lang('translations.access.order.route.title')</h5>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.route.origin')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->originCountry->name }}</p>
-                            </div>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.route.destination')</strong>
-                                
-                                <p class="text-muted">{{ $orderDetail[0]->destinationCountry->name }}</p>
-                            </div>
-                        </div>
+<div class="container-fluid py-4" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-lg-10">
+                @if (isset($status) && $status == 'no')
+                    <div class="alert alert-danger text-center shadow-sm">
+                        <h5 class="mb-0">{{ $message }}</h5>
                     </div>
-
-                    <!-- Columna derecha -->
-                    <div class="col-md-6">
-                        <!-- Sección: Fechas y Transporte -->
-                        <div class="mb-3 p-3" style="background-color: #f8f9fa; border-radius: 8px;">
-                            <h5 class="text-primary">@lang('translations.access.order.dates_transport.title')</h5>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.dates_transport.departure')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->departure_date }}</p>
+                @elseif (isset($status) && $status == 'ok')
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary rounded-circle p-2 me-3">
+                            <i class="fas fa-box text-white"></i>
+                        </div>
+                        <h2 class="mb-0">@lang('translations.access.order.info.title') #{{ $order->id }}</h2>
+                    </div>
+                    
+                    <div class="card border-0 shadow-lg rounded-3 overflow-hidden mb-5">
+                
+                        <div class="card-header bg-primary text-white p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-0"><i class="fas fa-truck-moving me-2"></i> @lang('translations.access.order.info.status'): 
+                                        <span class="badge bg-light text-primary">{{ $order->status->status }}</span>
+                                    </h5>
+                                </div>
+                                <div>
+                                    <span class="badge bg-light text-primary">
+                                        <i class="far fa-calendar-alt me-1"></i> {{ $order->created_at->format('d/m/Y H:i') }}
+                                    </span>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.dates_transport.arrival')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->arrival_date }}</p>
+                        </div>
+                        
+                        <div class="card-body p-4">
+                            <!-- Ruta y Transporte - Fila Superior -->
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <div class="card border-0 shadow-sm h-100">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="text-center px-3">
+                                                    <div class="bg-light rounded-circle p-3 mx-auto mb-2" style="width: 60px; height: 60px;">
+                                                        <i class="fas fa-map-marker-alt text-primary" style="font-size: 1.5rem;"></i>
+                                                    </div>
+                                                    <h6>@lang('translations.access.order.route.origin')</h6>
+                                                    <p class="mb-0 text-muted">{{ $orderDetail[0]->originCountry->name }}</p>
+                                                </div>
+                                                
+                                                <div class="align-self-center flex-grow-1 px-4">
+                                                    <div class="progress" style="height: 4px;">
+                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"></div>
+                                                    </div>
+                                                    @switch($orderDetail[0]->transport->type_id)
+                                                        @case ('1')
+                                                            <div class="text-center mt-2">
+                                                                <i class="fas fa-plane text-primary"></i>
+                                                                <small class="d-block">{{ $orderDetail[0]->transport->license_plate }}</small>
+                                                            </div>
+                                                        @break
+                                                        @case ('2')
+                                                            <div class="text-center mt-2">
+                                                                <i class="fas fa-ship text-primary"></i>
+                                                                <small class="d-block">{{ $orderDetail[0]->transport->license_plate }}</small>
+                                                            </div>
+                                                        @break
+                                                        @case ('3')
+                                                            <div class="text-center mt-2">
+                                                                <i class="fas fa-truck text-primary"></i>
+                                                                <small class="d-block">{{ $orderDetail[0]->transport->license_plate }}</small>
+                                                            </div>
+                                                        @break
+                                                    @endswitch
+                                                </div>
+                                                
+                                                <div class="text-center px-3">
+                                                    <div class="bg-light rounded-circle p-3 mx-auto mb-2" style="width: 60px; height: 60px;">
+                                                        <i class="fas fa-flag-checkered text-primary" style="font-size: 1.5rem;"></i>
+                                                    </div>
+                                                    <h6>@lang('translations.access.order.route.destination')</h6>
+                                                    <p class="mb-0 text-muted">{{ $orderDetail[0]->destinationCountry->name }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             
-                            @switch($orderDetail[0]->transport->type_id)
-                                @case ('1') 
-                                    <div class="mb-2">
-                                        <strong>@lang('translations.access.order.dates_transport.transport')</strong>
-                                        <p class="text-muted">
-                                            @php echo __('translations.access.order.dates_transport.air') . ' - ' . $orderDetail[0]->transport->license_plate; @endphp
-                                        </p>
+                            <!-- Información Principal - Fila Media -->
+                            <div class="row mb-4">
+                                <!-- Fechas -->
+                                <div class="col-md-4 mb-3 mb-md-0">
+                                    <div class="card border-0 shadow-sm h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title border-bottom pb-2"><i class="far fa-calendar-alt text-primary me-2"></i> @lang('translations.access.order.dates_transport.title')</h5>
+                                            <div class="d-flex justify-content-between mb-3">
+                                                <div>
+                                                    <small class="text-muted d-block">@lang('translations.access.order.dates_transport.departure')</small>
+                                                    <strong>{{ $orderDetail[0]->departure_date }}</strong>
+                                                </div>
+                                                <div class="text-end">
+                                                    <small class="text-muted d-block">@lang('translations.access.order.dates_transport.arrival')</small>
+                                                    <strong>{{ $orderDetail[0]->arrival_date }}</strong>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2 pt-2 border-top">
+                                                <small class="text-muted d-block">@lang('translations.access.order.dates_transport.transport')</small>
+                                                @switch($orderDetail[0]->transport->type_id)
+                                                    @case ('1')
+                                                        <strong><i class="fas fa-plane text-primary me-1"></i> @lang('translations.access.order.dates_transport.air') - {{ $orderDetail[0]->transport->license_plate }}</strong>
+                                                    @break
+                                                    @case ('2')
+                                                        <strong><i class="fas fa-ship text-primary me-1"></i> @lang('translations.access.order.dates_transport.maritime') - {{ $orderDetail[0]->transport->license_plate }}</strong>
+                                                    @break
+                                                    @case ('3')
+                                                        <strong><i class="fas fa-truck text-primary me-1"></i> @lang('translations.access.order.dates_transport.land') - {{ $orderDetail[0]->transport->license_plate }}</strong>
+                                                    @break
+                                                @endswitch
+                                            </div>
+                                        </div>
                                     </div>
-                                @break
-
-
-                                @case ('2') 
-                                    <div class="mb-2">
-                                        <strong>@lang('translations.access.order.dates_transport.transport')</strong>
-                                        <p class="text-muted">
-                                            @php echo __('translations.access.order.dates_transport.maritime') . ' - ' . $orderDetail[0]->transport->license_plate; @endphp
-                                        </p>
+                                </div>
+                                
+                                <!-- Paquete -->
+                                <div class="col-md-4 mb-3 mb-md-0">
+                                    <div class="card border-0 shadow-sm h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title border-bottom pb-2"><i class="fas fa-box text-primary me-2"></i> @lang('translations.access.order.location_package.title')</h5>
+                                            <div class="mb-2">
+                                                <small class="text-muted d-block">@lang('translations.access.order.location_package.type')</small>
+                                                <strong>{{ $orderDetail[0]->packageType->type }}</strong>
+                                            </div>
+                                            <div>
+                                                <small class="text-muted d-block">@lang('translations.access.order.location_package.location')</small>
+                                                <strong>{{ $orderDetail[0]->originCountry->name }}</strong>
+                                            </div>
+                                        </div>
                                     </div>
-                                @break
-                                @case ('3') 
-                                    <div class="mb-2">
-                                        <strong>@lang('translations.access.order.dates_transport.transport')</strong>
-                                        <p class="text-muted">
-                                            @php echo __('translations.access.order.dates_transport.land') . ' - ' . $orderDetail[0]->transport->license_plate; @endphp
-                                        </p>
+                                </div>
+                                
+                                <!-- Costo -->
+                                <div class="col-md-4">
+                                    <div class="card border-0 shadow-sm h-100 bg-light">
+                                        <div class="card-body">
+                                            <h5 class="card-title border-bottom pb-2"><i class="fas fa-dollar-sign text-primary me-2"></i> @lang('translations.access.order.cost_weight.title')</h5>
+                                            <div class="text-center py-2">
+                                                <span class="h3 text-primary">${{ number_format($orderDetail[0]->total_cost, 2) }}</span>
+                                                <div class="mt-2">
+                                                    <small class="text-muted">@lang('translations.access.order.cost_weight.weight'): <strong>{{ $orderDetail[0]->weight }} kg</strong></small>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                @break
-                            @endswitch
-                        </div>
-
-                        <div class="mb-3 p-3 mt-4" style="background-color: #e9ecef; border-radius: 8px;">
-                            <h5 class="text-primary">@lang('translations.access.order.cost_weight.title')</h5>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.cost_weight.cost')</strong>
-                                <p class="text-muted">${{ number_format($orderDetail[0]->total_cost, 2) }}</p>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.cost_weight.weight')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->weight }} kg</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3 p-3 mt-4" style="background-color: #f8f9fa; border-radius: 8px;">
-                            <h5 class="text-primary">@lang('translations.access.order.location_package.title')</h5>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.location_package.location')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->originCountry->name }}</p>
-                            </div>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.location_package.type')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->packageType->type }}</p>
+                            
+                            <!-- Descripción y Observaciones - Fila Inferior -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title border-bottom pb-2"><i class="fas fa-info-circle text-primary me-2"></i> @lang('translations.access.order.description_notes.title')</h5>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3 mb-md-0">
+                                                    <small class="text-muted d-block">@lang('translations.access.order.description_notes.description')</small>
+                                                    <p>{{ $orderDetail[0]->description ?: 'N/A' }}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <small class="text-muted d-block">@lang('translations.access.order.description_notes.observations')</small>
+                                                    <p class="mb-0">{{ $orderDetail[0]->observations ?: 'N/A' }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-
-                        <div class="mb-3 p-3 mt-4" style="background-color: #f8f9fa; border-radius: 8px;">
-                            <h5 class="text-primary">@lang('translations.access.order.description_notes.title')</h5>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.description_notes.description')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->description }}</p>
-                            </div>
-                            <div class="mb-2">
-                                <strong>@lang('translations.access.order.description_notes.observations')</strong>
-                                <p class="text-muted">{{ $orderDetail[0]->observations }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         @endif
         </div>
     </div>
     
-    <div class="container mt-4 mb-4">
-        <div class="col-10 mx-auto">
-        <h2 class="text-center mb-4">Seguimiento de Pedido</h2>
-        
-        <div id="map" style="height: 500px; width: 100%;"></div>
+    <div class="container-fluid py-4 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-11 col-lg-10">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary rounded-circle p-2 me-3">
+                            <i class="fas fa-map-marked-alt text-white"></i>
+                        </div>
+                        <h2 class="mb-0">@lang('translations.access.order.tracking')</h2>
+                    </div>
+                    
+                    <div class="card border-0 shadow-lg rounded-3 overflow-hidden mb-5">
+                        <div class="card-body p-0">
+                            <div id="map" style="height: 500px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
