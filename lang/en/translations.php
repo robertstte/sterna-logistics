@@ -76,6 +76,7 @@ return [
         ],
         "table" => [
             "orders" => [
+                "title" => "My Orders",
                 "id" => "ID",
                 "order" => "Order",
                 "client" => "Client",
@@ -85,7 +86,7 @@ return [
                 "date" => "Date",
                 "details" => [
                     "description" => "Description",
-                    "ubication" => "Ubication",
+                    "ubication" => "Location",
                     "package_type" => "Package Type",
                     "arrival_date" => "Arrival Date",
                     "departure_location" => "Departure Location",
@@ -97,8 +98,30 @@ return [
                     "status" => "Status",
                     "observations" => "Observations",
                     "save" => "Save",
-                    "cancel" => "Cancel"
-                ]
+                    "cancel" => "Cancel",
+                    "select_type" => "Select type",
+                    "select_transport" => "Select transport",
+                    "select_country" => "Select country",
+                    "select_location" => "Select location",
+                    "departure_date" => "Departure date",
+                    "arrival_date" => "Arrival date",
+                    "weight_kg" => "Weight (KG)",
+                    "description" => "Description",
+                    "modal_title" => "New Order"
+                ],
+                "new_order" => "New Order",
+                "request_new" => "Request New Order",
+                "request" => "Request",
+                "request_success" => "Request sent successfully",
+                "request_approved" => "Request approved successfully",
+                "request_rejected" => "Request rejected",
+                "requests" => "Order Requests",
+                "request_details" => "Request Details",
+                "approve" => "Approve",
+                "reject" => "Reject",
+                "no_orders" => "You have no orders",
+                "no_orders_message" => "You haven't made any orders yet. Would you like to request a new one?",
+                "request_order" => "Request Order"
             ],
             "customers" => [
                 "name" => "Name",
@@ -209,5 +232,33 @@ return [
         "mail" => "Mail",
         "instagram" => "Instagram",
         "facebook" => "Facebook"
+    ],
+    "myAccount" => [
+        "title" => "My Account",
+        "profile" => "Profile",
+        "password" => "Password",
+        "preferences" => "Preferences",
+        "plans" => "Plans",
+        "personal_info" => "Personal Information",
+        "name" => "Name",
+        "email" => "Email",
+        "phone" => "Phone",
+        "address" => "Address",
+        "update_profile" => "Update Profile",
+        "change_password" => "Change Password",
+        "current_password" => "Current Password",
+        "new_password" => "New Password",
+        "confirm_password" => "Confirm New Password",
+        "change_password_button" => "Change Password",
+        "email_notifications" => "Receive email notifications",
+        "order_updates" => "Receive order updates",
+        "language" => "Language",
+        "spanish" => "Spanish",
+        "english" => "English",
+        "save_preferences" => "Save Preferences",
+        "subscription_plans" => "Subscription Plans",
+        "price" => "Price",
+        "current_plan" => "Current Plan",
+        "change_to_plan" => "Change to this plan"
     ]
 ];

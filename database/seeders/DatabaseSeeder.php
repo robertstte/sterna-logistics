@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             CountryLocations::class,
             Roles::class,
             Statuses::class,
+            Plans::class,
             Users::class,
             PasswordTokens::class,
             Customers::class,

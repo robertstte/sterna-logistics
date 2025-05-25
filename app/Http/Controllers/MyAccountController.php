@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Customer;
+use App\Models\Plan;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PasswordChange;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,9 @@ class MyAccountController extends Controller
 
     public function index()
     {
-        return view('myAccount');
+        $plans = Plan::all();
+        $currentPlan = Auth::user()->customer->plan;
+        return view('myAccount', compact('plans', 'currentPlan'));
     }
 
     public function updateProfile(Request $request)
@@ -100,5 +103,18 @@ class MyAccountController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Preferencias actualizadas correctamente');
+    }
+
+    public function updatePlan(Request $request)
+    {
+        $request->validate([
+            'plan_id' => 'required|exists:plans,id'
+        ]);
+
+        $customer = Auth::user()->customer;
+        $customer->plan_id = $request->plan_id;
+        $customer->save();
+
+        return redirect()->back()->with('success', 'Plan actualizado correctamente');
     }
 }

@@ -1,164 +1,157 @@
 @extends('layouts.dashboard')
 
 @section('content')
-@if(session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: '¡Éxito!',
-            text: '{{ session('success') }}',
-            timer: 3000
-        });
-    </script>
-@endif
-<div class="container-fluid">
+<div class="container py-5">
     <div class="row">
-        <!-- Barra lateral -->
-        <div class="col-md-3 sidebar bg-light p-4 min-vh-30">
-            <div class="sidebar-sticky">
-                <h4 class="mb-4">Mi Cuenta</h4>
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
-                    <button class="nav-link active mb-2" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab">
-                        <i class="fas fa-user me-2"></i> Mi Perfil
-                    </button>
-                    <button class="nav-link mb-2" id="v-pills-security-tab" data-bs-toggle="pill" data-bs-target="#v-pills-security" type="button" role="tab">
-                        <i class="fas fa-shield-alt me-2"></i> Seguridad
-                    </button>
-                    <button class="nav-link mb-2" id="v-pills-preferences-tab" data-bs-toggle="pill" data-bs-target="#v-pills-preferences" type="button" role="tab">
-                        <i class="fas fa-cog me-2"></i> Preferencias
-                    </button>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@lang('translations.myAccount.title')</h5>
+                    <div class="list-group">
+                        <a href="#profile" class="list-group-item list-group-item-action active" data-bs-toggle="list">@lang('translations.myAccount.profile')</a>
+                        <a href="#password" class="list-group-item list-group-item-action" data-bs-toggle="list">@lang('translations.myAccount.password')</a>
+                        <a href="#preferences" class="list-group-item list-group-item-action" data-bs-toggle="list">@lang('translations.myAccount.preferences')</a>
+                        <a href="#plans" class="list-group-item list-group-item-action" data-bs-toggle="list">@lang('translations.myAccount.plans')</a>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Contenido principal -->
-        <div class="col-md-9 ms-sm-auto px-4 py-3">
-            <div class="tab-content" id="v-pills-tabContent">
-                <!-- Sección Mi Perfil -->
-                <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel">
-                    <h2 class="mb-4">Mi Perfil</h2>
+        <div class="col-md-9">
+            <div class="tab-content">
+                <!-- Perfil -->
+                <div class="tab-pane fade show active" id="profile">
                     <div class="card">
                         <div class="card-body">
+                            <h5 class="card-title">@lang('translations.myAccount.personal_info')</h5>
+                            @if(session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <form action="{{ route('my-account.profile') }}" method="POST">
                                 @csrf
-                                @method('PUT')
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Nombre completo</label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" 
-                                           id="name" name="name" value="{{ old('name', Auth::user()->username) }}">
-                                    @error('name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label for="name" class="form-label">@lang('translations.myAccount.name')</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->customer->name }}" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Correo electrónico</label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                           id="email" name="email" value="{{ old('email', Auth::user()->customer->email) }}">
-                                    @error('email')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label for="email" class="form-label">@lang('translations.myAccount.email')</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="phone" class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control @error('phone') is-invalid @enderror" 
-                                           id="phone" name="phone" value="{{ old('phone', Auth::user()->customer->phone) }}">
-                                    @error('phone')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label for="phone" class="form-label">@lang('translations.myAccount.phone')</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ Auth::user()->customer->phone }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="address" class="form-label">Dirección</label>
-                                    <input type="text" class="form-control @error('address') is-invalid @enderror" 
-                                           id="address" name="address" value="{{ old('address', Auth::user()->customer->address) }}">
-                                    @error('address')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label for="address" class="form-label">@lang('translations.myAccount.address')</label>
+                                    <input type="text" class="form-control" id="address" name="address" value="{{ Auth::user()->customer->address }}">
                                 </div>
-                                <button type="submit" class="btn btn-account-settings">Guardar cambios</button>
+                                <button type="submit" class="btn btn-primary">@lang('translations.myAccount.update_profile')</button>
                             </form>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sección Seguridad -->
-                <div class="tab-pane fade" id="v-pills-security" role="tabpanel">
-                    <h2 class="mb-4">Seguridad</h2>
+                <!-- Contraseña -->
+                <div class="tab-pane fade" id="password">
                     <div class="card">
                         <div class="card-body">
+                            <h5 class="card-title">@lang('translations.myAccount.change_password')</h5>
+                            @if(session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <form action="{{ route('my-account.password') }}" method="POST">
                                 @csrf
-                                @method('PUT')
                                 <div class="mb-3">
-                                    <label for="current_password" class="form-label">Contraseña actual</label>
-                                    <input type="password" class="form-control @error('current_password') is-invalid @enderror" 
-                                           id="current_password" name="current_password" required>
-                                    @error('current_password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label for="current_password" class="form-label">@lang('translations.myAccount.current_password')</label>
+                                    <input type="password" class="form-control" id="current_password" name="current_password" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Nueva contraseña</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                           id="password" name="password" required>
-                                    @error('password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label for="password" class="form-label">@lang('translations.myAccount.new_password')</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password_confirmation" class="form-label">Confirmar nueva contraseña</label>
-                                    <input type="password" class="form-control" 
-                                           id="password_confirmation" name="password_confirmation" required>
+                                    <label for="password_confirmation" class="form-label">@lang('translations.myAccount.confirm_password')</label>
+                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                                 </div>
-                                <button type="submit" class="btn btn-account-settings">Actualizar contraseña</button>
+                                <button type="submit" class="btn btn-primary">@lang('translations.myAccount.change_password_button')</button>
                             </form>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sección Preferencias -->
-                <div class="tab-pane fade" id="v-pills-preferences" role="tabpanel">
-                    <h2 class="mb-4">Preferencias</h2>
+                <!-- Preferencias -->
+                <div class="tab-pane fade" id="preferences">
                     <div class="card">
                         <div class="card-body">
+                            <h5 class="card-title">@lang('translations.myAccount.preferences')</h5>
+                            @if(session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <form action="{{ route('my-account.preferences') }}" method="POST">
                                 @csrf
-                                @method('PUT')
-                                <div class="mb-4">
-                                    <h5>Notificaciones</h5>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" id="email_notifications" 
-                                               name="email_notifications" value="1" 
-                                               {{ old('email_notifications', Auth::user()->preferences['email_notifications'] ?? '') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="email_notifications">
-                                            Recibir notificaciones por correo electrónico
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" id="order_updates" 
-                                               name="order_updates" value="1"
-                                               {{ old('order_updates', Auth::user()->preferences['order_updates'] ?? '') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="order_updates">
-                                            Actualizaciones de pedidos
-                                        </label>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="email_notifications" name="email_notifications" {{ Auth::user()->preferences['email_notifications'] ?? false ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="email_notifications">@lang('translations.myAccount.email_notifications')</label>
                                     </div>
                                 </div>
-
-                                <div class="mb-4">
-                                    <h5>Idioma</h5>
-                                    <div class="mb-3">
-                                        <select class="form-select @error('language') is-invalid @enderror" 
-                                                id="language" name="language">
-                                            <option value="es" {{ (old('language', Auth::user()->preferences['language'] ?? '') == 'es') ? 'selected' : '' }}>Español</option>
-                                            <option value="en" {{ (old('language', Auth::user()->preferences['language'] ?? '') == 'en') ? 'selected' : '' }}>English</option>
-                                        </select>
-                                        @error('language')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="order_updates" name="order_updates" {{ Auth::user()->preferences['order_updates'] ?? false ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="order_updates">@lang('translations.myAccount.order_updates')</label>
                                     </div>
                                 </div>
-
-                                <button type="submit" class="btn btn-account-settings">Guardar preferencias</button>
+                                <div class="mb-3">
+                                    <label for="language" class="form-label">@lang('translations.myAccount.language')</label>
+                                    <select class="form-select" id="language" name="language">
+                                        <option value="es" {{ (Auth::user()->preferences['language'] ?? 'es') === 'es' ? 'selected' : '' }}>@lang('translations.myAccount.spanish')</option>
+                                        <option value="en" {{ (Auth::user()->preferences['language'] ?? 'es') === 'en' ? 'selected' : '' }}>@lang('translations.myAccount.english')</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">@lang('translations.myAccount.save_preferences')</button>
                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Planes -->
+                <div class="tab-pane fade" id="plans">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@lang('translations.myAccount.subscription_plans')</h5>
+                            @if(session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <div class="row">
+                                @foreach($plans as $plan)
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100 {{ $currentPlan->id === $plan->id ? 'border-primary' : '' }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $plan->name }}</h5>
+                                            <p class="card-text">{{ $plan->description }}</p>
+                                            <p class="card-text"><strong>@lang('translations.myAccount.price'): {{ $plan->price }}€</strong></p>
+                                            
+                                            @if($currentPlan->id === $plan->id)
+                                                <button class="btn btn-primary" disabled>@lang('translations.myAccount.current_plan')</button>
+                                            @else
+                                                <form action="{{ route('my-account.plan') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+                                                    <button type="submit" class="btn btn-outline-primary">@lang('translations.myAccount.change_to_plan')</button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,15 +160,42 @@
     </div>
 </div>
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar los tabs de Bootstrap
-    var triggerTabList = [].slice.call(document.querySelectorAll('[data-bs-toggle="pill"]'));
-    triggerTabList.forEach(function(triggerEl) {
-        new bootstrap.Tab(triggerEl);
-    });
-});
-</script>
-@endpush
+<style>
+.card {
+    transition: all 0.3s ease;
+    border: 1px solid #ddd;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card.border-primary {
+    border-width: 2px;
+}
+
+.card-title {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.btn {
+    width: 100%;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.list-group-item.active {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+</style>
 @endsection
