@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Order;
 use App\Models\Status;
+use App\Models\PackageType;
+use App\Models\Transport;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\ChecksUserRole;
@@ -38,9 +41,20 @@ class UserOrdersController extends Controller
             ->with('orderDetail.destinationCountry.locations')
             ->get();
 
+        // Obtener solicitudes de pedidos pendientes
+        $orderRequests = \App\Models\OrderRequest::where('customer_id', Auth::user()->customer->id)
+            ->with(['packageType', 'transport', 'originCountry', 'destinationCountry'])
+            ->latest()
+            ->get();
+            
         $statuses = Status::all();
+        
+        // Obtener datos para el formulario de solicitud de pedidos
+        $packageTypes = PackageType::all();
+        $transports = Transport::with('transportType')->get();
+        $countries = Country::all();
 
-        return view('userOrders', compact('orders', 'statuses'));
+        return view('userOrders', compact('orders', 'orderRequests', 'statuses', 'packageTypes', 'transports', 'countries'));
     }
   
 }

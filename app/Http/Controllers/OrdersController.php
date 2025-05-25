@@ -118,7 +118,7 @@ class OrdersController extends Controller
             return $this->redirectBasedOnRole();
         }
 
-        return view('orders.show', compact('order'));
+        return redirect()->route('orders.index');
     }
 
     public function update(Request $request, $order_id)

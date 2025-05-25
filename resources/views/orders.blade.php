@@ -24,9 +24,8 @@
             </tr>
             <tr class="collapse orders-detail" id="orderDetail{{ $order->id }}">
                 <td colspan="7">
-                    <form action="{{ route('orders.update', $order->id) }}">
+                    <form action="{{ route('orders.update', $order->id) }}" method="POST">
                         @csrf
-                        @method('PUT')
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="row p-2">
@@ -44,7 +43,7 @@
                                 <div class="row p-2">
                                     <p class="orderDetail-title">@lang('translations.dashboard.table.orders.details.arrival_date')</p>
                                     <div class="form-group">
-                                        <input class="orderDetail-input" type="date" name="arrival_date" min={{ date('Y-m-d') }} value="{{ $order->orderDetail->arrival_date }}" required>
+                                        <input class="orderDetail-input" type="date" name="arrival_date" value="{{ $order->orderDetail->arrival_date }}" required>
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -131,9 +130,11 @@
             </tr>
         @endforeach
     </table>
+    @if(method_exists($orders, 'links'))
     <div class="d-flex justify-content-center">
         {{ $orders->links('pagination::bootstrap-4') }}
     </div>
+    @endif
 </div>
 
 <!-- Botón flotante para añadir pedido -->

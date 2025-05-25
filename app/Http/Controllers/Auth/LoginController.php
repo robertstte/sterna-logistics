@@ -27,23 +27,23 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        $remember = $request->has('remember');
+        $user = User::where('email', $request->email)->first();
+        
+        
 
-        if (Auth::attempt($credentials, $remember)) {
-            $request->session()->regenerate();
-
-            $user = Auth::user();
-
-            if ($user->role_id == 1) {
-                return redirect()->route('orders.index');
-            } else {
-                return redirect()->route('ordersUser.index');
-            }
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return back()
+                ->withInput($request->only('email'))
+                ->withErrors(['email' => 'Las credenciales no son válidas.']);
         }
 
-        return back()
-            ->withInput($request->only('email'))
-            ->withErrors(['email' => 'Las credenciales no son válidas.']);
+        Auth::login($user, $request->has('remember'));
+
+        if ($user->role_id == 1) {
+            return redirect()->route('orders.index');
+        } else {
+            return redirect()->route('ordersUser.index');
+        }
     }
     
     public function logout()

@@ -8,7 +8,7 @@ class Customer extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['user_id', 'name', 'email', 'address', 'phone', 'country_id', 'customer_type_id']; 
+    protected $fillable = ['user_id', 'name', 'email', 'address', 'phone', 'country_id', 'customer_type_id', 'plan_id']; 
     
     public function user()
     {
@@ -23,6 +23,11 @@ class Customer extends Model
     public function customerType()
     {
         return $this->belongsTo(CustomerType::class);
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
     }
 
     public function order()

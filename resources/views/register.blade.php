@@ -79,7 +79,6 @@
                                class="access-form-password" 
                                type="password" 
                                placeholder="@lang('translations.access.register.confirm_password')" 
-                               name="password_confirmation" 
                                required>
                         <img id="register-toggle-password-confirm" 
                              onclick="showFormPasswordConfirm()" 
