@@ -10,12 +10,14 @@
                     <li class="nav-item mt-2">
                         <a href="{{ route('orders.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.orders')</a>
                     </li>
-                    <li class="nav-item mt-2">
-                        <a href="customers" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.clients')</a>
-                    </li>
-                    <li class="nav-item mt-2">
-                        <a href="{{ route('invoices.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.invoicing')</a>
-                    </li>
+                    @if (Auth::user()->role_id == 1) 
+                        <li class="nav-item mt-2">
+                            <a href="customers" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.clients')</a>
+                        </li>
+                        <li class="nav-item mt-2">
+                            <a href="{{ route('invoices.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.invoicing')</a>
+                        </li>
+                    @endif
                     <li class="nav-item mt-2">
                         <a href="{{ route('my-account') }}" class="nav-link account btn">@lang('translations.dashboard.dheader.account')</a>
                     </li>

@@ -153,7 +153,11 @@ class OrdersController extends Controller
             'observations' => $request->observations
         ]);
 
-        Mail::to($mail)->send(new OrderUpdate(now()->format('d/m/Y H:i'), $name, $status->status, $status->color, $request->description, $request->arrival_date, $request->observations, $order->id));
+        $user = Auth::user();
+
+        if ($user->notifications) {
+            Mail::to($mail)->send(new OrderUpdate(now()->format('d/m/Y H:i'), $name, $status->status, $status->color, $request->description, $request->arrival_date, $request->observations, $order->id));
+        }
 
         return redirect()->route('orders.index');
     }
