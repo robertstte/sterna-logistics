@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
             $table->string('google_id')->unique()->nullable();
             $table->string('avatar')->nullable();
+            $table->boolean('notifications')->default(true);
             $table->timestamps();
         });
     }
