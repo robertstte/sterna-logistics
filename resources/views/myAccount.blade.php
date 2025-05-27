@@ -172,16 +172,18 @@
 }
 
 .card.border-primary {
-    border-width: 2px;
+    border-width: 2px solid rgb(0, 31, 63);
 }
 
 .card-title {
-    color: #007bff;
+    color: rgb(0, 31, 63);
     font-weight: bold;
 }
 
 .btn {
     width: 100%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 31, 63);
 }
 
 .alert-success {
@@ -194,7 +196,7 @@
 }
 
 .list-group-item.active {
-    background-color: #007bff;
+    background-color: rgb(0, 31, 63);
     border-color: #007bff;
 }
 </style>
