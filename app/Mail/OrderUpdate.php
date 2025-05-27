@@ -16,16 +16,18 @@ class OrderUpdate extends Mailable
     public $date;
     public $name;
     public $status;
+    public $color;
     public $description;
     public $arrival_date;
     public $observations;
     public $order;
 
-    public function __construct($date, $name, $status, $description, $arrival_date, $observations, $order)
+    public function __construct($date, $name, $status, $color, $description, $arrival_date, $observations, $order)
     {
         $this->date = $date;
         $this->name = $name;
         $this->status = $status;
+        $this->color = $color;
         $this->description = $description;
         $this->arrival_date = $arrival_date;
         $this->observations = $observations;
@@ -47,6 +49,7 @@ class OrderUpdate extends Mailable
                 'date' => $this->date,
                 'name' => $this->name,
                 'status' => $this->status,
+                'color' => $this->color,
                 'description' => $this->description,
                 'arrival_date' => $this->arrival_date,
                 'observations' => $this->observations,
