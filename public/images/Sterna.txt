@@ -1,0 +1,19 @@
+pdf factura - robert
+
+recordar mi contraseña y confirmar contraseña (con el ojito) -roberto   ESTA(casi)
+ 
+ajustarlos para que las imagenes no esten gorditas  -robert
+
+ojitos en todos los lugares que haya contraseñas -roberto ESTA
+
+prefrencias -robert
+
+vista dinero (char.js)  -roberto
+
+arreglar lo de el precio por km  -roberto
+
+manejar descuentos segun plan  -roberto
+
+login google (opcional)
+
+recuperar mi cuenta  -robert

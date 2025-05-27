@@ -87,9 +87,10 @@
                              data-eye-off="{{ asset('icons/eye-off.svg') }}" 
                              src="{{ asset('icons/eye.svg') }}">
                     </div>
+                    <p id="password-match-error" class="form-error" style="visibility: hidden;">Las contraseñas no coinciden</p>
                     <div class="row">
                         <div class="col-10">
-                            <button onclick="nextStep(3)" class="access-form-submit">@lang('translations.access.register.next')</button>                        
+                            <button type="submit" class="access-form-submit">@lang('translations.access.register.title')</button>                        
                         </div>
                         <div class="col-2">
                             <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
@@ -97,22 +98,11 @@
                     </div>
                     <p class="form-error">Faltan campos por completar</p>
                 </div>
-                <div class="step step-hidden" id="step-content4">
-                    <div class="row">
-                        <div class="col-10">
-                            <input class="access-form-submit" type="submit" value="@lang('translations.access.register.title')">
-                        </div>
-                        <div class="col-2">
-                            <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
-                        </div>
-                    </div>
-                    <p class="form-error">Faltan campos por completar</p>
-                </div>
+
                 <div class="row d-flex form-step-container">
-                    <div class="col-3"><hr class="form-step-active" id="step1" onclick="goToStep(1)"></div>
-                    <div class="col-3"><hr class="form-step" id="step2" onclick="goToStep(2)"></div>
-                    <div class="col-3"><hr class="form-step" id="step3" onclick="goToStep(3)"></div>
-                    <div class="col-3"><hr class="form-step" id="step4" onclick="goToStep(4)"></div>
+                    <div class="col-4"><hr class="form-step-active" id="step1" onclick="goToStep(1)"></div>
+                    <div class="col-4"><hr class="form-step" id="step2" onclick="goToStep(2)"></div>
+                    <div class="col-4"><hr class="form-step" id="step3" onclick="goToStep(3)"></div>
                 </div>
            
                 <div class="row">
@@ -137,7 +127,7 @@
             selectedStep.classList.remove('step-hidden');
         }
 
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 1; i <= 3; i++) {
             const stepIndicator = document.getElementById('step' + i);
             stepIndicator.classList.remove('form-step-active');
             stepIndicator.classList.add('form-step');
@@ -174,6 +164,8 @@
         }
     }
 
+    // Evitar ir a un step mayor a 3
+    if (step > 3) return;
     showStep(step);
 }
 
@@ -186,8 +178,27 @@ function nextStep(step) {
     const errorMsg = stepContainer.querySelector('.form-error');
     const currentFields = stepContainer.querySelectorAll('input, select');
     let allValid = true;
+    
+    // Validación especial para el paso 3 (contraseñas)
+    if (step === 3) {
+        const password = document.getElementById('register-password').value;
+        const confirmPassword = document.getElementById('register-password-confirm').value;
+        const passwordMatchError = document.getElementById('password-match-error');
+        
+        if (password !== confirmPassword) {
+            passwordMatchError.style.visibility = 'visible';
+            return;
+        } else {
+            passwordMatchError.style.visibility = 'hidden';
+        }
+    }
 
     currentFields.forEach(field => {
+        // No validar el campo de confirmación de contraseña para envío
+        if (field.id === 'register-password-confirm') {
+            return;
+        }
+        
         if (field.type === 'radio') {
             const radios = stepContainer.querySelectorAll(`input[name="${field.name}"]`);
             if (![...radios].some(r => r.checked)) {
@@ -200,8 +211,15 @@ function nextStep(step) {
 
     if (allValid) {
         errorMsg.style.visibility = 'hidden';
+        // Ya no hay más pasos, si estamos en el 3, enviamos el formulario
+        if (step === 3) {
+            // Buscar el botón submit y hacer submit
+            const form = document.querySelector('form');
+            form.requestSubmit();
+            return;
+        }
         const next = step + 1;
-        if (next <= 4) {
+        if (next <= 3) {
             showStep(next);
         }
     } else {
@@ -230,6 +248,22 @@ function nextStep(step) {
                 });
             })
             .catch(error => console.error('Error:', error));
+            
+        // Validación en tiempo real de las contraseñas
+        const passwordField = document.getElementById('register-password');
+        const confirmPasswordField = document.getElementById('register-password-confirm');
+        const passwordMatchError = document.getElementById('password-match-error');
+        
+        function validatePasswordMatch() {
+            if (confirmPasswordField.value && passwordField.value !== confirmPasswordField.value) {
+                passwordMatchError.style.visibility = 'visible';
+            } else {
+                passwordMatchError.style.visibility = 'hidden';
+            }
+        }
+        
+        passwordField.addEventListener('input', validatePasswordMatch);
+        confirmPasswordField.addEventListener('input', validatePasswordMatch);
 
         // Funciones para mostrar/ocultar contraseñas
         window.showFormPassword = function() {
@@ -274,6 +308,21 @@ function nextStep(step) {
             }, 400); 
         });
     }
+    
+    // Eliminar el campo de confirmación de contraseña antes de enviar el formulario
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        // No es necesario eliminar el campo porque no tiene atributo 'name'
+        // Solo verificamos que las contraseñas coincidan antes de enviar
+        const password = document.getElementById('register-password').value;
+        const confirmPassword = document.getElementById('register-password-confirm').value;
+        
+        if (password !== confirmPassword) {
+            e.preventDefault();
+            document.getElementById('password-match-error').style.visibility = 'visible';
+            showStep(3); // Volver al paso de contraseñas
+        }
+    });
 
     showStep(currentStep);
 });

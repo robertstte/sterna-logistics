@@ -65,16 +65,21 @@
                             <form action="{{ route('my-account.password') }}" method="POST">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="current_password" class="form-label">@lang('translations.myAccount.current_password')</label>
-                                    <input type="password" class="form-control" id="current_password" name="current_password" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">@lang('translations.myAccount.new_password')</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password_confirmation" class="form-label">@lang('translations.myAccount.confirm_password')</label>
-                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                                    <div class="mb-3 position-relative">
+                                        <label for="current_password" class="form-label">@lang('translations.myAccount.current_password')</label>
+                                        <input type="password" class="form-control" id="current_password" name="current_password" required>
+                                        <img onclick="togglePasswordVisibility('current_password', this)" class="position-absolute access-form-eye eye-lowered" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                                    </div>
+                                    <div class="mb-3 position-relative">
+                                        <label for="new_password" class="form-label">@lang('translations.myAccount.new_password')</label>
+                                        <input type="password" class="form-control" id="new_password" name="password" required>
+                                        <img onclick="togglePasswordVisibility('new_password', this)" class="position-absolute access-form-eye eye-lowered" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                                    </div>
+                                    <div class="mb-3 position-relative">
+                                        <label for="password_confirmation" class="form-label">@lang('translations.myAccount.confirm_password')</label>
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                                        <img onclick="togglePasswordVisibility('password_confirmation', this)" class="position-absolute access-form-eye eye-lowered" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">@lang('translations.myAccount.change_password_button')</button>
                             </form>
@@ -160,7 +165,28 @@
     </div>
 </div>
 
+<script>
+function togglePasswordVisibility(inputId, eyeIcon) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        eyeIcon.src = eyeIcon.dataset.eyeOff;
+    } else {
+        input.type = 'password';
+        eyeIcon.src = eyeIcon.dataset.eye;
+    }
+}
+</script>
+
 <style>
+.eye-lowered {
+    top: 41px;
+    right: 16px;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
 .card {
     transition: all 0.3s ease;
     border: 1px solid #ddd;
