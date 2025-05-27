@@ -10,8 +10,10 @@ use App\Models\Transport;
 use App\Models\PackageType;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use App\Mail\OrderUpdate;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Traits\ChecksUserRole;
 use Illuminate\Support\Facades\DB;
 
@@ -136,6 +138,11 @@ class OrdersController extends Controller
 
         $order = Order::findOrFail($order_id);
 
+        $name = $order->customer->name;
+        $mail = $order->customer->email;
+
+        $status = Status::findOrFail($request->status);
+
         $order->update([
             'status_id' => $request->status
         ]);
@@ -145,6 +152,12 @@ class OrdersController extends Controller
             'description' => $request->description,
             'observations' => $request->observations
         ]);
+
+        $user = Auth::user();
+
+        if ($user->notifications) {
+            Mail::to($mail)->send(new OrderUpdate(now()->format('d/m/Y H:i'), $name, $status->status, $status->color, $request->description, $request->arrival_date, $request->observations, $order->id));
+        }
 
         return redirect()->route('orders.index');
     }

@@ -101,13 +101,13 @@
                                 @csrf
                                 <div class="mb-3">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="email_notifications" name="email_notifications" {{ Auth::user()->preferences['email_notifications'] ?? false ? 'checked' : '' }}>
+                                        <input type="checkbox" class="form-check-input" id="email_notifications" name="email_notifications" {{ Auth::user()->preferences['email_notifications'] ?? false ? 'checked' : '' }} checked>
                                         <label class="form-check-label" for="email_notifications">@lang('translations.myAccount.email_notifications')</label>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="order_updates" name="order_updates" {{ Auth::user()->preferences['order_updates'] ?? false ? 'checked' : '' }}>
+                                        <input type="checkbox" class="form-check-input" id="order_updates" name="order_updates" {{ Auth::user()->preferences['order_updates'] ?? false ? 'checked' : '' }} checked>
                                         <label class="form-check-label" for="order_updates">@lang('translations.myAccount.order_updates')</label>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                             <h5 class="card-title">{{ $plan->name }}</h5>
                                             <p class="card-text">{{ $plan->description }}</p>
                                             <p class="card-text"><strong>@lang('translations.myAccount.price'): {{ $plan->price }}€</strong></p>
-                                            
+
                                             @if($currentPlan->id === $plan->id)
                                                 <button class="btn btn-primary" disabled>@lang('translations.myAccount.current_plan')</button>
                                             @else
@@ -198,16 +198,18 @@ function togglePasswordVisibility(inputId, eyeIcon) {
 }
 
 .card.border-primary {
-    border-width: 2px;
+    border-width: 2px solid rgb(0, 31, 63);
 }
 
 .card-title {
-    color: #007bff;
+    color: rgb(0, 31, 63);
     font-weight: bold;
 }
 
 .btn {
     width: 100%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 31, 63);
 }
 
 .alert-success {
@@ -220,7 +222,7 @@ function togglePasswordVisibility(inputId, eyeIcon) {
 }
 
 .list-group-item.active {
-    background-color: #007bff;
+    background-color: rgb(0, 31, 63);
     border-color: #007bff;
 }
 </style>

@@ -11,10 +11,10 @@
             <p class="name">Estimado/a {{ $name }}</p>
             <div class="content">
                 <p>Queremos informale que su orden <strong>Nº {{ $order }}</strong> ha cambiado de estado el <strong>{{ $date }}.</strong></p>
-                <p>Descripción: <strong>{{ $description }}</strong></p>
-                <p>Estado: <strong>{{ $status }}</strong></p>
+                <p>Descripción: {{ $description }}</p>
+                <p>Estado: <strong style="color: {{ $color }}">{{ $status }}</strong></p>
                 <p>Fecha llagada prevista: <strong>{{ $arrival_date }}</strong></p>
-                <p>Observaciones: <strong>{{ $observaciones }}</strong></p>
+                <p>Observaciones: <strong>{{ $observations }}</strong></p>
                 <p>Si tienes alguna pregunta o necesitas ayuda, contáctanos en <strong>soporte@sterna.es</strong></p>
                 <p>Atentamente, el quipo de Sterna.</p>
             </div>
