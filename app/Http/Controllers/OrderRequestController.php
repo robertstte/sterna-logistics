@@ -60,6 +60,41 @@ class OrderRequestController extends Controller
             // Establecer el estado como pendiente
             $validated['status'] = 'pending';
             
+            // Calcular distancia y costo
+            $departureLocation = CountryLocation::find($validated['departure_location']);
+            $arrivalLocation = CountryLocation::find($validated['arrival_location']);
+            $originAddress = ($departureLocation && $departureLocation->latitude && $departureLocation->longitude)
+                ? $departureLocation->latitude . ',' . $departureLocation->longitude
+                : ($departureLocation ? $departureLocation->name : '');
+            $destinationAddress = ($arrivalLocation && $arrivalLocation->latitude && $arrivalLocation->longitude)
+                ? $arrivalLocation->latitude . ',' . $arrivalLocation->longitude
+                : ($arrivalLocation ? $arrivalLocation->name : '');
+
+            $distanceService = new \App\Services\DistanceService();
+            $distance = $distanceService->getDistanceKm($originAddress, $destinationAddress);
+            if ($distance === null) {
+                $distance = 0;
+            }
+            $transport = Transport::find($validated['transport_id']);
+            $total_cost = $distance * $transport->cost_per_km;
+
+            // Ajuste por peso
+            $peso = $validated['weight'];
+            if ($peso <= 100) {
+                $total_cost *= 0.8;
+            } elseif ($peso > 1000) {
+                $total_cost *= 1.2;
+            }
+
+            // Descuento por plan del usuario que crea la request
+            $customer = \App\Models\Customer::find($validated['customer_id']);
+            $plan = $customer && $customer->plan ? strtolower($customer->plan->name) : null;
+            if ($plan === 'pymes') {
+                $total_cost *= 0.9;
+            } elseif ($plan === 'empresa') {
+                $total_cost *= 0.8;
+            }
+
             // Crear la solicitud de pedido usando create para mayor simplicidad
             $orderRequest = OrderRequest::create([
                 'customer_id' => $validated['customer_id'],
@@ -74,7 +109,9 @@ class OrderRequestController extends Controller
                 'arrival_date' => $validated['arrival_date'],
                 'description' => $validated['description'],
                 'observations' => $validated['observations'] ?? null,
-                'status' => 'pending'
+                'status' => 'pending',
+                'distance_km' => $distance,
+                'total_cost' => $total_cost
             ]);
             
             // \Log::info('OrderRequest creado:', $orderRequest->toArray());
