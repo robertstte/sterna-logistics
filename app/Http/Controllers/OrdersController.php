@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Traits\ChecksUserRole;
 use Illuminate\Support\Facades\DB;
+use App\Models\CountryLocation;
+use App\Services\DistanceService;
+
 
 class OrdersController extends Controller
 {
@@ -79,13 +82,41 @@ class OrdersController extends Controller
                 'status_id' => 5 // Estado "pendiente"
             ]);
 
-            // Calcular distancia (esto es un placeholder, deberías implementar el cálculo real)
-            $distance = 0;
+            // Obtener direcciones de origen y destino
+            $departureLocation = $request->departure_location ? CountryLocation::find($request->departure_location) : null;
+            $arrivalLocation = $request->arrival_location ? CountryLocation::find($request->arrival_location) : null;
+
+            // Usar nombre o coordenadas según disponibilidad
+            $originAddress = $departureLocation ? ($departureLocation->latitude && $departureLocation->longitude ? $departureLocation->latitude . ',' . $departureLocation->longitude : $departureLocation->name) : '';
+            $destinationAddress = $arrivalLocation ? ($arrivalLocation->latitude && $arrivalLocation->longitude ? $arrivalLocation->latitude . ',' . $arrivalLocation->longitude : $arrivalLocation->name) : '';
+
+            // Calcular distancia con DistanceService
+            $distanceService = new DistanceService();
+            $distance = $distanceService->getDistanceKm($originAddress, $destinationAddress);
+            if ($distance === null) {
+                $distance = 0;
+            }
 
             // Calcular costo total basado en la distancia y el costo por km del transporte
             $transport = Transport::find($request->transport_id);
             $total_cost = $distance * $transport->cost_per_km;
+            // Ajuste por peso
+            $peso = $request->weight;
+            if ($peso <= 100) {
+                $total_cost *= 0.8;
+            } elseif ($peso > 1000) {
+                $total_cost *= 1.2;
+            }
 
+            // Descuento por plan
+            $customer = \App\Models\Customer::find($request->customer_id);
+            $plan = $customer && $customer->plan ? strtolower($customer->plan->name) : null;
+
+            if ($plan === 'pymes') {
+                $total_cost *= 0.9; // 10% descuento
+            } elseif ($plan === 'empresa') {
+                $total_cost *= 0.8; // 20% descuento
+            }
             // Crear los detalles de la orden
             OrderDetail::create([
                 'order_id' => $order->id,

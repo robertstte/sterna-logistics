@@ -283,8 +283,6 @@
     @endif
     @endforeach
 </div>
-@endsection
-
 <style>
     .table > thead {
         --bs-table-color: white;
@@ -292,3 +290,5 @@
         --bs-table-border-color: #dee2e6;
     }
 </style>
+@endsection
+
