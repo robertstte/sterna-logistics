@@ -31,6 +31,7 @@ class InvoiceController extends Controller
             ->with('orderDetail.packageType')
             ->with('orderDetail.originCountry')
             ->with('orderDetail.destinationCountry')
+            ->where('status_id', 3)
             ->paginate(15);
 
         $customers = Customer::orderBy('name')->get();
