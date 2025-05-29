@@ -127,6 +127,8 @@ $(document).ready(function() {
     $('#generateSelectedInvoices').on('click', function() {
         if (selectedOrders.size === 0) return;
 
+        console.log('Selected Orders:', Array.from(selectedOrders)); // Depuración: Verificar los order_ids seleccionados
+
         $.ajax({
             url: '{{ route("invoices.generate") }}',
             method: 'POST',
@@ -134,20 +136,13 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             data: {
-                order_ids: Array.from(selectedOrders)
+                order_id: selectedOrders.values().next().value // Envía solo un ID
             },
             success: function(response) {
-                if (response.success) {
-                    alert('Facturas generadas exitosamente');
-                    // Limpiar selección
-                    selectedOrders.clear();
-                    $('.order-row').removeClass('table-primary');
-                    $('.add-invoice').text('Añadir').removeClass('btn-primary').addClass('btn-outline-primary');
-                    updateGenerateButton();
-                }
+                alert('Factura generada exitosamente');
             },
             error: function(xhr) {
-                alert('Error al generar las facturas');
+                alert('Error al generar la factura');
             }
         });
     });
@@ -155,7 +150,7 @@ $(document).ready(function() {
     // Generar facturas en lote
     $('#bulkInvoiceForm').on('submit', function(e) {
         e.preventDefault();
-        
+
         $.ajax({
             url: '{{ route("invoices.generate-bulk") }}',
             method: 'POST',
@@ -180,4 +175,4 @@ $(document).ready(function() {
 });
 </script>
 @endpush
-@endsection 
+@endsection

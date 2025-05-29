@@ -7,6 +7,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\ChecksUserRole;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
@@ -45,19 +46,23 @@ class InvoiceController extends Controller
             return $this->redirectBasedOnRole();
         }
 
+        if (!$request->has('order_id')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'El campo order_id es obligatorio.'
+            ], 422);
+        }
+
         $request->validate([
             'order_id' => 'required|exists:orders,id',
         ]);
 
-        $order = Order::with(['customer', 'orderDetail'])
-            ->findOrFail($request->order_id);
+        $order = Order::with(['customer', 'orderDetail'])->findOrFail($request->order_id);
 
-        // Aquí iría la lógica para generar la factura
-        // Por ahora solo retornamos los datos del pedido
-        return response()->json([
-            'success' => true,
-            'order' => $order
-        ]);
+        $dompdf = app('dompdf.wrapper');
+        $pdf = $dompdf->loadView('pdf.single', compact('order'));
+
+        return $pdf->download('single_invoice.pdf');
     }
 
     public function generateBulkInvoices(Request $request)
@@ -75,7 +80,7 @@ class InvoiceController extends Controller
         $query = Order::whereBetween('created_at', [
             $request->start_date,
             $request->end_date
-        ]);
+        ])->where('status_id', 3);
 
         if ($request->customer_id) {
             $query->where('customer_id', $request->customer_id);
@@ -84,10 +89,9 @@ class InvoiceController extends Controller
         $orders = $query->with(['customer', 'orderDetail'])
             ->get();
 
-        // Aquí iría la lógica para generar las facturas en lote
-        return response()->json([
-            'success' => true,
-            'orders' => $orders
-        ]);
+        $dompdf = app('dompdf.wrapper');
+        $pdf = $dompdf->loadView('pdf.bulk', compact('orders'));
+
+        return $pdf->download('bulk_invoices.pdf');
     }
 }
