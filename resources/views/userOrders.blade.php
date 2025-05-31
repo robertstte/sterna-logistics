@@ -36,6 +36,19 @@
             <th class="header">@lang('translations.dashboard.table.orders.destination')</th>
             <th class="header">@lang('translations.dashboard.table.orders.date')</th>
         </tr>
+        @if($orders->isEmpty())
+            <tr>
+                <td colspan="7" class="text-center p-5">
+                    <div class="mb-3">
+                        <i class="fas fa-box-open fa-3x text-muted mb-2"></i>
+                        <div class="h5 mb-3">No tienes pedidos confirmados todavía</div>
+                        <a href="{{ route('user.orders') }}" class="btn btn-primary">
+                            <i class="fas fa-plus me-1"></i> Solicitar un nuevo pedido
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        @endif
         @foreach ($orders as $order)
             <tr class="text-center" data-bs-toggle="collapse" data-bs-target="#orderDetail{{ $order->id }}">
                 <td class="body">{{ $loop->iteration }}</td>

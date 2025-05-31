@@ -16,6 +16,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\OrderRequestController;
 use App\Http\Controllers\AdminOrderRequestController;
+use App\Http\Controllers\VentasController;
 
 Route::get('/', function () {
     return view('landing');
@@ -34,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/orderRequests', [AdminOrderRequestController::class, 'index'])->name('admin.orderRequests');
     Route::post('/admin/orderRequests/{id}/approve', [AdminOrderRequestController::class, 'approve'])->name('admin.orderRequests.approve');
     Route::post('/admin/orderRequests/{id}/reject', [AdminOrderRequestController::class, 'reject'])->name('admin.orderRequests.reject');
+
+    // Ruta para el panel de ventas (admin)
+    Route::get('/ventas', [VentasController::class, 'index'])->name('ventas.index');
 
     // Rutas de usuario normal
     Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');
@@ -58,6 +62,12 @@ Route::middleware(['auth'])->group(function () {
     // Rutas para planes
     Route::get('/plans', [PlanController::class, 'showPlans'])->name('plans.show');
     Route::post('/plans/update', [PlanController::class, 'updatePlan'])->name('plans.update');
+
+    // Rutas Redsys
+    Route::post('/redsys/checkout', [\App\Http\Controllers\RedsysController::class, 'checkout'])->name('redsys.checkout');
+    Route::post('/redsys/response', [\App\Http\Controllers\RedsysController::class, 'response'])->name('redsys.response');
+    Route::get('/redsys/success', [\App\Http\Controllers\RedsysController::class, 'success'])->name('redsys.success');
+    Route::get('/redsys/fail', [\App\Http\Controllers\RedsysController::class, 'fail'])->name('redsys.fail');
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

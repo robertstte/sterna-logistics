@@ -69,7 +69,7 @@
         <table class="table table-striped table-hover">
             <thead class="table" >
                 <tr>
-                    <th>ID</th>
+                    
                     <th>Cliente</th>
                     <th>Tipo</th>
                     <th>Origen - Destino</th>
@@ -81,7 +81,7 @@
             <tbody>
                 @forelse($orderRequests as $request)
                 <tr>
-                    <td>{{ $request->id }}</td>
+                    
                     <td>{{ $request->customer->name }}</td>
                     <td>{{ $request->packageType->type }}</td>
                     <td>{{ $request->originCountry->name }} - {{ $request->destinationCountry->name }}</td>
@@ -119,82 +119,68 @@
     @foreach($orderRequests as $request)
     <div class="modal fade" id="detailModal{{ $request->id }}" tabindex="-1" aria-labelledby="detailModalLabel{{ $request->id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailModalLabel{{ $request->id }}">Detalles de Solicitud #{{ $request->id }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content shadow-lg border-0">
+                <div class="modal-header bg-primary text-white" style="background: #163a5c;">
+                    <h5 class="modal-title fw-bold" id="detailModalLabel{{ $request->id }}">
+                        <i class="fas fa-info-circle me-2"></i>Detalles de Solicitud
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
+                <div class="modal-body bg-light" style="background: #f4f8fc;">
+                    <div class="row g-3 align-items-stretch">
                         <div class="col-md-6">
-                            <h6>Información General</h6>
-                            <table class="table table-sm">
-                                <tr>
-                                    <th>Cliente:</th>
-                                    <td>{{ $request->customer->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Tipo de Paquete:</th>
-                                    <td>{{ $request->packageType->type }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Peso:</th>
-                                    <td>{{ $request->weight }} kg</td>
-                                </tr>
-                                <tr>
-                                    <th>Transporte:</th>
-                                    <td>{{ $request->transport->transportType->type }} ({{ $request->transport->license_plate }})</td>
-                                </tr>
-                            </table>
+                            <div class="card shadow-sm border-0 mb-3 h-100">
+                                <div class="card-body">
+                                    <h6 class="fw-bold text-primary mb-2" style="color: #163a5c;">Información General</h6>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Cliente:</span> {{ $request->customer->name }}</li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Tipo de Paquete:</span> {{ $request->packageType->type }}</li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Peso:</span> <span class="badge rounded-pill bg-primary bg-opacity-75">{{ $request->weight }} kg</span></li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Transporte:</span> {{ $request->transport->transportType->type }} <span class="badge bg-light text-primary border ms-1">{{ $request->transport->license_plate }}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <h6>Ubicaciones</h6>
-                            <table class="table table-sm">
-                                <tr>
-                                    <th>Origen:</th>
-                                    <td>{{ $request->originCountry->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Destino:</th>
-                                    <td>{{ $request->destinationCountry->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Ubicación Salida:</th>
-                                    <td>{{ $request->departureLocation->name ?? 'N/A' }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Ubicación Llegada:</th>
-                                    <td>{{ $request->arrivalLocation->name ?? 'N/A' }}</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <h6>Fechas</h6>
-                            <table class="table table-sm">
-                                <tr>
-                                    <th>Fecha de Salida:</th>
-                                    <td>{{ $request->departure_date->format('d/m/Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Fecha de Llegada:</th>
-                                    <td>{{ $request->arrival_date->format('d/m/Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Fecha de Solicitud:</th>
-                                    <td>{{ $request->created_at->format('d/m/Y H:i') }}</td>
-                                </tr>
-                            </table>
+                            <div class="card shadow-sm border-0 mb-3 h-100">
+                                <div class="card-body">
+                                    <h6 class="fw-bold text-primary mb-2" style="color: #163a5c;">Ubicaciones</h6>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Origen:</span> {{ $request->originCountry->name }}</li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Destino:</span> {{ $request->destinationCountry->name }}</li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Salida:</span> {{ $request->departureLocation->name ?? 'N/A' }}</li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Llegada:</span> {{ $request->arrivalLocation->name ?? 'N/A' }}</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <h6>Descripción</h6>
-                            <p>{{ $request->description }}</p>
-                            
-                            @if($request->observations)
-                            <h6>Observaciones</h6>
-                            <p>{{ $request->observations }}</p>
-                            @endif
+                            <div class="card shadow-sm border-0 mb-3 h-100">
+                                <div class="card-body">
+                                    <h6 class="fw-bold text-primary mb-2" style="color: #163a5c;">Fechas</h6>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Salida:</span> <span class="badge bg-primary bg-opacity-75">{{ $request->departure_date->format('d/m/Y') }}</span></li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Llegada:</span> <span class="badge bg-primary bg-opacity-75">{{ $request->arrival_date->format('d/m/Y') }}</span></li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Solicitado el:</span> <span class="badge bg-light text-primary border">{{ $request->created_at->format('d/m/Y H:i') }}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card shadow-sm border-0 mb-3 h-100">
+                                <div class="card-body">
+                                    <h6 class="fw-bold text-primary mb-2" style="color: #163a5c;">Descripción</h6>
+                                    <div class="mb-2">
+                                        <span class="text-dark">{{ $request->description }}</span>
+                                    </div>
+                                    @if($request->observations)
+                                    <h6 class="fw-bold text-primary mb-1 mt-3" style="color: #163a5c;">Observaciones</h6>
+                                    <div>
+                                        <span class="text-dark">{{ $request->observations }}</span>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

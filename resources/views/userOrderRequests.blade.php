@@ -59,7 +59,7 @@
         <table class="table table-striped table-hover">
             <thead class="table">
                 <tr>
-                    <th>@lang('translations.dashboard.table.orders.id')</th>
+                    
                     <th>@lang('translations.dashboard.table.orders.details.package_type')</th>
                     <th>@lang('translations.dashboard.table.orders.origin') - @lang('translations.dashboard.table.orders.destination')</th>
                     <th>@lang('translations.dashboard.table.orders.details.departure_date')</th>
@@ -70,7 +70,7 @@
             <tbody>
                 @forelse($orders as $order)
                 <tr>
-                    <td>{{ $order->id }}</td>
+                    
                     <td>{{ $order->packageType->type }}</td>
                     <td>{{ $order->originCountry->name }} - {{ $order->destinationCountry->name }}</td>
                     <td>{{ $order->departure_date->format('d/m/Y') }}</td>
@@ -102,87 +102,77 @@
     @foreach($orders as $order)
     <div class="modal fade" id="detailModal{{ $order->id }}" tabindex="-1" aria-labelledby="detailModalLabel{{ $order->id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailModalLabel{{ $order->id }}">@lang('translations.dashboard.table.orders.request_details') #{{ $order->id }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content shadow-lg border-0">
+                <div class="modal-header bg-primary text-white" style="background: #163a5c;">
+                    <h5 class="modal-title fw-bold" id="detailModalLabel{{ $order->id }}">
+                        <i class="fas fa-info-circle me-2"></i>@lang('translations.dashboard.table.orders.request_details')
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
+                <div class="modal-body bg-light" style="background: #f4f8fc;">
+                    <div class="row g-3 align-items-stretch">
                         <div class="col-md-6">
-                            <h6>@lang('translations.dashboard.table.orders.general_info')</h6>
-                            <table class="table table-sm">
-                                <tr>
-                                    <th>@lang('translations.dashboard.table.orders.details.package_type'):</th>
-                                    <td>{{ $order->packageType->type }}</td>
-                                </tr>
-                                <tr>
-                                    <th>@lang('translations.dashboard.table.orders.details.weight'):</th>
-                                    <td>{{ $order->weight }} kg</td>
-                                </tr>
-                                <tr>
-                                    <th>Transporte:</th>
-                                    <td>{{ $order->transport->transportType->type }} ({{ $order->transport->license_plate }})</td>
-                                </tr>
-                            </table>
+                            <div class="card shadow-sm border-0 mb-3 h-100">
+                                <div class="card-body">
+                                    <h6 class="fw-bold text-primary mb-2" style="color: #163a5c;">@lang('translations.dashboard.table.orders.general_info')</h6>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">@lang('translations.dashboard.table.orders.details.package_type'):</span> {{ $order->packageType->type }}</li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">@lang('translations.dashboard.table.orders.details.weight'):</span> <span class="badge rounded-pill bg-primary bg-opacity-75">{{ $order->weight }} kg</span></li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Transporte:</span> {{ $order->transport->transportType->type }} <span class="badge bg-light text-primary border ms-1">{{ $order->transport->license_plate }}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <h6>Ubicaciones</h6>
-                            <table class="table table-sm">
-                                <tr>
-                                    <th>Origen:</th>
-                                    <td>{{ $order->originCountry->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Destino:</th>
-                                    <td>{{ $order->destinationCountry->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Ubicación Salida:</th>
-                                    <td>{{ $order->departureLocation->name ?? 'N/A' }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Ubicación Llegada:</th>
-                                    <td>{{ $order->arrivalLocation->name ?? 'N/A' }}</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <h6>Fechas</h6>
-                            <table class="table table-sm">
-                                <tr>
-                                    <th>Fecha de Salida:</th>
-                                    <td>{{ $order->departure_date->format('d/m/Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Fecha de Llegada:</th>
-                                    <td>{{ $order->arrival_date->format('d/m/Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Fecha de Solicitud:</th>
-                                    <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
-                                </tr>
-                            </table>
+                            <div class="card shadow-sm border-0 mb-3 h-100">
+                                <div class="card-body">
+                                    <h6 class="fw-bold text-primary mb-2" style="color: #163a5c;">Ubicaciones</h6>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Origen:</span> {{ $order->originCountry->name }}</li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Destino:</span> {{ $order->destinationCountry->name }}</li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Salida:</span> {{ $order->departureLocation->name ?? 'N/A' }}</li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Llegada:</span> {{ $order->arrivalLocation->name ?? 'N/A' }}</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <h6>Descripción</h6>
-                            <p>{{ $order->description }}</p>
-                            
-                            @if($order->observations)
-                            <h6>Observaciones</h6>
-                            <p>{{ $order->observations }}</p>
-                            @endif
+                            <div class="card shadow-sm border-0 mb-3 h-100">
+                                <div class="card-body">
+                                    <h6 class="fw-bold text-primary mb-2" style="color: #163a5c;">Fechas</h6>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Salida:</span> <span class="badge bg-primary bg-opacity-75">{{ $order->departure_date->format('d/m/Y') }}</span></li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Llegada:</span> <span class="badge bg-primary bg-opacity-75">{{ $order->arrival_date->format('d/m/Y') }}</span></li>
+                                        <li class="list-group-item px-0 py-1"><span class="fw-semibold">Solicitado el:</span> <span class="badge bg-light text-primary border">{{ $order->created_at->format('d/m/Y H:i') }}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card shadow-sm border-0 mb-3 h-100">
+                                <div class="card-body">
+                                    <h6 class="fw-bold text-primary mb-2" style="color: #163a5c;">Descripción</h6>
+                                    <div class="mb-2">
+                                        <span class="text-dark">{{ $order->description }}</span>
+                                    </div>
+                                    @if($order->observations)
+                                    <h6 class="fw-bold text-primary mb-1 mt-3" style="color: #163a5c;">Observaciones</h6>
+                                    <div>
+                                        <span class="text-dark">{{ $order->observations }}</span>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
+                   
                     <div class="row mt-3">
                         <div class="col-12">
                             <div class="alert 
                                 @if($order->status == 'pending') alert-warning
                                 @elseif($order->status == 'approved') alert-success
                                 @elseif($order->status == 'rejected') alert-danger
-                                @endif">
+                                @endif shadow-sm">
                                 <strong>Estado:</strong> 
                                 @if($order->status == 'pending')
                                     Pendiente de aprobación
@@ -198,6 +188,42 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
+                <style>
+                    .modal-content {
+                        border-radius: 1.1rem;
+                        box-shadow: 0 8px 32px rgba(22,58,92,0.15), 0 4px 12px rgba(22,58,92,0.10);
+                    }
+                    .modal-header {
+                        border-radius: 1.1rem 1.1rem 0 0;
+                        border-bottom: 1px solid #e3eaf2;
+                    }
+                    .modal-body {
+                        border-radius: 0 0 1.1rem 1.1rem;
+                    }
+                    .card {
+                        background: #fff;
+                        border-radius: 1rem;
+                        border: none;
+                        box-shadow: 0 2px 8px rgba(22,58,92,0.07);
+                    }
+                    .list-group-item {
+                        background: transparent;
+                        border: none;
+                        padding-left: 0;
+                        padding-right: 0;
+                    }
+                    .fw-semibold { font-weight: 500; }
+                    .text-primary { color: #163a5c !important; }
+                    .badge.bg-primary {
+                        background: #1c5ca8 !important;
+                        color: #fff !important;
+                    }
+                    .badge.bg-light {
+                        background: #eaf1fa !important;
+                        color: #163a5c !important;
+                        border: 1px solid #bcd0e8;
+                    }
+                </style>
             </div>
         </div>
     </div>
@@ -437,8 +463,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-@endsection
-
 <style>
     .table > thead {
         --bs-table-color: white;
@@ -446,3 +470,6 @@ document.addEventListener('DOMContentLoaded', function() {
         --bs-table-border-color: #dee2e6;
     }
 </style>
+@endsection
+
+

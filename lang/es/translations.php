@@ -137,7 +137,8 @@ return [
     "dashboard" => [
         "dheader" => [
             "orders" => "Ordenes",
-            "clients" => "Clientes",
+            'clients' => 'Clientes',
+            'ventas' => 'Ventas',
             "invoicing" => "Facturación",
             "account" => "Cuenta",
             "logout" => "Cerrar sesión"
@@ -234,6 +235,25 @@ return [
         "perishables" => "Perecedero",
         "sensible" => "Sensible",
         "textile" => "Textil"
+    ],
+    "plans" => [
+        "title" => "Planes de Suscripción",
+        "subtitle" => "Elige el plan que mejor se adapte a tus necesidades",
+        "price" => "Precio",
+        "current_plan" => "Plan Actual",
+        "change_to_plan" => "Cambiar a este plan",
+        'price' => 'Precio',
+        'download_limit' => 'Límite de descargas',
+        'per_month' => 'mes',
+        'discount' => 'Descuento',
+        'switch_plan' => 'Cambiar plan',
+        'basic_support' => 'Soporte básico por email',
+        'reports_priority' => 'Acceso a reportes y soporte prioritario',
+        'unlimited' => 'Ilimitadas',
+        'exclusive_promo' => 'Promoción exclusiva',
+        'enterprise_services' => 'Soporte 24/7, gestor personal e integración avanzada',
+        'default_plan' => 'Plan por defecto',
+        'choose_plan' => 'Elegir plan',
     ],
     "status" => [
         "cancelled" => "Cancelado",

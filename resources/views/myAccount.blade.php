@@ -126,37 +126,84 @@
 
                 <!-- Planes -->
                 <div class="tab-pane fade" id="plans">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">@lang('translations.myAccount.subscription_plans')</h5>
-                            @if(session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@lang('translations.myAccount.subscription_plans')</h5>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @php $lang = App::getLocale(); @endphp
+            <div class="row align-items-center">
+                <div class="col-md-3 text-center">
+    {{-- Icono representativo del plan en caja especial si es Free --}}
+    @if($currentPlan->id == 1)
+        <div class="card border-primary shadow-sm mb-2" style="background: #f8fafc; border-radius: 1rem;">
+            <div class="card-body p-3">
+                <div class="plan-icon mb-2" style="font-size:3rem;"><i class="fas fa-star"></i></div>
+                <h5 class="mt-2 mb-0 text-primary">@if($lang == 'es') Gratuito @else Free @endif</h5>
+            </div>
+        </div>
+    @elseif($currentPlan->id == 2)
+        <div class="plan-icon"><i class="fas fa-briefcase"></i></div>
+        <h5 class="mt-2">@if($lang == 'es') Pymes @else Pymes @endif</h5>
+    @elseif($currentPlan->id == 3)
+        <div class="plan-icon"><i class="fas fa-gem"></i></div>
+        <h5 class="mt-2">@if($lang == 'es') Grandes Empresas @else Big Business @endif</h5>
+    @endif
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-2">
+                        @if($lang == 'es')
+                            @if($currentPlan->id == 1)
+                                Ideal para comenzar y probar la plataforma.
+                            @elseif($currentPlan->id == 2)
+                                Para profesionales que requieren más descargas y reportes.
+                            @elseif($currentPlan->id == 3)
+                                Solución completa para empresas con necesidades avanzadas.
                             @endif
-                            <div class="row">
-                                @foreach($plans as $plan)
-                                <div class="col-md-4 mb-4">
-                                    <div class="card h-100 {{ $currentPlan->id === $plan->id ? 'border-primary' : '' }}">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $plan->name }}</h5>
-                                            <p class="card-text">{{ $plan->description }}</p>
-                                            <p class="card-text"><strong>@lang('translations.myAccount.price'): {{ $plan->price }}€</strong></p>
-
-                                            @if($currentPlan->id === $plan->id)
-                                                <button class="btn btn-primary" disabled>@lang('translations.myAccount.current_plan')</button>
-                                            @else
-                                                <form action="{{ route('my-account.plan') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="plan_id" value="{{ $plan->id }}">
-                                                    <button type="submit" class="btn btn-outline-primary">@lang('translations.myAccount.change_to_plan')</button>
-                                                </form>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
+                        @else
+                            @if($currentPlan->id == 1)
+                                Ideal to start and test the platform.
+                            @elseif($currentPlan->id == 2)
+                                For professionals who need more downloads and reports.
+                            @elseif($currentPlan->id == 3)
+                                Complete solution for companies with advanced needs.
+                            @endif
+                        @endif
+                    </p>
+                    <p class="mb-2"><strong>@lang('translations.plans.price'): {{ $currentPlan->price }}€</strong></p>
+                    {{-- Información extra de cada plan --}}
+                    @if($currentPlan->id == 1)
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item">@lang('translations.plans.download_limit'): <strong>5/@lang('translations.plans.per_month')</strong></li>
+                            <li class="list-group-item">@lang('translations.plans.discount'): <strong>0%</strong></li>
+                            <li class="list-group-item"><i class="fas fa-envelope"></i> @lang('translations.plans.basic_support')</li>
+                        </ul>
+                    @elseif($currentPlan->id == 2)
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item">@lang('translations.plans.download_limit'): <strong>100/@lang('translations.plans.per_month')</strong></li>
+                            <li class="list-group-item">@lang('translations.plans.discount'): <strong>3%</strong></li>
+                            <li class="list-group-item"><i class="fas fa-chart-line"></i> @lang('translations.plans.reports_priority')</li>
+                        </ul>
+                    @elseif($currentPlan->id == 3)
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item">@lang('translations.plans.download_limit'): <strong>@lang('translations.plans.unlimited')</strong></li>
+                            <li class="list-group-item">@lang('translations.plans.discount'): <span style="color: #dc3545;"><s>7%</s></span> <strong>10%</strong> <span class="badge bg-success">@lang('translations.plans.exclusive_promo')</span></li>
+                            <li class="list-group-item"><i class="fas fa-headset"></i> @lang('translations.plans.enterprise_services')</li>
+                        </ul>
+                    @endif
+                </div>
+                <div class="col-md-3 text-end">
+                    <a href="{{ route('plans.show') }}" class="btn btn-outline-primary btn-custom mt-3">
+                        @lang('translations.plans.switch_plan')
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                         </div>
                     </div>
                 </div>

@@ -31,6 +31,11 @@
                         <a href="{{ route('customers.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.clients')</a>
                     </li>
                     @endif
+                    @if(Auth::user()->role_id === 1)
+                    <li class="nav-item mt-2">
+                        <a href="{{ route('ventas.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.ventas')</a>
+                    </li>
+                    @endif
                     <li class="nav-item mt-2">
                         <a href="{{ route('invoices.index') }}" class="nav-link nav-link-dheader">@lang('translations.dashboard.dheader.invoicing')</a>
                     </li>

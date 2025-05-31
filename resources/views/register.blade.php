@@ -21,6 +21,9 @@
                 <div class="step" id="step-content1">
                     <input class="access-form-name" type="text" placeholder="@lang('translations.access.register.name')" name="name" required>
                     <input class="access-form-register-email" type="email" placeholder="@lang('translations.access.register.email')" name="email" required>
+@if($errors->has('email'))
+    <span class="form-error" style="display:block;visibility:visible;">{{ $errors->first('email') }}</span>
+@endif
                     <div class="row w-100">
                         <div class="col-6 d-flex justify-content-start access-form-customer-type">
                             <input class="access-form-customer-type-radio" value="2" type="radio" name="customerType">

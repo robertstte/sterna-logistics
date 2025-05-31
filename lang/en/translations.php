@@ -138,7 +138,8 @@ return [
     "dashboard" => [
         "dheader" => [
             "orders" => "Orders",
-            "clients" => "Clients",
+            'clients' => 'Clients',
+            'ventas' => 'Sales',
             "invoicing" => "Invoicing",
             "account" => "Account",
             "logout" => "Logout"
@@ -329,6 +330,25 @@ return [
         "mail" => "Mail",
         "instagram" => "Instagram",
         "facebook" => "Facebook"
+    ],
+    "plans" => [
+        "title" => "Plan Subscription",
+        "subtitle" => "Choose the plan that best suits your needs",
+        "price" => "Price",
+        "current_plan" => "Current Plan",
+        "change_to_plan" => "Change to this plan",
+        'price' => 'Price',
+        'download_limit' => 'Download limit',
+        'per_month' => 'month',
+        'discount' => 'Discount',
+        'switch_plan' => 'Change plan',
+        'basic_support' => 'Basic email support',
+        'reports_priority' => 'Reports access & priority support',
+        'unlimited' => 'Unlimited',
+        'exclusive_promo' => 'Exclusive promo',
+        'enterprise_services' => '24/7 support, account manager & advanced integration',
+        'default_plan' => 'Default plan',
+        'choose_plan' => 'Choose plan',
     ],
     "myAccount" => [
         "title" => "My Account",
