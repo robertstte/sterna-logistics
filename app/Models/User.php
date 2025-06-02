@@ -19,9 +19,10 @@ class User extends Authenticatable
         'role_id',
         'google_id',
         'avatar',
-        'notifications'
+        'notifications',
+        'lang'
     ];
-    
+
     protected $hidden = [
         'password',
         'remember_token',

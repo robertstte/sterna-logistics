@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/orders', [OrdersController::class, 'store'])->name('orders.store');
     Route::get('/api/countries/{country}/locations', [CountryLocationController::class, 'getLocations']);
     Route::get('/customers', [CustomersController::class, 'index'])->name('customers.index');
-    
+
     // Rutas para solicitudes de pedidos (admin)
     Route::get('/admin/orderRequests', [AdminOrderRequestController::class, 'index'])->name('admin.orderRequests');
     Route::post('/admin/orderRequests/{id}/approve', [AdminOrderRequestController::class, 'approve'])->name('admin.orderRequests.approve');
@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Rutas de usuario normal
     Route::get('/ordersUser', [UserOrdersController::class, 'index'])->name('ordersUser.index');
-    
+
     // Rutas para solicitudes de pedidos
     Route::get('/user/orders', [OrderRequestController::class, 'index'])->name('user.orders');
     Route::get('/order/request', [OrderRequestController::class, 'create'])->name('order.request.create');

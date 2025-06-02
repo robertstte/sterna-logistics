@@ -124,9 +124,14 @@ $(document).ready(function() {
     });
 
     // Generar facturas seleccionadas
+    // Generar facturas seleccionadas
     $('#generateSelectedInvoices').on('click', function() {
         if (selectedOrders.size === 0) return;
 
+        // Convertir el Set a un Array
+        const orderIds = Array.from(selectedOrders);
+
+        // Enviar todos los IDs seleccionados
         $.ajax({
             url: '{{ route("invoices.generate") }}',
             method: 'POST',
@@ -134,20 +139,29 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             data: {
-                order_ids: Array.from(selectedOrders)
+                order_ids: orderIds // Envía todos los IDs seleccionados
             },
-            success: function(response) {
-                if (response.success) {
-                    alert('Facturas generadas exitosamente');
-                    // Limpiar selección
-                    selectedOrders.clear();
-                    $('.order-row').removeClass('table-primary');
-                    $('.add-invoice').text('Añadir').removeClass('btn-primary').addClass('btn-outline-primary');
-                    updateGenerateButton();
+            xhrFields: {
+                responseType: 'blob' // Esperar una respuesta de tipo blob (PDF)
+            },
+            success: function(blob, status, xhr) {
+                const disposition = xhr.getResponseHeader('Content-Disposition');
+                let filename = 'invoices.pdf';
+                if (disposition && disposition.indexOf('filename=') !== -1) {
+                    filename = disposition.split('filename=')[1].replace(/"/g, '');
                 }
+
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
             },
             error: function(xhr) {
-                alert('Error al generar las facturas');
+                alert('Error al generar la factura');
             }
         });
     });
@@ -155,22 +169,38 @@ $(document).ready(function() {
     // Generar facturas en lote
     $('#bulkInvoiceForm').on('submit', function(e) {
         e.preventDefault();
-        
+
+        const formData = {
+            start_date: $('#start_date').val(),
+            end_date: $('#end_date').val(),
+            customer_id: $('#customer_id').val()
+        };
+
         $.ajax({
             url: '{{ route("invoices.generate-bulk") }}',
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            data: {
-                start_date: $('#start_date').val(),
-                end_date: $('#end_date').val(),
-                customer_id: $('#customer_id').val()
+            data: formData,
+            xhrFields: {
+                responseType: 'blob'
             },
-            success: function(response) {
-                if (response.success) {
-                    alert('Facturas generadas exitosamente');
+            success: function(blob, status, xhr) {
+                const disposition = xhr.getResponseHeader('Content-Disposition');
+                let filename = 'bulk_invoices.pdf';
+                if (disposition && disposition.indexOf('filename=') !== -1) {
+                    filename = disposition.split('filename=')[1].replace(/"/g, '');
                 }
+
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
             },
             error: function(xhr) {
                 alert('Error al generar las facturas');
@@ -180,4 +210,4 @@ $(document).ready(function() {
 });
 </script>
 @endpush
-@endsection 
+@endsection

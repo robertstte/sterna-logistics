@@ -7,6 +7,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\ChecksUserRole;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
@@ -31,6 +32,7 @@ class InvoiceController extends Controller
             ->with('orderDetail.packageType')
             ->with('orderDetail.originCountry')
             ->with('orderDetail.destinationCountry')
+            ->where('status_id', 3)
             ->paginate(15);
 
         $customers = Customer::orderBy('name')->get();
@@ -45,18 +47,15 @@ class InvoiceController extends Controller
         }
 
         $request->validate([
-            'order_id' => 'required|exists:orders,id',
+            'order_ids' => 'required|array',
+            'order_ids.*' => 'exists:orders,id',
         ]);
 
-        $order = Order::with(['customer', 'orderDetail'])
-            ->findOrFail($request->order_id);
+        $orders = Order::with(['customer', 'orderDetail'])->whereIn('id', $request->order_ids)->get();
 
-        // Aquí iría la lógica para generar la factura
-        // Por ahora solo retornamos los datos del pedido
-        return response()->json([
-            'success' => true,
-            'order' => $order
-        ]);
+        $pdf = Pdf::loadView('pdf.single', ['orders' => $orders]);
+
+        return $pdf->download('single_invoices_' . date('Y-m-d') . '.pdf');
     }
 
     public function generateBulkInvoices(Request $request)
@@ -74,19 +73,16 @@ class InvoiceController extends Controller
         $query = Order::whereBetween('created_at', [
             $request->start_date,
             $request->end_date
-        ]);
+        ])->where('status_id', 3);
 
         if ($request->customer_id) {
             $query->where('customer_id', $request->customer_id);
         }
 
-        $orders = $query->with(['customer', 'orderDetail'])
-            ->get();
+        $orders = $query->with(['customer', 'orderDetail'])->get();
 
-        // Aquí iría la lógica para generar las facturas en lote
-        return response()->json([
-            'success' => true,
-            'orders' => $orders
-        ]);
+        $pdf = Pdf::loadView('pdf.bulk', ['orders' => $orders, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
+
+        return $pdf->download('bulk_invoices_' . date('Y-m-d') . '.pdf');
     }
 }
