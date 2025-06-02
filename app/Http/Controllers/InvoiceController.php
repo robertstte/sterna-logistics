@@ -7,7 +7,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\ChecksUserRole;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
@@ -59,8 +59,7 @@ class InvoiceController extends Controller
 
         $order = Order::with(['customer', 'orderDetail'])->findOrFail($request->order_id);
 
-        $dompdf = app('dompdf.wrapper');
-        $pdf = $dompdf->loadView('pdf.single', compact('order'));
+        $pdf = Pdf::loadView('pdf.single', ['order' => $order]);
 
         return $pdf->download('single_invoice.pdf');
     }
@@ -86,12 +85,10 @@ class InvoiceController extends Controller
             $query->where('customer_id', $request->customer_id);
         }
 
-        $orders = $query->with(['customer', 'orderDetail'])
-            ->get();
+        $orders = $query->with(['customer', 'orderDetail'])->get();
 
-        $dompdf = app('dompdf.wrapper');
-        $pdf = $dompdf->loadView('pdf.bulk', compact('orders'));
+        $pdf = Pdf::loadView('pdf.bulk', ['orders' => $orders, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
 
-        return $pdf->download('bulk_invoices.pdf');
+        return $pdf->download('bulk_invoices_' . date('Y-m-d') . '.pdf');
     }
 }
