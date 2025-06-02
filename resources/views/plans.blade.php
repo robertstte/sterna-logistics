@@ -100,21 +100,41 @@
     </ul>
 @endif
                             
-                        <!--     @if($currentPlan->id === $plan->id)
-    <button class="btn btn-primary btn-custom mt-auto w-100 mb-2" disabled>@lang('translations.plans.default_plan')</button>
-@elseif($plan->id == 1)
-    <form class="mt-auto w-100">
-        <button type="button" class="btn btn-outline-secondary btn-custom mb-2" disabled>@lang('translations.plans.choose_plan')</button>
-    </form>
+                      @php
+    // This flag should ideally be passed from your controller (e.g., PlanController@showPlans).
+    // It indicates if the user has just registered and is on the default plan.
+    // If not passed, it defaults to false, and the 'Default Plan' specific text might not appear as intended.
+    $isNewlyRegistered = $isNewlyRegistered ?? false;
+@endphp
+
+@if($isNewlyRegistered && isset($currentPlan) && $currentPlan->id == 1 && $plan->id == 1)
+    {{-- User is newly registered AND their current plan is the default free plan (ID 1) AND this card is for the free plan --}}
+    <button class="btn btn-primary btn-custom mt-auto w-100 mb-2" disabled>@lang('translations.plans.default_plan', [], $lang)</button>
+@elseif(isset($currentPlan) && $currentPlan->id === $plan->id)
+    {{-- This is the user's current plan (and not the "newly registered default" case) --}}
+    {{-- IMPORTANT: Ensure you add 'translations.plans.selected_plan' to your language files (e.g., resources/lang/en/translations.php and resources/lang/es/translations.php) --}}
+    <button class="btn btn-success btn-custom mt-auto w-100 mb-2" disabled>@lang('translations.plans.selected_plan', [], $lang)</button>
 @else
-    <form action="{{ route('redsys.checkout') }}" method="POST" class="mt-auto w-100">
-        @csrf
-        <input type="hidden" name="plan_id" value="{{ $plan->id }}">
-        <input type="hidden" name="amount" value="{{ $plan->price }}">
-        <input type="hidden" name="plan_name" value="{{ $lang == 'es' ? ($plan->id == 2 ? 'Pymes' : 'Grandes Empresas') : ($plan->id == 2 ? 'Pymes' : 'Big Business') }}">
-        <button type="submit" class="btn btn-outline-primary btn-custom mb-2">@lang('translations.plans.choose_plan')</button>
-    </form>
-@endif -->
+    {{-- This is not the user's current plan, so they can choose it --}}
+    @if($plan->id == 1)
+        {{-- This is the Free Plan (ID 1) and it's not their current plan --}}
+        <form action="{{ route('plans.update') }}" method="POST" class="mt-auto w-100">
+            @csrf
+            <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+            {{-- This route should handle direct plan update to free without payment (uses PlanController@updatePlan) --}}
+            <button type="submit" class="btn btn-outline-primary btn-custom mb-2">@lang('translations.plans.choose_plan', [], $lang)</button>
+        </form>
+    @else
+        {{-- This is a Paid Plan and it's not their current plan --}}
+        <form action="{{ route('stripe.checkout') }}" method="POST" class="mt-auto w-100">
+            @csrf
+            <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+            <input type="hidden" name="amount" value="{{ $plan->price }}">
+            <input type="hidden" name="plan_name" value="{{ $lang == 'es' ? ($plan->id == 2 ? 'Pymes' : 'Grandes Empresas') : ($plan->id == 2 ? 'Pymes' : 'Big Business') }}">
+            <button type="submit" class="btn btn-outline-primary btn-custom mb-2">@lang('translations.plans.choose_plan', [], $lang)</button>
+        </form>
+    @endif
+@endif 
                         </div>
                     </div>
                 </div>

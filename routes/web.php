@@ -17,6 +17,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\OrderRequestController;
 use App\Http\Controllers\AdminOrderRequestController;
 use App\Http\Controllers\VentasController;
+use App\Http\Controllers\StripePaymentController;
 
 Route::get('/', function () {
     return view('landing');
@@ -64,10 +65,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/plans/update', [PlanController::class, 'updatePlan'])->name('plans.update');
 
     // Rutas Redsys
-    Route::post('/redsys/checkout', [\App\Http\Controllers\RedsysController::class, 'checkout'])->name('redsys.checkout');
-    Route::post('/redsys/response', [\App\Http\Controllers\RedsysController::class, 'response'])->name('redsys.response');
-    Route::get('/redsys/success', [\App\Http\Controllers\RedsysController::class, 'success'])->name('redsys.success');
-    Route::get('/redsys/fail', [\App\Http\Controllers\RedsysController::class, 'fail'])->name('redsys.fail');
+   Route::get('/stripe', [StripePaymentController::class, 'showForm'])->name('stripe.checkout');
+   Route::post('/stripe', [StripePaymentController::class, 'processPayment'])->name('stripe.post');
+   Route::get('/payment/success', [StripePaymentController::class, 'handlePaymentSuccess'])->name('stripe.success');
+
+Route::get('/pago-cancelado', function () {
+    return 'Pago cancelado';
+})->name('stripe.cancel');
+
+
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

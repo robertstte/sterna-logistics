@@ -349,6 +349,7 @@ return [
         'enterprise_services' => '24/7 support, account manager & advanced integration',
         'default_plan' => 'Default plan',
         'choose_plan' => 'Choose plan',
+        'selected_plan' => 'Selected Plan',
     ],
     "myAccount" => [
         "title" => "My Account",

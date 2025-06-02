@@ -254,6 +254,7 @@ return [
         'enterprise_services' => 'Soporte 24/7, gestor personal e integración avanzada',
         'default_plan' => 'Plan por defecto',
         'choose_plan' => 'Elegir plan',
+        'selected_plan' => 'Plan Seleccionado',
     ],
     "status" => [
         "cancelled" => "Cancelado",
