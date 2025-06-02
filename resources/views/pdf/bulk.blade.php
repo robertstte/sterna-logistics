@@ -45,7 +45,7 @@
             </tfoot>
         </table>
     </main>
-    <p class="footer-text">Todas las facturas se libres de IVA.</p>
+    <p class="footer-text">Todas las facturas se generan exentas de IVA.</p>
 </body>
 </html>
 
@@ -71,6 +71,7 @@
         top: 10px;
         right: 25px;
         font-size: 16px;
+        font-weight: bold;
         font-family: Arial, sans-serif;
     }
     .range {

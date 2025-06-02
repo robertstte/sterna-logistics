@@ -124,11 +124,14 @@ $(document).ready(function() {
     });
 
     // Generar facturas seleccionadas
+    // Generar facturas seleccionadas
     $('#generateSelectedInvoices').on('click', function() {
         if (selectedOrders.size === 0) return;
 
-        console.log('Selected Orders:', Array.from(selectedOrders)); // Depuración: Verificar los order_ids seleccionados
+        // Convertir el Set a un Array
+        const orderIds = Array.from(selectedOrders);
 
+        // Enviar todos los IDs seleccionados
         $.ajax({
             url: '{{ route("invoices.generate") }}',
             method: 'POST',
@@ -136,10 +139,26 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             data: {
-                order_id: selectedOrders.values().next().value // Envía solo un ID
+                order_ids: orderIds // Envía todos los IDs seleccionados
             },
-            success: function(response) {
-                alert('Factura generada exitosamente');
+            xhrFields: {
+                responseType: 'blob' // Esperar una respuesta de tipo blob (PDF)
+            },
+            success: function(blob, status, xhr) {
+                const disposition = xhr.getResponseHeader('Content-Disposition');
+                let filename = 'invoices.pdf';
+                if (disposition && disposition.indexOf('filename=') !== -1) {
+                    filename = disposition.split('filename=')[1].replace(/"/g, '');
+                }
+
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
             },
             error: function(xhr) {
                 alert('Error al generar la factura');

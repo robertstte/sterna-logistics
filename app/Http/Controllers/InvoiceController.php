@@ -46,22 +46,16 @@ class InvoiceController extends Controller
             return $this->redirectBasedOnRole();
         }
 
-        if (!$request->has('order_id')) {
-            return response()->json([
-                'success' => false,
-                'message' => 'El campo order_id es obligatorio.'
-            ], 422);
-        }
-
         $request->validate([
-            'order_id' => 'required|exists:orders,id',
+            'order_ids' => 'required|array',
+            'order_ids.*' => 'exists:orders,id',
         ]);
 
-        $order = Order::with(['customer', 'orderDetail'])->findOrFail($request->order_id);
+        $orders = Order::with(['customer', 'orderDetail'])->whereIn('id', $request->order_ids)->get();
 
-        $pdf = Pdf::loadView('pdf.single', ['order' => $order]);
+        $pdf = Pdf::loadView('pdf.single', ['orders' => $orders]);
 
-        return $pdf->download('single_invoice.pdf');
+        return $pdf->download('single_invoices_' . date('Y-m-d') . '.pdf');
     }
 
     public function generateBulkInvoices(Request $request)
