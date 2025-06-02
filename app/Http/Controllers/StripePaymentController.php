@@ -19,7 +19,20 @@ class StripePaymentController extends Controller
     public function processPayment(Request $request)
     {
         Stripe::setApiKey(config('services.stripe.secret'));
-    
+        $user = Auth::user();
+        $username = $user->username;
+        switch ($request->plan_id) {
+            case 1:
+                $name = "Plan free (no se como has llegado hasta aquí)";
+                break;
+            case 2:
+                $name = "Plan para Pymes y pequeños negocios";
+                break;
+            case 3:
+                $name = "Plan para grandes empresas";
+                break;
+            
+        }
         $checkoutSession = Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
@@ -27,6 +40,7 @@ class StripePaymentController extends Controller
                     'currency' => 'eur',
                     'product_data' => [
                         'name' => 'Cambio de plan',
+                        'description' => $name,
                     ],
                     'unit_amount' => $request->amount * 100,
                 ],
