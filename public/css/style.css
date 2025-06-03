@@ -222,7 +222,7 @@ html {
 }
 
 .localization-form {
-    margin: 30px 20px 30px 20px;
+    margin: 200px 20px 30px 20px;
 }
 
 .localization-form-text {
@@ -481,7 +481,7 @@ hr {
         padding: 20px;
         max-width: 95%;
     }
-    
+
     .features-card-dark {
         height: auto;
         padding: 20px;
@@ -491,7 +491,7 @@ hr {
     .features-card-title {
         font-size: 20px;
     }
-    
+
     .features-card-title-dark {
         font-size: 20px;
     }
@@ -864,7 +864,7 @@ hr {
     .access-form-title {
         font-size: 28px;
     }
-    
+
     .access-form-recovery {
         margin-top: 30px;
         margin-right: 10px;
@@ -1021,13 +1021,13 @@ hr {
 }
 
 .pagination .page-link {
-    display: flex; 
+    display: flex;
     font-size: 16px;
     padding: 8px 16px;
     border-radius: 8px;
-    align-items: center; 
+    align-items: center;
     text-decoration: none;
-    justify-content: center; 
+    justify-content: center;
     color: rgb(0, 31, 63);
     border: 2px solid rgb(0, 31, 63);
 }
@@ -1056,7 +1056,7 @@ hr {
 }
 
 .nav-pills .nav-link.active {
-    color: white;           
+    color: white;
     font-weight: 600;
     font-family: "Onest";
     background-color: rgb(0, 31, 63);
