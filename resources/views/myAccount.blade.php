@@ -101,21 +101,21 @@
                                 @csrf
                                 <div class="mb-3">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="email_notifications" name="email_notifications" {{ Auth::user()->preferences['email_notifications'] ?? false ? 'checked' : '' }} checked>
+                                        <input type="checkbox" class="form-check-input" id="email_notifications" name="email_notifications" value="1" {{ Auth::user()->notifications ? 'checked' : '' }}>
                                         <label class="form-check-label" for="email_notifications">@lang('translations.myAccount.email_notifications')</label>
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                               <div class="mb-3">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="order_updates" name="order_updates" {{ Auth::user()->preferences['order_updates'] ?? false ? 'checked' : '' }} checked>
+                                        <input type="checkbox" class="form-check-input" id="order_updates" name="order_updates" value="1" {{-- Auth::user()->order_updates ? 'checked' : '' --}}>
                                         <label class="form-check-label" for="order_updates">@lang('translations.myAccount.order_updates')</label>
                                     </div>
-                                </div>
+                                </div> 
                                 <div class="mb-3">
                                     <label for="language" class="form-label">@lang('translations.myAccount.language')</label>
                                     <select class="form-select" id="language" name="language">
-                                        <option value="es" {{ (Auth::user()->preferences['language'] ?? 'es') === 'es' ? 'selected' : '' }}>@lang('translations.myAccount.spanish')</option>
-                                        <option value="en" {{ (Auth::user()->preferences['language'] ?? 'es') === 'en' ? 'selected' : '' }}>@lang('translations.myAccount.english')</option>
+                                        <option value="es" {{ Auth::user()->lang === 'es' ? 'selected' : '' }}>@lang('translations.myAccount.spanish')</option>
+                                        <option value="en" {{ Auth::user()->lang === 'en' ? 'selected' : '' }}>@lang('translations.myAccount.english')</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">@lang('translations.myAccount.save_preferences')</button>

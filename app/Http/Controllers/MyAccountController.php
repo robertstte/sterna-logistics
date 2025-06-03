@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\PasswordChange;
 use App\Mail\PasswordRecovery;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 
 class MyAccountController extends Controller
 {
@@ -111,23 +112,24 @@ class MyAccountController extends Controller
     public function updatePreferences(Request $request)
     {
         $request->validate([
-            'email_notifications' => 'boolean',
-            'order_updates' => 'boolean',
+            'email_notifications' => 'nullable|boolean',
+            // 'order_updates' => 'nullable|boolean', // No column for this yet in users table
             'language' => 'required|in:es,en',
         ]);
 
         $user = Auth::user();
         
-        $preferences = [
-            'email_notifications' => $request->has('email_notifications'),
-            'order_updates' => $request->has('order_updates'),
-            'language' => $request->language,
-        ];
+        $user->lang = $request->language;
+        
+        $user->notifications = $request->has('email_notifications');
 
-        $user->preferences = $preferences;
         $user->save();
 
-        return redirect()->back()->with('success', 'Preferencias actualizadas correctamente');
+        // Update locale for the current session
+        App::setLocale($request->language);
+        session()->put('language', $request->language);
+
+        return redirect()->back()->with('success', __('Preferencias actualizadas correctamente.'));
     }
 
     public function updatePlan(Request $request)

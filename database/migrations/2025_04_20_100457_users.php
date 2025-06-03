@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('google_id')->unique()->nullable();
             $table->string('avatar')->nullable();
             $table->boolean('notifications')->default(true);
-            $table->string('lang');
+            $table->string('lang')->default('es');
             $table->timestamps();
         });
     }

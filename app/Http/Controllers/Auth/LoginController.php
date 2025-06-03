@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session; // Session facade for consistency, though session() helper works too.
 
 class LoginController extends Controller
 {
@@ -38,6 +40,12 @@ class LoginController extends Controller
         }
 
         Auth::login($user, $request->has('remember'));
+
+        // Set user's preferred language
+        if (Auth::check() && Auth::user()->lang) {
+            App::setLocale(Auth::user()->lang);
+            session()->put('language', Auth::user()->lang);
+        }
 
         if ($user->role_id == 1) {
             return redirect()->route('orders.index');
