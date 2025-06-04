@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Models\Transport;
 use App\Models\PackageType;
 use App\Models\OrderDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\OrderUpdate;
 use Illuminate\Support\Facades\Auth;
@@ -172,6 +173,9 @@ class OrdersController extends Controller
         $name = $order->customer->name;
         $mail = $order->customer->email;
 
+        $user = User::where('email', $order->customer->email)->firstOrFail();
+        $language = $user->lang;
+
         $status = Status::findOrFail($request->status);
 
         $order->update([
@@ -187,7 +191,7 @@ class OrdersController extends Controller
         $user = Auth::user();
 
         if ($user->notifications) {
-            Mail::to($mail)->send(new OrderUpdate(now()->format('d/m/Y H:i'), $name, $status->status, $status->color, $request->description, $request->arrival_date, $request->observations, $order->id));
+            Mail::to($mail)->send(new OrderUpdate(now()->format('d/m/Y H:i'), $name, $status->status, $status->color, $request->description, $request->arrival_date, $request->observations, $order->id, $language));
         }
 
         return redirect()->route('orders.index');

@@ -21,8 +21,9 @@ class OrderUpdate extends Mailable
     public $arrival_date;
     public $observations;
     public $order;
+    public $language;
 
-    public function __construct($date, $name, $status, $color, $description, $arrival_date, $observations, $order)
+    public function __construct($date, $name, $status, $color, $description, $arrival_date, $observations, $order, $language)
     {
         $this->date = $date;
         $this->name = $name;
@@ -32,6 +33,7 @@ class OrderUpdate extends Mailable
         $this->arrival_date = $arrival_date;
         $this->observations = $observations;
         $this->order = $order;
+        $this->language = $language;
     }
 
     public function envelope(): Envelope
@@ -53,7 +55,8 @@ class OrderUpdate extends Mailable
                 'description' => $this->description,
                 'arrival_date' => $this->arrival_date,
                 'observations' => $this->observations,
-                'order' => $this->order
+                'order' => $this->order,
+                'language' => $this->language
             ]
         );
     }
