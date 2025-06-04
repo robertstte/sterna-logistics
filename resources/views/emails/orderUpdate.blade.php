@@ -1,28 +1,45 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Password Change Confirmation</title> 
+        <title>Password Change Confirmation</title>
     </head>
     <body>
         <header>
             <p class="logo">Sterna.</p>
         </header>
         <main>
-            <p class="name">Estimado/a {{ $name }}</p>
+            @if ($language == 'es')
+                <p class="name">Estimado/a {{ $name }}</p>
+                <div class="content">
+                    <p>Queremos informale que su orden <strong>Nº {{ $order }}</strong> ha cambiado de estado el <strong>{{ $date }}.</strong></p>
+                    <p>Descripción: {{ $description }}</p>
+                    <p>Estado: <strong style="color: {{ $color }}">{{ $status }}</strong></p>
+                    <p>Fecha llagada prevista: <strong>{{ $arrival_date }}</strong></p>
+                    <p>Observaciones: <strong>{{ $observations }}</strong></p>
+                    <p>Si tienes alguna pregunta o necesitas ayuda, contáctanos en <strong>soporte@sterna.es</strong></p>
+                    <p>Atentamente, el quipo de Sterna.</p>
+                </div>
+            </main>
+            <footer>
+                <p class="copyright">&copy {{ date('Y') }} Sterna. Todos los derechos reservados.</p>
+                <p class="privacy">Política de privacidad y Términos de uso.</p>
+            </footer>
+            @else
+            <p class="name">Dear {{ $name }}</p>
             <div class="content">
-                <p>Queremos informale que su orden <strong>Nº {{ $order }}</strong> ha cambiado de estado el <strong>{{ $date }}.</strong></p>
-                <p>Descripción: {{ $description }}</p>
-                <p>Estado: <strong style="color: {{ $color }}">{{ $status }}</strong></p>
-                <p>Fecha llagada prevista: <strong>{{ $arrival_date }}</strong></p>
-                <p>Observaciones: <strong>{{ $observations }}</strong></p>
-                <p>Si tienes alguna pregunta o necesitas ayuda, contáctanos en <strong>soporte@sterna.es</strong></p>
-                <p>Atentamente, el quipo de Sterna.</p>
+                <p>We would like to inform you that your order <strong>No. {{ $order }}</strong> has changed status on <strong>{{ $date }}.</strong></p>
+                <p>Description: {{ $description }}</p>
+                <p>Status: <strong style="color: {{ $color }}">{{ $status }}</strong></p>
+                <p>Estimated arrival date: <strong>{{ $arrival_date }}</strong></p>
+                <p>Observations: <strong>{{ $observations }}</strong></p>
+                <p>If you have any questions or need assistance, please contact us at <strong>support@sterna.es</strong></p>
+                <p>Best regards, the Sterna team.</p>
             </div>
-        </main>
-        <footer>
-            <p class="copyright">&copy {{ date('Y') }} Sterna. Todos los derechos reservados.</p>
-            <p class="privacy">Política de privacidad y Términos de uso.</p>
-        </footer>
+            <footer>
+                <p class="copyright">&copy {{ date('Y') }} Sterna. All rights reserved.</p>
+                <p class="privacy">Privacy Policy and Terms of Use.</p>
+            </footer>
+            @endif
     </body>
 </html>
 

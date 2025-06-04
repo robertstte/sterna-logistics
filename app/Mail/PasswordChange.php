@@ -15,11 +15,13 @@ class PasswordChange extends Mailable
 
     public $date;
     public $name;
+    public $language;
 
-    public function __construct($date, $name)
+    public function __construct($date, $name, $language)
     {
         $this->date = $date;
         $this->name = $name;
+        $this->language = $language;
     }
 
     public function envelope(): Envelope
@@ -33,7 +35,7 @@ class PasswordChange extends Mailable
     {
         return new Content(
             view: 'emails.passwordChange',
-            with: ['date' => $this->date, 'name' => $this->name]
+            with: ['date' => $this->date, 'name' => $this->name, 'language' => $this->language]
         );
     }
 

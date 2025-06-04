@@ -61,26 +61,27 @@ class MyAccountController extends Controller
     {
         $request->validate([
             'current_password' => 'required|string',
-            'password' => 'required|string|min:8|confirmed', 
+            'password' => 'required|string|min:8|confirmed',
         ]);
-    
+
         $user = Auth::user();
-    
+
         if (!Hash::check($request->current_password, $user->password)) {
             return back()->withErrors(['current_password' => 'La contraseña actual no es correcta']);
         }
-    
+
         if (Hash::check($request->password, $user->password)) {
             return back()->withErrors(['password' => 'La nueva contraseña no puede ser igual a la actual.']);
         }
-    
+
         $user->password = $request->password;
 
         $user->save();
 
         $name = $user->customer->name;
+        $language = $user->lang;
 
-        Mail::to($user->email)->send(new PasswordChange(now()->format('d/m/Y H:i'), $name));
+        Mail::to($user->email)->send(new PasswordChange(now()->format('d/m/Y H:i'), $name, $language));
 
         return redirect()->back()->with('success', 'Contraseña actualizada correctamente');
     }
@@ -97,6 +98,8 @@ class MyAccountController extends Controller
 
         $name = $user->customer->name;
 
+        $language = $user->lang;
+
         PasswordToken::create([
             'user_id' => $user->id,
             'token' => $token,
@@ -104,7 +107,7 @@ class MyAccountController extends Controller
             'used' => false,
         ]);
 
-        Mail::to($user->email)->send(new PasswordRecovery(now()->format('d/m/Y H:i'), $name, $token));
+        Mail::to($user->email)->send(new PasswordRecovery(now()->format('d/m/Y H:i'), $name, $token, $language));
 
         return redirect()->route('login')->with('success', 'Te hemos enviado un enlace para recuperar tu contraseña.');
     }
@@ -118,11 +121,14 @@ class MyAccountController extends Controller
         ]);
 
         $user = Auth::user();
-        
-        $user->lang = $request->language;
-        
-        $user->notifications = $request->has('email_notifications');
 
+        $preferences = [
+            'email_notifications' => $request->has('email_notifications'),
+            'order_updates' => $request->has('order_updates'),
+            'language' => $request->language,
+        ];
+
+        $user->preferences = $preferences;
         $user->save();
 
         // Update locale for the current session

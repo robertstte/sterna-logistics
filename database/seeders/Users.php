@@ -18,7 +18,7 @@ class Users extends Seeder
                 'password' => Hash::make('Wu385ctZdIHMEi0'),
                 'role_id' => 1,
                 'notifications' => true ,
-                'lang' => 'en'
+                'lang' => 'es'
             ],
             [
                 'username' => 'Rebecca.Willson',
