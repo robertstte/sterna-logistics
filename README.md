@@ -1,3 +1,4 @@
+![Logo de la aplicación](public/images/logo.png)
 
 # Sterna Logistics
 
