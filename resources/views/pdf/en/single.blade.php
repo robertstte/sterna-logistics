@@ -8,7 +8,7 @@
 <body>
     <header>
         <p class="logo">Sterna.</p>
-        <p class="date">Fecha emisión: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
+        <p class="date">Issue Date: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
     </header>
     <main>
         <table>
@@ -27,8 +27,8 @@
                 @foreach ($orders as $order)
                     <tr>
                         <td class="text-left">{{ $order->id }}</td>
-                        <td class="text-left">{{ $order->orderDetail->origin }}</td>
-                        <td class="text-left">{{ $order->orderDetail->destination }}</td>
+                        <td class="text-left">{{ $order->orderDetail->originCountry->name }}</td>
+                        <td class="text-left">{{ $order->orderDetail->destinationCountry->name }}</td>
                         <td class="text-left">{{ $order->orderDetail->departure_date }}</td>
                         <td class="text-left">{{ $order->orderDetail->arrival_date }}</td>
                         <td class="text-right">{{ $order->orderDetail->total_cost }} €</td>
@@ -44,7 +44,7 @@
             </tfoot>
         </table>
     </main>
-    <p class="footer-text">Todas las facturas se generan exentas de IVA.</p>
+    <p class="footer-text">All invoices are generated VAT exempt.</p>
 </body>
 </html>
 

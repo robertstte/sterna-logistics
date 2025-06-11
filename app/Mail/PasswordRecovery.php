@@ -16,12 +16,14 @@ class PasswordRecovery extends Mailable
     public $date;
     public $name;
     public $token;
+    public $language;
 
-    public function __construct($date, $name, $token)
+    public function __construct($date, $name, $token, $language)
     {
         $this->date = $date;
         $this->name = $name;
         $this->token = $token;
+        $this->language = $language;
     }
 
     public function envelope(): Envelope
@@ -35,7 +37,7 @@ class PasswordRecovery extends Mailable
     {
         return new Content(
             view: 'emails.passwordRecovery',
-            with: ['date' => $this->date, 'name' => $this->name, 'token' => $this->token]
+            with: ['date' => $this->date, 'name' => $this->name, 'token' => $this->token, 'language' => $this->language]
         );
     }
 

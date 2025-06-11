@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ChecksUserRole;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceController extends Controller
 {
@@ -51,9 +52,19 @@ class InvoiceController extends Controller
             'order_ids.*' => 'exists:orders,id',
         ]);
 
-        $orders = Order::with(['customer', 'orderDetail'])->whereIn('id', $request->order_ids)->get();
+        $orders = Order::with([
+            'customer',
+            'orderDetail.originCountry',
+            'orderDetail.destinationCountry'
+        ])->whereIn('id', $request->order_ids)->get();
 
-        $pdf = Pdf::loadView('pdf.single', ['orders' => $orders]);
+        $user = Auth::user();
+
+        if ($user->lang == 'es') {
+            $pdf = Pdf::loadView('pdf.es.single', ['orders' => $orders]);
+        } else {
+            $pdf = Pdf::loadView('pdf.en.single', ['orders' => $orders]);
+        }
 
         return $pdf->download('single_invoices_' . date('Y-m-d') . '.pdf');
     }
@@ -73,7 +84,8 @@ class InvoiceController extends Controller
         $query = Order::whereBetween('created_at', [
             $request->start_date,
             $request->end_date
-        ])->where('status_id', 3);
+        ])->where('status_id', 3)
+        ->with(['customer', 'orderDetail.originCountry', 'orderDetail.destinationCountry']);
 
         if ($request->customer_id) {
             $query->where('customer_id', $request->customer_id);
@@ -81,7 +93,13 @@ class InvoiceController extends Controller
 
         $orders = $query->with(['customer', 'orderDetail'])->get();
 
-        $pdf = Pdf::loadView('pdf.bulk', ['orders' => $orders, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
+        $user = Auth::user();
+
+        if ($user->lang == 'es') {
+            $pdf = Pdf::loadView('pdf.es.bulk', ['orders' => $orders, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
+        } else {
+            $pdf = Pdf::loadView('pdf.en.bulk', ['orders' => $orders, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
+        }
 
         return $pdf->download('bulk_invoices_' . date('Y-m-d') . '.pdf');
     }

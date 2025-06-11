@@ -1,66 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+![Logo de la aplicación](public/images/logo.png)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Sterna Logistics
 
-## About Laravel
+El objetivo principal del proyecto Sterna es desarrollar una aplicación web funcional 
+para la gestión de pedidos y transportes a gran escala. La plataforma permite a los 
+administradores coordinar y gestionar los envíos y a los clientes seguir el estado de los 
+mismos.  
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Tecnologías empleadas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* Laravel
+* Bootstrap
+* HTML - CSS
+* JavaScript
+* Google Maps API
+* DOMPDF 
+* SweetAlter2
+* Mailtrap 
+* Git - Github 
+* Amazon Web Services 
+* MariaDB
+* Stripe
+* Illustration Kit
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Diseño y estructura
 
-## Learning Laravel
+* Página de inicio
+* Panel de administración
+* Pandel de cliente
+* Inicio de sesión
+* Registro
+* Solicitud de envío
+* Recuperación de credenciales
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Funcionalidades y etapas
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+El desarrollo de la aplicación se organizó en las siguientes etapas: 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Autenticación y roles
 
-## Laravel Sponsors
+Se implementaron formularios de login y registro diferenciados para clientes 
+(distinguimos entre particulares y empresas dentro de esta categoría) y administradores. Se añadieron roles en la base de datos y control mediante Middlewares.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Gestión de pedidos
 
-### Premium Partners
+El administrador puede agregar pedidos confirmar y modificar su estados. Se incluyen 
+campos como origen, destino, fecha de salida, fecha de llegada entre otros. 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Seguimiento de paquetes
 
-## Contributing
+El cliente tiene acceso a un buscador donde introduciendo su número de seguimiento 
+puede consultar el estado y ubicación de su envío. Se utilizó la API de Google Maps 
+para mostrar la ruta visualmente.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Panel del cliente 
 
-## Code of Conduct
+Al igual que los administradores los clientes también tienen acceso a un panel en el que 
+pueden realizar diversas acciones como:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* Ver una tabla con todos los pedidos que tienen asociados.
+* Modificar sus datos personales. 
 
-## Security Vulnerabilities
+# Pruebas, errores y soluciones planteadas 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Durante el desarrollo se realizaron pruebas de funcionalidad manuales, simulando 
+acciones principales como la creación de pedidos, el seguimiento de envíos y la edición 
+de perfiles, así como pruebas de interfaz y rendimiento.
 
-## License
+### Login y registro 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Inicialmente, hubo dificultades al gestionar múltiples roles y vistas personalizadas según 
+privilegios. Esto se resolvió utilizando Middlewares personalizados y ajustando las rutas 
+de redirección. 
+
+### Interacción con Google Maps
+
+La API no se mostraba correctamente debido a problemas con la clave API y la configuración de permisos. Se soluciona generando una nueva clave desde Google Cloud Console y activando el servicio de mapas correspondiente. 
+
+### Servidor de correo
+
+Tras probar diferentes proveedores de servidores de correo dándonos error al enviar los 
+correos de cambios de contraseña y actualización del estados de las órdenes. Optamos por Mailtrap el cual también nos dio problemas con el puerto de envío en la configuración incial. 
+
+### Diseño base de datos 
+
+Aunque no fue un problema como tal, durante el desarrollo hemos tenido que cambiar 
+el diseño de la base de datos ya que ha medida que iba creciendo la aplicación el 
+diseño no se adapta a las necesidades de ese momento.
+
+### Implementación de pasarela de pago
+
+Al principio intentamos implementar una pasarela de pago en Redsys sandbox y debido
+a la falta de documentación y actualización de esta librería decidimos integrar la librería
+de Stripe sandbox ya que estaba mucho mas actualizada, con esto fue mucho mas sencillo y no hubo problema alguno.
+
+# Conclusiones
+
+El proyecto ha conseguido los objetivos que nos hemos propuesto como la creación de
+una página segura y robusta la cual cuenta con múltiples funcionalidades tanto a nivel
+de usuario como de administrador. Hemos realizado un buen diseño y maquetación de
+la página además de un comportamiento responsive.
