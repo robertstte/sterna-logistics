@@ -368,23 +368,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para cargar ubicaciones
     function loadLocations(countryId, targetSelect, transportId) {
-        if (!transportId) {
+        // Clear and disable the select before fetching
+        targetSelect.innerHTML = '<option value="">Cargando...</option>';
+        targetSelect.disabled = true;
+
+        if (!countryId || !transportId) {
             targetSelect.innerHTML = '<option value="">Seleccionar ubicación</option>';
-            targetSelect.disabled = true;
             return;
         }
 
         fetch(`/api/countries/${countryId}/locations?transport_id=${transportId}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                return response.json();
+            })
             .then(locations => {
                 targetSelect.innerHTML = '<option value="">Seleccionar ubicación</option>';
-                locations.forEach(location => {
-                    const option = document.createElement('option');
-                    option.value = location.id;
-                    option.textContent = location.name;
-                    targetSelect.appendChild(option);
-                });
-                targetSelect.disabled = false;
+                if (locations && locations.length > 0) {
+                    locations.forEach(location => {
+                        const option = document.createElement('option');
+                        option.value = location.id;
+                        option.textContent = location.name;
+                        targetSelect.appendChild(option);
+                    });
+                    targetSelect.disabled = false;
+                } else {
+                    targetSelect.innerHTML = '<option value="">No hay ubicaciones disponibles</option>';
+                    targetSelect.disabled = true;
+                }
+            })
+            .catch(error => {
+                console.error('Error loading locations:', error);
+                targetSelect.innerHTML = '<option value="">Error al cargar</option>';
+                targetSelect.disabled = true;
             });
     }
 

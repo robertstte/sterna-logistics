@@ -53,57 +53,52 @@ function showMap(mapDiv)
     showOrderUbication(departureLat, departureLng, arrivalLat, arrivalLng, mapDiv.id);
 }
 
-function showOrderUbication(departureLat, departureLng, arrivalLat, arrivalLng, mapDivId)
-{
+function showOrderUbication(departureLat, departureLng, arrivalLat, arrivalLng, mapDivId) {
     const departure = { lat: departureLat, lng: departureLng };
     const arrival = { lat: arrivalLat, lng: arrivalLng };
 
-    let marker;
-    let step = 0;
-    let routeCoords = [];
-
     const map = new google.maps.Map(document.getElementById(mapDivId), {
-        zoom: 11,
-        center: departure
+        zoom: 4,
+        center: departure,
+        mapId: "STERNA_MAP_ID" // A Map ID is required for Advanced Markers
     });
 
-    const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer();
+    // Marker for the origin point
+    new google.maps.marker.AdvancedMarkerElement({
+        map: map,
+        position: departure,
+        title: 'Origin'
+    });
 
-    directionsRenderer.setMap(map);
+    // Custom marker for the destination point
+    const pinGlyph = new google.maps.marker.PinElement({
+        glyph: 'D',
+        glyphColor: 'white',
+        background: '#FF6B00', // Using a brand color
+        borderColor: 'white',
+    });
 
-    directionsService.route(
-        { origin: departure, destination: arrival, travelMode: google.maps.TravelMode.DRIVING },
-        (response, status) => {
-            if (status === "OK") {
-                directionsRenderer.setDirections(response);
-                const path = response.routes[0].overview_path;
+    new google.maps.marker.AdvancedMarkerElement({
+        map: map,
+        position: arrival,
+        title: 'Destination',
+        content: pinGlyph.element,
+    });
 
-                const polyline = new google.maps.Polyline({
-                    path: path,
-                    geodesic: true,
-                    strokeColor: "#0000FF",
-                    strokeOpacity: 1.0,
-                    strokeWeight: 2
-                });
-                polyline.setMap(map);
+    // Create a straight line (Polyline) between the two points
+    const directPath = new google.maps.Polyline({
+        path: [departure, arrival],
+        geodesic: true, // Makes the line follow the curve of the Earth
+        strokeColor: '#0d6efd',
+        strokeOpacity: 0.8,
+        strokeWeight: 2.5
+    });
 
-                routeCoords = path;
-                marker = new google.maps.Marker({
-                    position: path[0],
-                    map: map,
-                    icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
-                });
-                moveMarker();
-            }
-        }
-    );
+    directPath.setMap(map);
 
-    function moveMarker()
-    {
-        if (step >= routeCoords.length) return;
-        marker.setPosition(routeCoords[step]);
-        step++;
-        setTimeout(moveMarker, 1000);
-    }
+    // Adjust map bounds to show both markers and the line
+    const bounds = new google.maps.LatLngBounds();
+    bounds.extend(departure);
+    bounds.extend(arrival);
+    map.fitBounds(bounds);
 }
