@@ -45,7 +45,7 @@
                     @enderror
                 </div>
                 <div class="row">
-                    <div class="col-4 text-start">
+                    <div class="col-6 text-start">
                         <a href="recovery">
                             <span class="access-form-recovery" style="float: left;">@lang('translations.access.login.recovery')</span>
                         </a>
