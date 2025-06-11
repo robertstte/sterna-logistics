@@ -341,9 +341,10 @@ function nextStep(step) {
     height: 4px;
     background-color: #ccc;
     cursor: pointer;
+    border: 4px;
 }
 .form-step-active {
-    background-color: #007bff;
+    background-color: rgb(0 167 255);
 }
 .step{
     height: 322px;
