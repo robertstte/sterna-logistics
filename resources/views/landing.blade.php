@@ -123,15 +123,15 @@
     <p class="features-title mx-auto">@lang('translations.landing.features.title')</p>
     <div class="row features-circles-container mx-auto d-none d-lg-flex">
         <div class="features-circle">
-            <img loading="lazy" src="{{ asset('icons/lock.svg') }}" alt="@lang('translations.landing.features.security')">
+            <img loading="lazy" src="{{ asset('images/lock.svg') }}" alt="@lang('translations.landing.features.security')">
             <span class="features-circle-text">@lang('translations.landing.features.security')</span>
         </div>
         <div class="features-circle">
-            <img loading="lazy" src="{{ asset('icons/anchor.svg') }}" alt="@lang('translations.landing.features.robustness')">
+            <img loading="lazy" src="{{ asset('images/anchor.svg') }}" alt="@lang('translations.landing.features.robustness')">
             <span class="features-circle-text">@lang('translations.landing.features.robustness')</span>
         </div>
         <div class="features-circle">
-            <img loading="lazy" src="{{ asset('icons/clock.svg') }}" alt="@lang('translations.landing.features.speed')">
+            <img loading="lazy" src="{{ asset('images/clock.svg') }}" alt="@lang('translations.landing.features.speed')">
             <span class="features-circle-text">@lang('translations.landing.features.speed')</span>
         </div>
     </div>
@@ -144,7 +144,7 @@
                         <p class="features-card-message">@lang('translations.landing.features.control.message')</p>
                     </div>
                     <div class="col-12 col-md-6">
-                        <img loading="lazy" src="{{ asset('icons/control.svg') }}" alt="@lang('translations.landing.features.control.icon')">
+                        <img loading="lazy" src="{{ asset('images/control.svg') }}" alt="@lang('translations.landing.features.control.icon')">
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                         <p class="features-card-message">@lang('translations.landing.features.transport.message')</p>
                     </div>
                     <div class="col-12 col-md-6">
-                        <img loading="lazy" src="{{ asset('icons/transport.svg') }}" alt="@lang('translations.landing.features.transport.icon')">
+                        <img loading="lazy" src="{{ asset('images/transport.svg') }}" alt="@lang('translations.landing.features.transport.icon')">
                     </div>
                 </div>
             </div>
@@ -172,7 +172,7 @@
                         <p class="features-card-message">@lang('translations.landing.features.notified.message')</p>
                     </div>
                     <div class="col-12 col-md-6">
-                        <img loading="lazy" src="{{ asset('icons/notified.svg') }}" alt="@lang('translations.landing.features.notified.icon')">
+                        <img loading="lazy" src="{{ asset('images/notified.svg') }}" alt="@lang('translations.landing.features.notified.icon')">
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@
                         <p class="features-card-message">@lang('translations.landing.features.invoicing.message')</p>
                     </div>
                     <div class="col-12 col-md-6">
-                        <img loading="lazy" src="{{ asset('icons/invoice.svg') }}" alt="@lang('translations.landing.features.invoicing.icon')">
+                        <img loading="lazy" src="{{ asset('images/invoice.svg') }}" alt="@lang('translations.landing.features.invoicing.icon')">
                     </div>
                 </div>
             </div>
@@ -195,7 +195,7 @@
 <div class="row">
     <div class="col-12">
         <div class="auto-scroll">
-            <a href="#"><img loading="lazy" src="{{ asset('icons/arrow.svg') }}" alt="Arrow"></a>
+            <a href="#"><img loading="lazy" src="{{ asset('images/arrow.svg') }}" alt="Arrow"></a>
         </div>
     </div>
 </div>

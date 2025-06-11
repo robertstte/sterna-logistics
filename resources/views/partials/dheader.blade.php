@@ -46,7 +46,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="nav-link" >
-                            <img src="{{ asset('icons/logout.svg') }}" class="nav-link" alt="@lang('translations.dashboard.dheader.exit')">
+                            <img src="{{ asset('images/logout.svg') }}" class="nav-link" alt="@lang('translations.dashboard.dheader.exit')">
                             </button>
                         </form>
                     </li>

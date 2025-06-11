@@ -68,17 +68,17 @@
                                     <div class="mb-3 position-relative">
                                         <label for="current_password" class="form-label">@lang('translations.myAccount.current_password')</label>
                                         <input type="password" class="form-control" id="current_password" name="current_password" required>
-                                        <img onclick="togglePasswordVisibility('current_password', this)" class="position-absolute access-form-eye eye-lowered" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                                        <img onclick="togglePasswordVisibility('current_password', this)" class="position-absolute access-form-eye eye-lowered" data-eye="{{ asset('images/eye.svg') }}" data-eye-off="{{ asset('images/eye-off.svg') }}" src="{{ asset('images/eye.svg') }}">
                                     </div>
                                     <div class="mb-3 position-relative">
                                         <label for="new_password" class="form-label">@lang('translations.myAccount.new_password')</label>
                                         <input type="password" class="form-control" id="new_password" name="password" required>
-                                        <img onclick="togglePasswordVisibility('new_password', this)" class="position-absolute access-form-eye eye-lowered" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                                        <img onclick="togglePasswordVisibility('new_password', this)" class="position-absolute access-form-eye eye-lowered" data-eye="{{ asset('images/eye.svg') }}" data-eye-off="{{ asset('images/eye-off.svg') }}" src="{{ asset('images/eye.svg') }}">
                                     </div>
                                     <div class="mb-3 position-relative">
                                         <label for="password_confirmation" class="form-label">@lang('translations.myAccount.confirm_password')</label>
                                         <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-                                        <img onclick="togglePasswordVisibility('password_confirmation', this)" class="position-absolute access-form-eye eye-lowered" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                                        <img onclick="togglePasswordVisibility('password_confirmation', this)" class="position-absolute access-form-eye eye-lowered" data-eye="{{ asset('images/eye.svg') }}" data-eye-off="{{ asset('images/eye-off.svg') }}" src="{{ asset('images/eye.svg') }}">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">@lang('translations.myAccount.change_password_button')</button>

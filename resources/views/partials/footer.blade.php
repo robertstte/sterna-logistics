@@ -7,17 +7,17 @@
             <ul class="social">
                 <li>
                     <a href="mailto:info@sterna.com">
-                        <img src="{{ asset('icons/mail.svg') }}" alt="@Lang('translations.footer.mail')">
+                        <img src="{{ asset('images/mail.svg') }}" alt="@Lang('translations.footer.mail')">
                     </a>
                 </li>  
                 <li>
                     <a href="https://www.instagram.com" target="_blank">
-                        <img src="{{ asset('icons/instagram.svg') }}" alt="@Lang('translations.footer.instagram')">
+                        <img src="{{ asset('images/instagram.svg') }}" alt="@Lang('translations.footer.instagram')">
                     </a>
                 </li>  
                 <li>
                     <a href="https://www.facebook.com" target="_blank">
-                        <img src="{{ asset('icons/facebook.svg') }}" alt="@Lang('translations.footer.facebook')">
+                        <img src="{{ asset('images/facebook.svg') }}" alt="@Lang('translations.footer.facebook')">
                     </a>
                 </li>                      
             </ul>

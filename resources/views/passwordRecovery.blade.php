@@ -12,7 +12,7 @@
                     <p class="access-form-title">@lang('translations.access.recovery.title')</p>
                 </div>
                 <div class="col-3">
-                    <a href="{{ route('login') }}"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.login.back')"></a>
+                    <a href="{{ route('login') }}"><img loading="lazy" class="access-form-back" src="{{ asset('images/back.svg') }}" alt="@lang('translations.access.login.back')"></a>
                 </div>
             </div>
             <form method="POST" action="{{ route('password.recovery') }}" id="recoveryForm">

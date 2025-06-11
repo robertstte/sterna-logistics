@@ -11,7 +11,7 @@
                 <ul class="nav justify-content-center list-unstyled d-flex">
                     <li class="ms-3">
                         <a href="mailto:info@sterna.com" class="text-decoration-none">
-                            <img src="{{ asset('icons/mail.svg') }}" alt="@Lang('translations.footer.mail')" width="24" height="24">
+                            <img src="{{ asset('images/mail.svg') }}" alt="@Lang('translations.footer.mail')" width="24" height="24">
                         </a>
                     </li>
                     <br>  
@@ -24,17 +24,17 @@
                         
                     
                         <div class="dropdown-center">
-                            <img src="{{ asset('icons/language.svg') }}" class="dropdown-toggle" data-bs-toggle="dropdown" 
+                            <img src="{{ asset('images/language.svg') }}" class="dropdown-toggle" data-bs-toggle="dropdown" 
                             alt="@lang('translations.header.language')" width="24" height="24" style="filter: brightness(100);">
                             <ul class="dropdown-menu">
                                 <li>
                                     <a class="dropdown-item mx-auto" href="{{ route('language.change', 'es') }}">
-                                        <img src="{{ asset('icons/es.svg') }}" alt="@lang('translations.header.spanish')">
+                                        <img src="{{ asset('images/es.svg') }}" alt="@lang('translations.header.spanish')">
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item mx-auto" href="{{ route('language.change', 'en') }}">
-                                        <img src="{{ asset('icons/en.svg') }}" alt="@lang('translations.header.english')">
+                                        <img src="{{ asset('images/en.svg') }}" alt="@lang('translations.header.english')">
                                     </a>
                                 </li>
                             </ul>

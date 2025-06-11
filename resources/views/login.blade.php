@@ -12,7 +12,7 @@
                     <p class="access-form-title">@lang('translations.access.login.title')</p>
                 </div>
                 <div class="col-3">
-                    <a href="/"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.login.back')"></a>
+                    <a href="/"><img loading="lazy" class="access-form-back" src="{{ asset('images/back.svg') }}" alt="@lang('translations.access.login.back')"></a>
                 </div>
             </div>
             <form method="POST" action="{{ route('login') }}" id="loginForm">
@@ -37,7 +37,7 @@
                            placeholder="@lang('translations.access.login.password')" 
                            name="password" 
                            required>
-                    <img id="login-toggle-password" onclick="showFormPassword()" class="position-absolute access-form-eye" data-eye="{{ asset('icons/eye.svg') }}" data-eye-off="{{ asset('icons/eye-off.svg') }}" src="{{ asset('icons/eye.svg') }}">
+                    <img id="login-toggle-password" onclick="showFormPassword()" class="position-absolute access-form-eye" data-eye="{{ asset('images/eye.svg') }}" data-eye-off="{{ asset('images/eye-off.svg') }}" src="{{ asset('images/eye.svg') }}">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -45,13 +45,9 @@
                     @enderror
                 </div>
                 <div class="row">
-                    <div class="col-6 access-form-remember d-flex">
-                        <input class="access-form-remember-checkbox" type="checkbox" name="remember">
-                        <span>@lang('translations.access.login.remember')</span>
-                    </div>
-                    <div class="col-6">
+                    <div class="col-4 text-start">
                         <a href="recovery">
-                            <span class="access-form-recovery">@lang('translations.access.login.recovery')</span>
+                            <span class="access-form-recovery" style="float: left;">@lang('translations.access.login.recovery')</span>
                         </a>
                     </div>
                 </div>
@@ -61,7 +57,7 @@
                         <input class="access-form-submit" type="submit" value="@lang('translations.access.login.signin')">
                     </div>
                     <div class="col-2">
-                        <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
+                        <img class="access-form-google" src="{{ asset('images/google.svg') }}" alt="@lang('translations.access.login.google')">
                     </div>
                 </div>
                 <div class="row">

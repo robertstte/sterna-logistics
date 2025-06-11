@@ -13,7 +13,7 @@
 
                 </div>
                 <div class="col-6">
-                    <a onclick="prevStep()" style="cursor: pointer;"><img loading="lazy" class="access-form-back" src="{{ asset('icons/back.svg') }}" alt="@lang('translations.access.register.back')"></a>
+                    <a onclick="prevStep()" style="cursor: pointer;"><img loading="lazy" class="access-form-back" src="{{ asset('images/back.svg') }}" alt="@lang('translations.access.register.back')"></a>
                 </div>
             </div>
            <form method="POST" action="{{ route('register') }}" style="margin-bottom: 0;">
@@ -40,7 +40,7 @@
                             <button onclick="nextStep(1)" class="access-form-submit">@lang('translations.access.register.next')</button>
                         </div>
                         <div class="col-2">
-                            <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
+                            <img class="access-form-google" src="{{ asset('images/google.svg') }}" alt="@lang('translations.access.login.google')">
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                             <button onclick="nextStep(2)" class="access-form-submit">@lang('translations.access.register.next')</button>
                         </div>
                         <div class="col-2">
-                            <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
+                            <img class="access-form-google" src="{{ asset('images/google.svg') }}" alt="@lang('translations.access.login.google')">
                         </div>
                     </div>
                     <p class="form-error">Faltan campos por completar</p>
@@ -73,9 +73,9 @@
                         <img id="register-toggle-password" 
                              onclick="showFormPassword()" 
                              class="position-absolute access-form-eye" 
-                             data-eye="{{ asset('icons/eye.svg') }}" 
-                             data-eye-off="{{ asset('icons/eye-off.svg') }}" 
-                             src="{{ asset('icons/eye.svg') }}">
+                             data-eye="{{ asset('images/eye.svg') }}" 
+                             data-eye-off="{{ asset('images/eye-off.svg') }}" 
+                             src="{{ asset('images/eye.svg') }}">
                     </div>
                     <div class="position-relative">
                         <input id="register-password-confirm" 
@@ -86,9 +86,9 @@
                         <img id="register-toggle-password-confirm" 
                              onclick="showFormPasswordConfirm()" 
                              class="position-absolute access-form-eye" 
-                             data-eye="{{ asset('icons/eye.svg') }}" 
-                             data-eye-off="{{ asset('icons/eye-off.svg') }}" 
-                             src="{{ asset('icons/eye.svg') }}">
+                             data-eye="{{ asset('images/eye.svg') }}" 
+                             data-eye-off="{{ asset('images/eye-off.svg') }}" 
+                             src="{{ asset('images/eye.svg') }}">
                     </div>
                     <p id="password-match-error" class="form-error" style="visibility: hidden;">Las contraseñas no coinciden</p>
                     <div class="row">
@@ -96,7 +96,7 @@
                             <button type="submit" class="access-form-submit">@lang('translations.access.register.title')</button>                        
                         </div>
                         <div class="col-2">
-                            <img class="access-form-google" src="{{ asset('icons/google.svg') }}" alt="@lang('translations.access.login.google')">
+                            <img class="access-form-google" src="{{ asset('images/google.svg') }}" alt="@lang('translations.access.login.google')">
                         </div>
                     </div>
                     <p class="form-error">Faltan campos por completar</p>
