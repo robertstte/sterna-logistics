@@ -164,6 +164,62 @@ class CountryLocations extends Seeder
                 'longitude' => '-3.654119',
                 'type_id' => 3,
                 'country_id' => 204
+            ],
+            [
+                'name' => 'SPAR Logistics Center',
+                'latitude' => '45.67128',
+                'longitude' => '15.75335',
+                'type_id' => 3,
+                'country_id' => 55
+            ],
+            [
+                'name' => 'Dostyk Logistic Center',
+                'latitude' => '45.2533',
+                'longitude' => '82.4844',
+                'type_id' => 3,
+                'country_id' => 113
+            ],
+            [
+                'name' => 'Casablanca Port',
+                'latitude' => '33.5785',
+                'longitude' => '7.6245',
+                'type_id' => 2,
+                'country_id' => 149
+            ],
+            [
+                'name' => 'Lisboa Port',
+                'latitude' => '38.7145',
+                'longitude' => '9.1614',
+                'type_id' => 2,
+                'country_id' => 177
+            ],
+            [
+                'name' => 'Marsella Port',
+                'latitude' => '43.2962',
+                'longitude' => '5.3698',
+                'type_id' => 2,
+                'country_id' => 74
+            ],
+            [
+                'name' => 'Santo Domingo Port',
+                'latitude' => '18.4657',
+                'longitude' => '69.8835',
+                'type_id' => 2,
+                'country_id' => 62
+            ],
+            [
+                'name' => 'Dublin Airport',
+                'latitude' => '53.4264',
+                'longitude' => '-6.2499',
+                'type_id' => 1,
+                'country_id' => 105
+            ],
+            [
+                'name' => 'Chicago OHare International Airport',
+                'latitude' => '41.9786',
+                'longitude' => '-87.9047',
+                'type_id' => 1,
+                'country_id' => 230
             ]
         ]);
     }
