@@ -11,6 +11,7 @@ class CountryLocations extends Seeder
     public function run(): void
     {
         DB::table('country_locations')->insert([
+            // Existing data for Iraq
             [
                 'name' => 'Port of Al Maqal',
                 'latitude' => '30.5618',
@@ -53,6 +54,7 @@ class CountryLocations extends Seeder
                 'type_id' => 2,
                 'country_id' => 104
             ],
+            // Existing data for Nepal
             [
                 'name' => 'Tribhuvan International Airport',
                 'latitude' => '27.7017',
@@ -81,6 +83,7 @@ class CountryLocations extends Seeder
                 'type_id' => 3,
                 'country_id' => 154
             ],
+            // Existing data for Brazil
             [
                 'name' => 'Port of Santos',
                 'latitude' => '-23.966355',
@@ -110,7 +113,7 @@ class CountryLocations extends Seeder
                 'country_id' => 31
             ],
             [
-                'name' => 'São Paulo-Guarulhos International Airport',
+                'name' => 'São Paulo-Guarulhos International Airport', // Duplicated entry, consider removing
                 'latitude' => '-23.4356',
                 'longitude' => '-46.4731',
                 'type_id' => 1,
@@ -120,9 +123,10 @@ class CountryLocations extends Seeder
                 'name' => 'São Paulo Logistics Center',
                 'latitude' => '-23.5505',
                 'longitude' => '-46.6333',
-                'type_id' => 1,
+                'type_id' => 1, // This should probably be type_id 3 (Logistics Center)
                 'country_id' => 31
             ],
+            // Existing data for Spain
             [
                 'name' => 'Port of Algeciras',
                 'latitude' => '36.1272',
@@ -164,7 +168,147 @@ class CountryLocations extends Seeder
                 'longitude' => '-3.654119',
                 'type_id' => 3,
                 'country_id' => 204
-            ]
+            ],
+
+            // --- Nuevos datos solicitados ---
+
+            // India 
+            [
+                'name' => 'Indira Gandhi International Airport',
+                'latitude' => '28.5667',
+                'longitude' => '77.1000',
+                'type_id' => 1,
+                'country_id' => 101
+            ],
+            [
+                'name' => 'Jawaharlal Nehru Port Trust (JNPT)',
+                'latitude' => '18.9667',
+                'longitude' => '72.8258',
+                'type_id' => 2,
+                'country_id' => 101
+            ],
+            [
+                'name' => 'Mumbai Logistics Park',
+                'latitude' => '19.0760',
+                'longitude' => '72.8777',
+                'type_id' => 3,
+                'country_id' => 101
+            ],
+
+            // Nepal (country_id: 154 - Añadiendo a los existentes)
+            [
+                'name' => 'Gautam Buddha International Airport',
+                'latitude' => '27.6780',
+                'longitude' => '83.4350',
+                'type_id' => 1,
+                'country_id' => 154
+            ],
+            [
+                'name' => 'Birgunj Dry Port', // Nepal es un país sin salida al mar, así que un "Puerto Seco" o "Puerto Interior" es más apropiado.
+                'latitude' => '27.0093',
+                'longitude' => '84.8569',
+                'type_id' => 2,
+                'country_id' => 154
+            ],
+            [
+                'name' => 'Bhairahawa Logistics Hub',
+                'latitude' => '27.5255',
+                'longitude' => '83.4760',
+                'type_id' => 3,
+                'country_id' => 154
+            ],
+
+            // Malta 
+            [
+                'name' => 'Malta International Airport',
+                'latitude' => '35.8575',
+                'longitude' => '14.4776',
+                'type_id' => 1,
+                'country_id' => 136
+            ],
+            [
+                'name' => 'Grand Harbour (Valletta)',
+                'latitude' => '35.8950',
+                'longitude' => '14.5100',
+                'type_id' => 2,
+                'country_id' => 136
+            ],
+            [
+                'name' => 'Malta Freeport Centre',
+                'latitude' => '35.8080',
+                'longitude' => '14.5360',
+                'type_id' => 3,
+                'country_id' => 136
+            ],
+
+            // Italia 
+            [
+                'name' => 'Leonardo da Vinci–Fiumicino Airport (Rome)',
+                'latitude' => '41.8003',
+                'longitude' => '12.2389',
+                'type_id' => 1,
+                'country_id' => 108
+            ],
+            [
+                'name' => 'Port of Genoa',
+                'latitude' => '44.4093',
+                'longitude' => '8.9103',
+                'type_id' => 2,
+                'country_id' => 108
+            ],
+            [
+                'name' => 'Interporto Bologna',
+                'latitude' => '44.5930',
+                'longitude' => '11.3850',
+                'type_id' => 3,
+                'country_id' => 108
+            ],
+
+            // Alemania 
+            [
+                'name' => 'Frankfurt Airport',
+                'latitude' => '50.0333',
+                'longitude' => '8.5706',
+                'type_id' => 1,
+                'country_id' => 81
+            ],
+            [
+                'name' => 'Port of Hamburg',
+                'latitude' => '53.5333',
+                'longitude' => '9.9500',
+                'type_id' => 2,
+                'country_id' => 81
+            ],
+            [
+                'name' => 'Logistikpark Hamm',
+                'latitude' => '51.6888',
+                'longitude' => '7.7818',
+                'type_id' => 3,
+                'country_id' => 81
+            ],
+
+            // Inglaterra (Reino Unido) 
+            [
+                'name' => 'Heathrow Airport (London)',
+                'latitude' => '51.4700',
+                'longitude' => '-0.4543',
+                'type_id' => 1,
+                'country_id' => 229
+            ],
+            [
+                'name' => 'Port of Felixstowe',
+                'latitude' => '51.9619',
+                'longitude' => '1.3283',
+                'type_id' => 2,
+                'country_id' => 229
+            ],
+            [
+                'name' => 'Prologis Park Daventry',
+                'latitude' => '52.2850',
+                'longitude' => '-1.1890',
+                'type_id' => 3,
+                'country_id' => 229
+            ],
         ]);
     }
 }
